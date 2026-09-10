@@ -3,7 +3,7 @@
 A browser DJ instrument you perform in: a four-channel Web Audio mixer, crossfader, filter, EQ, tempo, stems and a Three.js booth, with **GPT-6 Astra as a read-only practice companion**. Four CDJs and their mixer strips now read **A, B, C, D from left to right** ([verified controls and audio](docs/evidence/deck-order/)).
 
 - **Live:** [Mixtape — The Booth](https://mixtape-the-booth.vercel.app/#play) — free play needs no Booth account; Astra hints need Booth sign-in. Existing Vercel deployment protection is separate.
-- **Video (60 s):** pending a shareable recording URL.
+- **Video (60 s):** [Download the MP4](https://raw.githubusercontent.com/our-mixtape/the-booth/a8407dad5c86d1b6b1be807576ea132305449143/docs/evidence/hosted-gateway/booth-demo-60s.mp4) — real local Astra session with captured system audio; [verification](docs/evidence/hosted-gateway/README.md).
 - **Repo:** [our-mixtape/the-booth](https://github.com/our-mixtape/the-booth) · developed September 10, 2026, and prepared for the OpenAI GPT-6 Astra Hackathon NYC. [Provenance](docs/PROVENANCE.md) distinguishes work completed before the 10:30 AM hacking start; the whole repository is not claimed as event-built.
 
 ## What runs where
@@ -50,7 +50,7 @@ For an approved persistent host, configure server-only credentials and exact HTT
 
 ## Earlier checkpoints
 
-The chronological sections below preserve earlier results. The current session and verification sections above supersede their statements that native steering, local keys or signed-in rehearsal are unavailable.
+The chronological sections below preserve earlier results. The current session and verification sections above supersede their statements that native steering, local keys, signed-in rehearsal or system-audio recording are unavailable.
 
 Production design update, September 10: Afterhours now follows Andrew's **Booth v4 – Astra** reference: light Archivo typography, an indigo glow, dark equipment surfaces and cool preparation screens. “Follow the mix” and the CDJs share lavender, cyan, periwinkle and lilac deck accents. [Open production](https://mixtape-the-booth.vercel.app), deployment `dpl_GjrAUo8YEqjibkr4JkcxWtKmAULi`. Build/lint, 61 unit tests and all 14 selected browser checks passed, including a focused retry after a local server restart interrupted an evidence download. Hosted page/bundle/style checks passed; the stylesheet matches the tested build. Existing Vercel protection and Clerk configuration remain. See [release evidence](docs/evidence/production-astra-palette/verification.json). Local preview: `pnpm dev` at [the landing page](http://127.0.0.1:5173/).
 

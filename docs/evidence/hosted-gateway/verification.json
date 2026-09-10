@@ -63,5 +63,7 @@
     "No physical-speaker or Andrew musical audition",
     "No new model cost, memory or input-latency benchmark collected",
     "Video has fixture system audio and no narration"
-  ]
+  ],
+  "publicVideoUrl": "https://raw.githubusercontent.com/our-mixtape/the-booth/a8407dad5c86d1b6b1be807576ea132305449143/docs/evidence/hosted-gateway/booth-demo-60s.mp4",
+  "publicVideoCheck": "Anonymous HEAD returned HTTP 200, application/octet-stream, 3215378 bytes"
 }

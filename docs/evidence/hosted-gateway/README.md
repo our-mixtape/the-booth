@@ -20,7 +20,7 @@ The final recorded take completed at **17:26:45 EDT**. The in-app browser used `
 
 The visible waiting interval was **36.9 seconds**, conservatively measured from the completed plan rather than the earlier tool dispatch. The model continued coaching after requesting the async watch. Practice was started at about 42 seconds into the take. B entered **2.263 seconds late** against the unchanged **8 ± 0.25-second** target; the engine returned **retry**. Astra cited the measured error and tolerance and declined to infer beat alignment, handoff completion or musical quality. A one-bar delay intentionally conflicts with the fixed practice target. This is a performed failed attempt, not a passing exercise or evidence of learning.
 
-- [60-second screen-and-system-audio video](booth-demo-60s.mp4)
+- [60-second screen-and-system-audio video](booth-demo-60s.mp4) · [public MP4 download](https://raw.githubusercontent.com/our-mixtape/the-booth/a8407dad5c86d1b6b1be807576ea132305449143/docs/evidence/hosted-gateway/booth-demo-60s.mp4) (HTTP 200 checked; GitHub serves it as a download)
 - [Actual lifecycle and practice observation](recorded-session.json)
 - [Measured review screenshot](recorded-review.png)
 - [Four-player booth frame](booth-ready.png)
