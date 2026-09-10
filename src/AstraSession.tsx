@@ -17,6 +17,7 @@ const shortId = (id: string) => `${id.slice(0, 15)}…`;
 export function AstraSession({ engine, snap }: { engine: AudioEngine; snap: ReturnType<AudioEngine['snapshot']> }) {
  const auth = useBoothSession(), signedIn = auth.phase === 'signed-in';
  const live = useRef<LiveSession | null>(null);
+ const responseHistory = useRef<HTMLDivElement>(null), latestShown = useRef('');
  const [view, setView] = useState(() => new LiveSession().state);
  const [reauthRequired, setReauthRequired] = useState(false);
  const [brief, setBrief] = useState(''), [steer, setSteer] = useState(''), [now, setNow] = useState(Date.now());
@@ -33,6 +34,13 @@ export function AstraSession({ engine, snap }: { engine: AudioEngine; snap: Retu
  const busy = !!view.inFlightResponseId || view.requestPending || !!view.pendingCall;
  const canSteer = canUse && !!view.inFlightResponseId && view.phase !== 'steer-queued';
  const latest = view.responses.at(-1);
+ useEffect(() => {
+  const history = responseHistory.current;
+  if (!history || !latest) return;
+  // Keep the new review visible inside its own scroll area; never move the booth/page.
+  if (latestShown.current !== latest.id || history.scrollHeight - history.scrollTop - history.clientHeight < 80) history.scrollTop = history.scrollHeight;
+  latestShown.current = latest.id;
+ }, [latest]);
  const elapsed = latest ? Math.max(0, (latest.completedAt ?? now) - latest.startedAt) / 1000 : 0;
  const doSteer = (text: string) => { if (canSteer) { setSteer(text); void live.current?.steer(text); } };
  return <section className="astra-session" aria-label="Astra session">
@@ -44,7 +52,7 @@ export function AstraSession({ engine, snap }: { engine: AudioEngine; snap: Retu
   </form>
   <ol className="astra-session-lifecycle" aria-label="Session lifecycle">{(view.history.length ? view.history : [{ phase: 'idle' as const, at: now }]).map((item, index) => <li key={`${item.at}-${index}`} aria-current={index === view.history.length - 1 || !view.history.length ? 'step' : undefined}><strong>{labels[item.phase]}</strong>{item.responseId && <small>{shortId(item.responseId)}</small>}<span>{(Math.max(0, item.at - (view.history[0]?.at ?? item.at)) / 1000).toFixed(1)}s</span></li>)}</ol>
   <p className="astra-session-current" role="status">{labels[view.phase]}{latest && ` · ${Math.max(0, elapsed).toFixed(1)}s`}</p>
-  <div className="astra-session-responses" aria-label="Astra response history">{view.responses.map((response, index) => <article key={response.id} className={response.id === latest?.id ? 'current-response' : 'previous-response'}><p className="astra-session-response-label">{response.kind === 'review' ? 'Attempt review' : response.successorOf ? 'Revised plan' : `Response ${index + 1}`} · {shortId(response.id)}{response.successorOf && ` · follows ${shortId(response.successorOf)}`}{response.steered && ' · steered'}</p><p className="astra-session-plan">{response.text || 'Astra is thinking…'}</p></article>)}</div>
+  <div ref={responseHistory} className="astra-session-responses" aria-label="Astra response history">{view.responses.map((response, index) => <article key={response.id} className={response.id === latest?.id ? 'current-response' : 'previous-response'}><p className="astra-session-response-label">{response.kind === 'review' ? 'Attempt review' : response.successorOf ? 'Revised plan' : `Response ${index + 1}`} · {shortId(response.id)}{response.successorOf && ` · follows ${shortId(response.successorOf)}`}{response.steered && ' · steered'}</p><p className="astra-session-plan">{response.text || 'Astra is thinking…'}</p></article>)}</div>
   {view.pendingCall && <p className="astra-session-wait" role="status">Waiting for your attempt · hands on the mixer</p>}
   {view.reviewPending && view.inFlightResponseId && <p className="astra-session-wait" role="status">Attempt result queued · Astra will review it after this response</p>}
   <form className="astra-session-steer" onSubmit={event => { event.preventDefault(); doSteer(steer); }}>

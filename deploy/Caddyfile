@@ -1,0 +1,10 @@
+{$GATEWAY_DOMAIN} {
+  # Caddy owns TLS. Only this proxy's private network reaches the Node listener.
+  # No access log: never log Authorization, briefs, or attempt results.
+  header Strict-Transport-Security "max-age=31536000"
+  reverse_proxy gateway:8787 {
+    # Flush SSE immediately; do not buffer or impose a 30-second response limit.
+    # Zero also preserves upstream cancellation when the browser disconnects.
+    flush_interval 0
+  }
+}

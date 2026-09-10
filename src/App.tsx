@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { sessionAvailability } from './agent/gateway';
 import { isLivingSleeveEnabled } from './camera/feature';
 const LivingSleeve = import.meta.env.DEV ? lazy(() => import('./camera/LivingSleeve').then(module => ({ default: module.LivingSleeve }))) : null;
 import { AudioEngine, getEngine } from './audio/engine';
@@ -34,7 +35,9 @@ export default function App(){
  const toggleAlt=()=>switchLayout(layout==='vinyl'?digitalLayout:'vinyl');
  const openLibrary=(id:DeckId)=>{if(kids){location.hash='kids/session';return;}setDetails(true);requestAnimationFrame(()=>document.getElementById(`library-${id}`)?.scrollIntoView({block:'center',behavior:'auto'}));};
  useEffect(()=>{let active=true;getEngine().then(e=>{if(active){setEngine(e);setSnap(e.snapshot());setStatus('Tracks ready · audio not started');}}).catch(()=>setError('Could not prepare audio. Refresh to retry.'));
- fetch('/api/status').then(r=>r.json()).then(s=>{setAstra(s.message);setAvailable(s.available);setSessionAvailable(s.session?.available===true);}).catch(()=>setAstra('Astra unavailable · gateway offline'));
+ fetch('/api/status').then(r=>r.json()).then(s=>{if(!active)return;setAstra(s.message);setAvailable(s.available);if(!import.meta.env.VITE_ASTRA_GATEWAY_ORIGIN)setSessionAvailable(s.session?.available===true);}).catch(()=>{if(active)setAstra('Astra unavailable · gateway offline');});
+ // Gateway readiness is independent of the existing same-origin HTTP hint fallback.
+ if(import.meta.env.VITE_ASTRA_GATEWAY_ORIGIN)void sessionAvailability(AbortSignal.timeout(5000)).then(available=>{if(active)setSessionAvailable(available);}).catch(()=>{if(active)setSessionAvailable(false);});
  return()=>{active=false;};},[]);
  useEffect(()=>{if(!engine)return;const timer=setInterval(()=>setSnap(engine.snapshot()),100);return()=>clearInterval(timer);},[engine]);
  const send=(c:Command,o:Origin='accessible')=>{if(!engine||!ready)return;try{engine.command(c,o);setSnap(engine.snapshot());}catch{setError('Audio command failed. Stop and retry.');}};

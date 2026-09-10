@@ -1,0 +1,5 @@
+{
+  "at": "2026-09-10T21:30:14.167Z",
+  "scope": "real local same-origin HTTP hint with actual Clerk sign-in",
+  "panel": "✳ ASTRA / YOUR NEXT MOVE\n\nSay it. Type it. Try a prompt.\n◉ Talk to voice\nWhat would you like to try?\nHandoff hint\nTwo minutes left\nKeep it restrained\nAsk Astra ↗\n\ngpt-6-astra · B’s target entry is 8 seconds after retry, with a ±0.25-second tolerance. Next: Use B’s play control when the attempt’s elapsed time reaches 8 seconds—not when its source position reaches 8 seconds.\n\nVoice off. Voice uses a separate OpenAI speech model; your microphone is sent to it for up to 2 minutes. Use headphones. The mix output is never connected. Requests share the current deck state; Astra never moves the controls."
+}

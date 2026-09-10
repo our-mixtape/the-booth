@@ -1,0 +1,47 @@
+{
+  "file": "booth-hosted-disconnect-pane.mp4",
+  "sha256": "e1be65c80cbf98086096d222cbed4cbc8117b2ff0b0e50e11207d6165ca2160b",
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 808,
+        "height": 1080,
+        "duration": "10.185000"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "10.116104"
+      }
+    ],
+    "format": {
+      "duration": "10.185000",
+      "size": "1702252"
+    }
+  },
+  "decodedStereoSampleRate": 48000,
+  "decodedAudioSeconds": 10.08,
+  "peak": 0.1730891466140747,
+  "rms": 0.026480062099742272,
+  "rmsDBFS": -31.5416200149007,
+  "oneSecondRms": [
+    0.026394955596522367,
+    0.026576440208845697,
+    0.026550768064552806,
+    0.026372345638218334,
+    0.026635634411117208,
+    0.026588446003991267,
+    0.026637425692555762,
+    0.02647446840012764,
+    0.02657471102680807,
+    0.026459019322782766,
+    0.019824307397458985
+  ],
+  "scope": "Encoded audio signal check; not human audition or proof of glitch-free playback"
+}

@@ -1,12 +1,12 @@
 # Only the application and build inputs may leave this checkout.
 /*
-!/api/
+!/api
 !/api/**
-!/server/
+!/server
 !/server/**
-!/src/
+!/src
 !/src/**
-!/public/
+!/public
 !/public/**
 !/package.json
 !/pnpm-lock.yaml
@@ -15,7 +15,7 @@
 !/playwright.config.ts
 !/index.html
 !/vercel.json
-!/tests/
+!/tests
 !/tests/**
 # Tests are typechecked by the build; no private recordings or results are included.
 **/.DS_Store

@@ -11,12 +11,15 @@ export const sessionPaths = new Set(['/api/session/brief', '/api/session/steer',
 /** SSE ownership is scoped to both the authenticated user and their app session. */
 export function createSessionRoute({ key, model, env, stateSchema, WebSocketImpl }) {
  const sessions = new Map();
+ let closed = false;
  const briefSchema = stateSchema.extend({ brief: z.string().trim().min(1).max(1000), requestId: id, effort: z.enum(['low', 'medium']).optional(), sessionId: id.optional() });
- return async (req, res, identity) => {
+ const route = async (req, res, identity) => {
   if (!sessionPaths.has(req.url)) return false;
   const reply = (status, body) => { res.writeHead(status, { 'Content-Type': 'application/json' }); res.end(JSON.stringify(body)); return true; };
+  const unavailable = () => reply(503, { error: 'Astra gateway is shutting down. Manual playback continues.' });
+  if (closed) return unavailable();
   if (req.method !== 'POST') return reply(405, { error: 'Use POST for Astra sessions.' });
-  if (env.VERCEL) return reply(503, { error: 'Astra session is available on the local booth only. Manual playback continues.' });
+  if (env.VERCEL) return reply(503, { error: 'Connect the persistent Astra gateway to use live sessions. Manual playback continues.' });
   if (!key) return reply(503, { error: 'Astra unavailable · no server API key. Manual playback continues.' });
   if (!identity?.userId || !identity?.sessionId) return reply(401, { error: 'Sign in to use Astra sessions.' });
   if (!req.headers['content-type']?.startsWith('application/json')) return reply(415, { error: 'Expected JSON' });
@@ -29,6 +32,8 @@ export function createSessionRoute({ key, model, env, stateSchema, WebSocketImpl
   let input;
   try { input = (req.url.endsWith('/brief') ? briefSchema : req.url.endsWith('/steer') ? steerSchema : toolSchema).parse(JSON.parse(body)); }
   catch { return reply(400, { error: 'Invalid Astra session request' }); }
+  // A shutdown can run while a streamed request body is still arriving.
+  if (closed) return unavailable();
   const owner = JSON.stringify([identity.userId, identity.sessionId]);
   const existing = input.sessionId ? sessions.get(input.sessionId) : null;
   if (input.sessionId && (!existing || existing.owner !== owner)) return reply(404, { error: 'Astra session not found.' });
@@ -46,8 +51,13 @@ export function createSessionRoute({ key, model, env, stateSchema, WebSocketImpl
   if (!req.url.endsWith('/brief')) return reply(404, { error: 'Astra session not found.' });
   if (sessions.size >= 16 || [...sessions.values()].filter(session => session.owner === owner).length >= 2) return reply(429, { error: 'Close an existing Astra session before starting another.' });
   const sessionId = randomUUID();
-  let heartbeat, core;
-  const cleanup = () => { clearTimeout(heartbeat); sessions.delete(sessionId); core?.close(); if (!res.writableEnded) res.end(); };
+  let heartbeat, core, cleaned = false;
+  const cleanup = () => {
+   if (cleaned) return;
+   cleaned = true;
+   clearTimeout(heartbeat); sessions.delete(sessionId); core?.close();
+   if (!res.writableEnded) res.end();
+  };
   const send = event => {
    if (res.destroyed || res.writableEnded) return cleanup();
    // Bound buffered output for disconnected or stalled readers.
@@ -56,12 +66,19 @@ export function createSessionRoute({ key, model, env, stateSchema, WebSocketImpl
   res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache, no-transform', Connection: 'keep-alive', 'X-Accel-Buffering': 'no' });
   res.flushHeaders?.();
   core = createAstraSession({ key, model, WebSocketImpl, onEvent: send, onClose: cleanup });
-  sessions.set(sessionId, { owner, core, requests: new Set([input.requestId]) });
+  sessions.set(sessionId, { owner, core, cleanup, requests: new Set([input.requestId]) });
   res.on('close', cleanup);
   send({ t: 'session', sessionId });
+  if (cleaned) return true;
   const beat = () => { if (res.destroyed || res.writableEnded) return cleanup(); if (!res.write(': heartbeat\n\n')) return cleanup(); heartbeat = setTimeout(beat, 15000); heartbeat.unref?.(); };
   heartbeat = setTimeout(beat, 15000); heartbeat.unref?.();
   try { await core.brief(briefArgs()); } catch { send({ t: 'error', message: 'Astra session could not start. Manual playback continues.' }); cleanup(); }
   return true;
  };
+ route.close = () => {
+  if (closed) return;
+  closed = true;
+  for (const session of sessions.values()) session.cleanup();
+ };
+ return route;
 }

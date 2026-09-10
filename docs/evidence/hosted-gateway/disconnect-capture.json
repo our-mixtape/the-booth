@@ -1,0 +1,15 @@
+{
+  "audioSource": "ScreenCaptureKit system output (content-filter scoped), AAC stereo 48 kHz",
+  "droppedAudioBuffers": 0,
+  "droppedVideoFrames": 0,
+  "durationSeconds": 10.124868666,
+  "meteredSystemAudioSamples": 963840,
+  "microphoneCaptured": false,
+  "nonSilentSystemAudio": true,
+  "recordedAt": "2026-09-10T21:25:09Z",
+  "systemAudioBuffers": 502,
+  "systemAudioPeakDBFS": -15.179615137258986,
+  "systemAudioRmsDBFS": -31.53815142850634,
+  "videoFrames": 297,
+  "redaction": "Window identifier and raw full-window file path omitted. Shared media is cropped to the Booth browser pane."
+}

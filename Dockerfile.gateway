@@ -1,0 +1,11 @@
+FROM node:25.5.0-bookworm-slim@sha256:3393543ad82b7ca5f9329c5115ad801f9e08b4d385f81a616cfb981c32e16c7b
+WORKDIR /app
+RUN npm install --global pnpm@10.27.0
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --prod --frozen-lockfile
+COPY server/ ./server/
+ENV NODE_ENV=production GATEWAY_MODE=persistent GATEWAY_HOST=0.0.0.0 PORT=8787
+USER node
+EXPOSE 8787
+HEALTHCHECK --interval=15s --timeout=3s --start-period=10s --retries=3 CMD node -e "fetch('http://127.0.0.1:'+(process.env.GATEWAY_PORT||process.env.PORT)+'/healthz').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"
+CMD ["node", "server/start.mjs"]

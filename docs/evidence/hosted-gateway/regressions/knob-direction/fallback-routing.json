@@ -1,0 +1,38 @@
+[
+  {
+    "kind": "high",
+    "direction": "left",
+    "value": -6,
+    "dsp": -5.999485492706299
+  },
+  {
+    "kind": "high",
+    "direction": "right with vertical drift",
+    "value": 6,
+    "dsp": 6
+  },
+  {
+    "kind": "high",
+    "direction": "up with horizontal drift",
+    "value": 6,
+    "dsp": 6
+  },
+  {
+    "kind": "filter",
+    "direction": "left",
+    "value": 0.25,
+    "dsp": 534.9922485351562
+  },
+  {
+    "kind": "filter",
+    "direction": "right with vertical drift",
+    "value": 0.75,
+    "dsp": 5981.39501953125
+  },
+  {
+    "kind": "filter",
+    "direction": "up with horizontal drift",
+    "value": 0.7500001089913504,
+    "dsp": 5981.3984375
+  }
+]

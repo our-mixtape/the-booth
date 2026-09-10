@@ -1,0 +1,140 @@
+{
+  "checkedAt": "2026-09-10T22:26:16.920Z",
+  "sourceCommit": "6d4f50af21f75a20a308a77b445ecfe34c3c80aa",
+  "scope": "Actual Render/Vercel deployment and real signed-in hosted Astra sessions, including recorded measured async review.",
+  "gateway": {
+    "url": "https://mixtape-astra-gateway.onrender.com",
+    "serviceId": "srv-dahiqq6k1f9s73ffj0k0",
+    "deploymentId": "dep-dahirqrl550s738ao5og",
+    "status": "live",
+    "finishedAt": "2026-09-10T22:24:00.975Z",
+    "runtime": "Docker, pinned Node 25.5.0",
+    "region": "Virginia",
+    "plan": "0.5c-512mb, user-approved $7/month base compute",
+    "instances": 1,
+    "automaticDeploys": false,
+    "healthCheckPath": "/healthz",
+    "port": 8787,
+    "maxShutdownDelaySeconds": 15,
+    "maintenanceMode": false,
+    "credentials": "Existing Booth OpenAI/Clerk values transferred with explicit authorization; values omitted.",
+    "checks": [
+      {
+        "name": "health",
+        "status": 200,
+        "allowOrigin": null,
+        "body": {
+          "ok": true
+        }
+      },
+      {
+        "name": "status",
+        "status": 200,
+        "allowOrigin": null,
+        "body": {
+          "model": "gpt-6-astra",
+          "available": true,
+          "verified": false,
+          "session": {
+            "available": true
+          },
+          "auth": {
+            "required": true,
+            "configured": true
+          },
+          "voice": {
+            "model": "gpt-realtime-2.1",
+            "available": true,
+            "verified": false
+          },
+          "message": "Key configured \u00b7 model access not yet verified"
+        }
+      },
+      {
+        "name": "allowed CORS",
+        "status": 204,
+        "allowOrigin": "https://mixtape-the-booth.vercel.app",
+        "body": null
+      },
+      {
+        "name": "foreign CORS",
+        "status": 403,
+        "allowOrigin": null,
+        "body": {
+          "error": "Origin not allowed"
+        }
+      },
+      {
+        "name": "unauthenticated brief",
+        "status": 401,
+        "allowOrigin": "https://mixtape-the-booth.vercel.app",
+        "body": {
+          "error": "Sign in to The Booth to use Astra and voice.",
+          "code": "sign_in_required"
+        }
+      },
+      {
+        "name": "private library",
+        "status": 200,
+        "allowOrigin": null,
+        "body": {
+          "tracks": [],
+          "message": "Private local library is not hosted."
+        }
+      }
+    ]
+  },
+  "frontend": {
+    "url": "https://mixtape-the-booth.vercel.app/#advanced/play",
+    "deploymentUrl": "https://mixtape-the-booth-4eiaf96l3-efficient-frontier-labs.vercel.app",
+    "deploymentId": "dpl_223iAM9Lmbvp5QZDgNWGUSWYDJNT",
+    "status": "READY, promoted to production",
+    "build": "Cloud typecheck and Vite production build passed; existing chunk warning.",
+    "bundle": "/assets/index-npbotvnW.js",
+    "gatewayIncluded": true,
+    "localGatewayAbsent": true,
+    "serverSecretsAbsent": true,
+    "bundleBytes": 1197059,
+    "bundleSha256": "ebd792af1888e795c67e0affd13e1a0211f5a45a5cecc6122dfeba259a25cde6",
+    "exactLiveIndexMatchesCheckedDeployment": true,
+    "liveSessionPanelVisible": true
+  },
+  "access": "Existing Vercel protection remains enabled. User-approved private one-hour rehearsal link was revoked after testing; token omitted. Booth Clerk sign-in remains required.",
+  "limitations": [
+    "One gateway process; maintenance interrupts sessions and no session migration is implemented.",
+    "Booth uses its existing Clerk development instance and Vercel deployment protection.",
+    "Real provider failures were not induced remotely; simulated provider-failure regressions preserved manual audio.",
+    "55-minute lifetime and full capacity limits are covered with simulated clocks, not a remote soak/load test.",
+    "No custom-domain or charity-jukebox changes.",
+    "No physical-speaker or human musical audition, narration, or event-eligibility claim."
+  ],
+  "temporaryAccess": {
+    "ttlSeconds": 3600,
+    "revoked": true,
+    "remainingShareableLinks": 0
+  },
+  "remoteAcceptance": {
+    "model": "gpt-6-astra",
+    "authentication": "Real user-completed Clerk sign-in",
+    "firstCompletedRun": {
+      "visiblePendingSeconds": 74.0,
+      "reviewDoneSeconds": 89.7,
+      "entryErrorSeconds": 5.363
+    },
+    "recordedRun": {
+      "nativeSteerQueuedSeconds": 0.9,
+      "steeredSeconds": 2.5,
+      "automaticSuccessorSeconds": 2.5,
+      "waitingSeconds": 8.1,
+      "reviewStartsSeconds": 48.9,
+      "reviewDoneSeconds": 51.7,
+      "visiblePendingSeconds": 40.8,
+      "entryErrorSeconds": 2.368,
+      "practiceToleranceSeconds": 0.25,
+      "outcome": "retry"
+    },
+    "disconnect": "Actual Render restart terminated a pending SSE stream; manual playback and filter changes continued. Replacement verified and maintenance disabled.",
+    "fallback": "Genuine same-origin Vercel HTTP hint succeeded while Render was in maintenance.",
+    "recording": "60-second hosted screen-and-system-audio recording; original fixtures only; no microphone."
+  }
+}
