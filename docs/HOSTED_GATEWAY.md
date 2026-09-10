@@ -73,6 +73,23 @@ The signed-in dashboard can also use **New Web Service → Public Git Repository
 
 The [Blueprint fields](https://render.com/docs/blueprint-spec), [Docker behavior](https://render.com/docs/docker) and [pricing](https://render.com/pricing) were checked against Render's documentation. Provider-side validation and the real remote acceptance run are still required before declaring Render deployment complete.
 
+### Terminal access verified
+
+Render CLI v2.28.0 is installed for this task at `/tmp/booth-render-cli/cli_v2.28.0`. Its official darwin/arm64 archive SHA-256 matched `c102919d50195e1f5bc287d4fef79bbe0eb5e85f6fc01d9103e9e96fda02be2c`. The user-requested CLI authorization succeeded; the CLI selected Andrew's workspace and found no services. Its provider-side Blueprint check returned `valid: false` with the sole reported error `need_payment_info` at `services[0]`. This is a billing prerequisite, not successful provider validation or a deployment. Add payment information using Render Billing in the user's normal browser; no manual service-form setup is needed after that.
+
+Exact commands used after downloading and verifying the official release:
+
+```sh
+export RENDER_CLI_DISABLE_ANALYTICS=1
+export RENDER_CLI_CONFIG_DIR=/tmp/booth-render-cli/config
+/tmp/booth-render-cli/cli_v2.28.0 login --output text
+/tmp/booth-render-cli/cli_v2.28.0 workspace set tea-dahih7e1egvs7385ljeg --confirm --output text
+/tmp/booth-render-cli/cli_v2.28.0 services --output json
+/tmp/booth-render-cli/cli_v2.28.0 blueprints validate render.yaml --output json
+```
+
+The CLI configuration contains a credential and stays outside Git. Render states that CLI tokens expire seven days after creation. Vercel CLI access was also rechecked successfully; the separate in-app Vercel login failure does not block terminal deployment. Real hosted browser verification still requires authorized deployment access plus real Booth Clerk sign-in.
+
 ### Frontend connection
 
 After the gateway passes HTTPS readiness and authentication checks, set **only** the public origin in the Booth Vercel project and rebuild the relevant environment:
