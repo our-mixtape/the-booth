@@ -1,6 +1,6 @@
 # Astra live session
 
-Local gateway companion for Mixtape — The Booth. The instrument stays manual: Astra reads compact operational state, never audio, and cannot move a control. The existing HTTP `/api/hint` and voice paths remain separate.
+Gateway companion for Mixtape — The Booth. The latest [portable deployment configuration](HOSTED_GATEWAY.md) and [recorded cross-origin rehearsal](evidence/hosted-gateway/README.md) extend the local verification below; no persistent gateway is deployed yet. The instrument stays manual: Astra reads compact operational state, never audio, and cannot move a control. The existing HTTP `/api/hint` and voice paths remain separate.
 
 ## Run and verify
 
@@ -10,7 +10,7 @@ Use Node 25.5.0 (the verified built-in WebSocket runtime) and pnpm 10.27.0. Inst
 PORT=5176 GATEWAY_PORT=8790 pnpm dev
 ```
 
-Open <http://127.0.0.1:5176/#play>. Sign in with the existing Booth account. The panel appears only when `/api/status` reports `session.available: true`; readiness means the local key is configured, not that a request has succeeded. Hosted Vercel builds keep the stateless HTTP hint path and hide the live-session panel. This iteration does not deploy the hosted app.
+Open <http://127.0.0.1:5176/#play>. Sign in with the existing Booth account. The panel appears only when `/api/status` reports `session.available: true`; readiness means the local key is configured, not that a request has succeeded. With no external gateway setting, hosted Vercel builds keep the stateless HTTP hint path and hide the live-session panel. `VITE_ASTRA_GATEWAY_ORIGIN` connects the unchanged session contracts directly to the approved persistent gateway; see [deployment instructions](HOSTED_GATEWAY.md).
 
 ```sh
 pnpm typecheck
@@ -45,7 +45,7 @@ A session is owned by both Clerk user ID and Clerk session ID. The gateway retai
 4. Show the engine result and Astra review. Say: “The engine returned the result later through an async tool call, while Astra could keep coaching.” Explain any retry honestly; the result does not establish artistic quality or audible smoothness.
 5. For steering Q&A, show the redacted real-API log. Avoid exclusivity claims about all other models. Use the actual latency on this run rather than promising a fixed response time.
 
-Submission video link has not been supplied. Record system audio separately before using this as a screen-and-audio submission; an internal master-bus regression capture is not system-audio verification.
+A [60-second local rehearsal with actual system audio](evidence/hosted-gateway/booth-demo-60s.mp4) is now recorded. See [capture/encoding evidence](evidence/hosted-gateway/README.md) and [exact recording commands](DEMO_RECORDING.md). This is not remote deployment, human audition or event-eligibility evidence.
 
 ## Stage beat: 0:50–1:25
 

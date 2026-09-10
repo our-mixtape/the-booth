@@ -6,7 +6,7 @@ const conflict = message => Object.assign(new Error(message), { status: 409 });
 
 /** One connection-local Responses history. All commands remain read-only. */
 export function createAstraSession({ key, model = 'gpt-6-astra', WebSocketImpl = globalThis.WebSocket, onEvent, onClose = () => {}, idleMs = 60000 }) {
- let socket, closed = false, ready, inFlight = null, latest = null, successorOf = null, creating = false;
+ let socket, closed = false, ready, rejectReady, inFlight = null, latest = null, successorOf = null, creating = false;
  let idleTimer, connectionTimer, lifetimeTimer, responseTimer, attemptTimer, responseChars = 0, responseCount = 0;
  const calls = new Map(), queue = [];
  const emit = event => { if (!closed) onEvent(event); };
@@ -14,6 +14,9 @@ export function createAstraSession({ key, model = 'gpt-6-astra', WebSocketImpl =
  const stop = () => {
   if (closed) return;
   closed = true;
+  // Some socket implementations do not emit close when cancelled while connecting.
+  // Settle the awaiting HTTP route before clearing its connection timeout.
+  rejectReady?.(conflict('Astra session is closed.')); rejectReady = null;
   for (const timer of [idleTimer, connectionTimer, lifetimeTimer, responseTimer, attemptTimer]) clearTimeout(timer);
   calls.clear(); queue.length = 0;
   try { socket?.close(); } catch { /* Cleanup must not affect manual playback. */ }
@@ -62,6 +65,8 @@ export function createAstraSession({ key, model = 'gpt-6-astra', WebSocketImpl =
    case 'response.created': {
     if (!idValid(responseId)) return fail();
     const predecessor = successorOf;
+    // Native steering creates this response server-side, without calling create().
+    if (predecessor && ++responseCount > 64) return fail('Astra session limit reached. Start another session.');
     latest = inFlight = responseId; creating = false; successorOf = null; responseChars = 0; armResponseTimeout();
     emit({ t: 'created', responseId, ...(predecessor ? { successorOf: predecessor } : {}) });
     break;
@@ -114,10 +119,11 @@ export function createAstraSession({ key, model = 'gpt-6-astra', WebSocketImpl =
   if (closed) return Promise.reject(conflict('Astra session is closed.'));
   if (ready) return ready;
   ready = new Promise((resolve, reject) => {
-   const rejectConnection = () => reject(conflict('Astra session could not connect.'));
+   rejectReady = reject;
+   const rejectConnection = () => { rejectReady = null; reject(conflict('Astra session could not connect.')); };
    try { socket = new WebSocketImpl('wss://api.openai.com/v1/responses', { headers: { Authorization: `Bearer ${key}` } }); } catch { rejectConnection(); fail(); return; }
    socket.addEventListener('message', receive);
-   socket.addEventListener('open', () => { clearTimeout(connectionTimer); if (closed) return; touch(); resolve(); });
+   socket.addEventListener('open', () => { clearTimeout(connectionTimer); if (closed) return; rejectReady = null; touch(); resolve(); });
    socket.addEventListener('error', () => { rejectConnection(); fail(); });
    socket.addEventListener('close', () => { rejectConnection(); if (!closed) fail('Astra session disconnected. Manual playback continues.'); });
    connectionTimer = setTimeout(() => { rejectConnection(); fail('Astra session connection timed out. Manual playback continues.'); }, 15000);

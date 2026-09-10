@@ -1,4 +1,5 @@
 import { createContext, useContext, type ReactNode } from 'react';
+import { sessionEndpoint } from '../agent/gateway';
 
 export type BoothSession = {
  phase: 'loading' | 'signed-out' | 'signed-in' | 'unconfigured' | 'error';
@@ -29,7 +30,7 @@ export async function sessionFetch(getToken: BoothSession['getToken'], path: '/a
  if (!token) throw new SignInRequiredError();
  const headers = new Headers(init.headers); headers.set('Authorization', `Bearer ${token}`);
  // Same-origin cookies preserve Vercel deployment protection; the gateway still requires the bearer session.
- const response = await fetch(path, { ...init, headers, credentials: 'same-origin', redirect: 'error' });
+ const response = await fetch(sessionEndpoint(path), { ...init, headers, credentials: 'same-origin', redirect: 'error' });
  if (response.status === 401) throw new SignInRequiredError();
  return response;
 }

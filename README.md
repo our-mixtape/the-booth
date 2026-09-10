@@ -8,7 +8,7 @@ A browser DJ instrument you perform in: a four-channel Web Audio mixer, crossfad
 
 ## What runs where
 
-Playback, timing, every control and the practice result run locally in the browser. Astra never receives the mix audio. It reads measured deck state: positions, BPM with provenance, gains, filter, EQ, tempo, available stem routing and the last eight commands. Hosted HTTP hints use the Responses API with strict Structured Outputs; the local live session streams plans and reviews over a Responses WebSocket. The domain layer rejects every agent-origin command: Astra can point, you play. Optional microphone conversation uses a separate speech model.
+Playback, timing, every control and the practice result run locally in the browser. Astra never receives the mix audio. It reads measured deck state: positions, BPM with provenance, gains, filter, EQ, tempo, available stem routing and the last eight commands. Hosted HTTP hints use the Responses API with strict Structured Outputs; the portable Node gateway streams live plans and reviews over a Responses WebSocket. The app stays on Vercel. Gateway deployment awaits an approved persistent host and HTTPS hostname; [configuration and exact requirements](docs/HOSTED_GATEWAY.md) are ready. The domain layer rejects every agent-origin command: Astra can point, you play. Optional microphone conversation uses a separate speech model.
 
 ## Native Astra capabilities, verified on this account today
 
@@ -16,7 +16,7 @@ Playback, timing, every control and the practice result run locally in the brows
 - **Async tool calling:** Astra calls `watch_attempt` (`async: true`) and continues coaching while it is pending. The browser returns the engine's result later using the original call ID; Astra reviews the measured numbers in a successor response.
 - **Real signed-in rehearsal:** brief → steer → manual fixture attempt → review completed in **56.6 seconds**, including the time spent operating the booth. The engine measured B **6.9013 seconds late**, so the attempt correctly required a retry. Astra cited that error and the **0.25-second** tolerance, and explicitly declined to infer musical quality. This was browser automation through real controls, real Clerk authentication and real `gpt-6-astra` responses; no mocked identity or model stream. [Screenshots, timings and limits](docs/evidence/astra-session/real-session.md).
 
-[Redacted API event logs](docs/evidence/astra-session/) separately verify response/call identities with synthetic numeric results; the latest transport run took **16.88 seconds**. Live sessions run on the local gateway; the hosted build keeps its HTTP hint. [Runbook](docs/ASTRA_SESSION.md) · [official steering](https://developers.openai.com/api/docs/guides/steering) · [async tools](https://developers.openai.com/api/docs/guides/async-tool-calling).
+[Redacted API event logs](docs/evidence/astra-session/) separately verify response/call identities with synthetic numeric results; the latest transport run took **16.88 seconds**. The latest cross-origin local rehearsal held the watch pending for **36.9 seconds**, then reviewed the actual **2.263-second** late entry at **54.5 seconds**. Its continuous 60-second video contains verified ScreenCaptureKit system audio and both layouts. Manual playback and a filter change survived a real local gateway termination; provider-failure tests are simulated. [New recording and evidence](docs/evidence/hosted-gateway/README.md). Live sessions remain locally verified; the hosted build keeps its HTTP hint until the approved gateway is connected. [Runbook](docs/ASTRA_SESSION.md) · [official steering](https://developers.openai.com/api/docs/guides/steering) · [async tools](https://developers.openai.com/api/docs/guides/async-tool-calling).
 
 ## Developed with Codex on gpt-6-astra — evidence in 30 seconds
 
@@ -25,7 +25,7 @@ Playback, timing, every control and the practice result run locally in the brows
 - **Tests exposed real timing failures:** earlier browser runs entered B 0.51 s late under parallel graphics load and 0.30 s late after scrolling. The unchanged ±0.25 s mechanic rejected the attempts; the harness was corrected without relaxing the musical target. [Build records](docs/BUILD_LOG.md).
 - **Traceable authorship:** Codex authored and revised the implementation; [PROVENANCE](docs/PROVENANCE.md) records code, dependency and asset origins. Planning documents and the first playable implementation predate the hacking start; [BUILD_LOG](docs/BUILD_LOG.md) preserves those timestamps.
 
-Hosted demo tracks are original generated fixtures: synthesized drums, bass and melody, not source separation. The private library was prepared locally with this project's Demucs adapter and is not in the repository. This rehearsal does not establish human audition or system-audio capture.
+Hosted demo tracks are original generated fixtures: synthesized drums, bass and melody, not source separation. The private library was prepared locally with this project's Demucs adapter and is not in the repository. The new local recording verifies system-audio capture; Andrew’s musical audition remains outstanding.
 
 ## Run and verification
 
@@ -38,7 +38,15 @@ PORT=5176 GATEWAY_PORT=8790 pnpm dev
 
 Open [the local booth](http://127.0.0.1:5176/#play). Configure the existing Booth Clerk keys and `OPENAI_API_KEY` in an ignored server-side `.env` with mode 600 for live sessions. Manual mixing needs no credentials. Default ports remain 5173/8787.
 
-For the latest mixer changes, typecheck, lint, **92 unit tests**, **27 browser tests**, and the production build passed. These include left/right knob input and clockwise indicators on both mixer versions, physical CDJ routing, all 21 mixer controls, layout/audio continuity, accounts, Kids/Afterhours and both Astra panels. [Knob-direction evidence](docs/evidence/knob-direction/). The real signed-in live session and existing HTTP hint both returned genuine `gpt-6-astra` feedback. Exact commands and test prerequisites are in [the runbook](docs/ASTRA_SESSION.md). No dependencies were added for live sessions, and this iteration made no deployment or DNS changes. A system-audio demo recording and its video URL remain outstanding.
+For the portable gateway, typecheck, lint, **109 unit/integration tests**, **28 distinct browser checks across combined and focused runs**, and the production build passed. One voice-stop scrolling timeout passed on unchanged focused rerun. Checks preserve A–D routing, clockwise knobs, all 21 mixer controls, layout/audio continuity and the ±0.25-second tolerance. The real signed-in live session and HTTP hint both returned genuine `gpt-6-astra` feedback. The pinned Node container and Caddy configuration were checked locally; no gateway was deployed. [Results and limitations](docs/evidence/hosted-gateway/README.md) · [recording commands](docs/DEMO_RECORDING.md).
+
+For the actual cross-origin development configuration, use:
+
+```sh
+VITE_ASTRA_GATEWAY_ORIGIN=http://127.0.0.1:8792 PORT=5178 GATEWAY_PORT=8792 pnpm dev
+```
+
+For an approved persistent host, configure server-only credentials and exact HTTPS browser origins in the ignored `.env.gateway`, then run `pnpm start:gateway`. The [deployment runbook](docs/HOSTED_GATEWAY.md) also supplies the single-process Docker/Caddy deployment, the Vercel build setting, test commands and remaining remote acceptance checks. No dependencies, charity-jukebox infrastructure or DNS settings changed.
 
 ## Earlier checkpoints
 

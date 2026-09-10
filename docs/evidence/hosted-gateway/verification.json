@@ -1,0 +1,67 @@
+{
+  "date": "2026-09-10",
+  "base": "72a3662",
+  "branch": "codex/hosted-astra-sessions",
+  "deployedGateway": null,
+  "app": "https://mixtape-the-booth.vercel.app/#play",
+  "appDeploymentChanged": false,
+  "checks": [
+    {
+      "command": "pnpm typecheck",
+      "result": "passed"
+    },
+    {
+      "command": "pnpm lint",
+      "result": "passed"
+    },
+    {
+      "command": "pnpm test",
+      "result": "109 passed, 16 files; real 31-second HTTP stream, simulated upstream/auth fixtures"
+    },
+    {
+      "command": "VITE_CLERK_PUBLISHABLE_KEY='' PORT=5177 GATEWAY_PORT=8791 pnpm exec playwright test tests/session.browser.ts tests/ask.browser.ts tests/auth.browser.ts tests/experience.browser.ts tests/layout.browser.ts tests/mixer.browser.ts tests/waveforms.browser.ts",
+      "result": "26/27 initially; voice-stop scrolling timeout passed unchanged focused rerun"
+    },
+    {
+      "command": "VITE_CLERK_PUBLISHABLE_KEY='' PORT=5177 GATEWAY_PORT=8791 pnpm exec playwright test tests/session.browser.ts",
+      "result": "4/4 passed after additional actual master-bus capture with simulated model error"
+    },
+    {
+      "command": "pnpm build",
+      "result": "passed; existing large-chunk warning"
+    },
+    {
+      "command": "docker build -f Dockerfile.gateway -t booth-astra-gateway:local .",
+      "result": "passed; local image sha256:e7ff7575e2cc2bac3ec162e587db8cad60787d03fc3deb56e95a26c0f50bfcad"
+    },
+    {
+      "command": "GATEWAY_DOMAIN=gateway.example GATEWAY_ENV_FILE=/tmp/booth-compose-smoke.env docker compose -f deploy/gateway.compose.yaml config --quiet",
+      "result": "passed with dummy credentials; no deployment"
+    },
+    {
+      "command": "python3 scripts/check-recording.py docs/evidence/hosted-gateway/booth-demo-60s.mp4",
+      "result": "passed; actual system-audio origin established separately by ScreenCaptureKit metrics"
+    }
+  ],
+  "realLocal": {
+    "authentication": "Clerk sign-in",
+    "model": "gpt-6-astra",
+    "url": "http://127.0.0.1:5178/#advanced/play",
+    "gateway": "http://127.0.0.1:8792",
+    "waitingSeconds": 36.9,
+    "reviewCompleteSeconds": 54.5,
+    "entryErrorSeconds": 2.263,
+    "toleranceSeconds": 0.25,
+    "result": "retry",
+    "httpHint": "real completed gpt-6-astra response",
+    "gatewayTermination": "manual playback and filter remained usable; system audio captured"
+  },
+  "limitations": [
+    "No approved persistent host, account/access method or HTTPS gateway hostname supplied",
+    "No remote HTTPS/CORS/proxy/sign-in acceptance run",
+    "Real upstream provider failure not induced; provider-error checks simulated",
+    "No physical-speaker or Andrew musical audition",
+    "No new model cost, memory or input-latency benchmark collected",
+    "Video has fixture system audio and no narration"
+  ]
+}

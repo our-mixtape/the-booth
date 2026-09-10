@@ -1,0 +1,86 @@
+[
+  {
+    "deck": "A",
+    "playerX": -6.4,
+    "command": {
+      "id": "2ddf79ab-5caf-4cd1-bb0b-a57b128b81d3",
+      "at": 5.274666666666667,
+      "origin": "pointer",
+      "command": {
+        "type": "play",
+        "deck": "A"
+      },
+      "positions": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      }
+    },
+    "gain": 0.5656854510307312,
+    "track": "amber"
+  },
+  {
+    "deck": "B",
+    "playerX": -3.05,
+    "command": {
+      "id": "cbccca97-2f12-46bb-a514-555ac83c2b0d",
+      "at": 6.373333333333333,
+      "origin": "pointer",
+      "command": {
+        "type": "play",
+        "deck": "B"
+      },
+      "positions": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      }
+    },
+    "gain": 0.5656854510307312,
+    "track": "afterglow"
+  },
+  {
+    "deck": "C",
+    "playerX": 3.05,
+    "command": {
+      "id": "a03926ff-3685-4f3f-9014-da0290891e4b",
+      "at": 6.810666666666667,
+      "origin": "pointer",
+      "command": {
+        "type": "play",
+        "deck": "C"
+      },
+      "positions": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      }
+    },
+    "gain": 0.5656854510307312,
+    "track": "amber"
+  },
+  {
+    "deck": "D",
+    "playerX": 6.4,
+    "command": {
+      "id": "86d3936a-0e5f-4bed-ade6-8b1cf0a89937",
+      "at": 7.930666666666666,
+      "origin": "pointer",
+      "command": {
+        "type": "play",
+        "deck": "D"
+      },
+      "positions": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      }
+    },
+    "gain": 0.5656854510307312,
+    "track": "afterglow"
+  }
+]

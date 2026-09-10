@@ -1,0 +1,202 @@
+[
+  {
+    "target": "A.high",
+    "command": {
+      "type": "eq",
+      "deck": "A",
+      "band": "high",
+      "value": -6
+    },
+    "applied": -6
+  },
+  {
+    "target": "A.mid",
+    "command": {
+      "type": "eq",
+      "deck": "A",
+      "band": "mid",
+      "value": -6
+    },
+    "applied": -6
+  },
+  {
+    "target": "A.low",
+    "command": {
+      "type": "eq",
+      "deck": "A",
+      "band": "low",
+      "value": -6
+    },
+    "applied": -6
+  },
+  {
+    "target": "A.filter",
+    "command": {
+      "type": "filter",
+      "deck": "A",
+      "value": 0.7500002179827009
+    },
+    "applied": 5981.4013671875
+  },
+  {
+    "target": "A.gain",
+    "command": {
+      "type": "gain",
+      "deck": "A",
+      "value": 0.55
+    },
+    "applied": 0.550000011920929
+  },
+  {
+    "target": "B.high",
+    "command": {
+      "type": "eq",
+      "deck": "B",
+      "band": "high",
+      "value": -6
+    },
+    "applied": -6
+  },
+  {
+    "target": "B.mid",
+    "command": {
+      "type": "eq",
+      "deck": "B",
+      "band": "mid",
+      "value": -6
+    },
+    "applied": -6
+  },
+  {
+    "target": "B.low",
+    "command": {
+      "type": "eq",
+      "deck": "B",
+      "band": "low",
+      "value": -6
+    },
+    "applied": -6
+  },
+  {
+    "target": "B.filter",
+    "command": {
+      "type": "filter",
+      "deck": "B",
+      "value": 0.7500002179827009
+    },
+    "applied": 5981.4013671875
+  },
+  {
+    "target": "B.gain",
+    "command": {
+      "type": "gain",
+      "deck": "B",
+      "value": 0.55
+    },
+    "applied": 0
+  },
+  {
+    "target": "C.high",
+    "command": {
+      "type": "eq",
+      "deck": "C",
+      "band": "high",
+      "value": -6
+    },
+    "applied": -6
+  },
+  {
+    "target": "C.mid",
+    "command": {
+      "type": "eq",
+      "deck": "C",
+      "band": "mid",
+      "value": -6
+    },
+    "applied": -6
+  },
+  {
+    "target": "C.low",
+    "command": {
+      "type": "eq",
+      "deck": "C",
+      "band": "low",
+      "value": -6
+    },
+    "applied": -6
+  },
+  {
+    "target": "C.filter",
+    "command": {
+      "type": "filter",
+      "deck": "C",
+      "value": 0.7500002179827009
+    },
+    "applied": 5981.4013671875
+  },
+  {
+    "target": "C.gain",
+    "command": {
+      "type": "gain",
+      "deck": "C",
+      "value": 0.55
+    },
+    "applied": 0.550000011920929
+  },
+  {
+    "target": "D.high",
+    "command": {
+      "type": "eq",
+      "deck": "D",
+      "band": "high",
+      "value": -6
+    },
+    "applied": -6
+  },
+  {
+    "target": "D.mid",
+    "command": {
+      "type": "eq",
+      "deck": "D",
+      "band": "mid",
+      "value": -6
+    },
+    "applied": -6
+  },
+  {
+    "target": "D.low",
+    "command": {
+      "type": "eq",
+      "deck": "D",
+      "band": "low",
+      "value": -6
+    },
+    "applied": -6
+  },
+  {
+    "target": "D.filter",
+    "command": {
+      "type": "filter",
+      "deck": "D",
+      "value": 0.7500002179827009
+    },
+    "applied": 5981.4013671875
+  },
+  {
+    "target": "D.gain",
+    "command": {
+      "type": "gain",
+      "deck": "D",
+      "value": 0.55
+    },
+    "applied": 0
+  },
+  {
+    "target": "crossfader",
+    "command": {
+      "type": "crossfader",
+      "value": 0.5
+    },
+    "applied": 0.3889087438583374
+  }
+]

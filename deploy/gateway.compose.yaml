@@ -1,0 +1,37 @@
+# Exactly one gateway process. Do not scale behind a random load balancer:
+# brief/SSE, steer and tool requests all belong to this instance.
+services:
+  gateway:
+    build:
+      context: ..
+      dockerfile: Dockerfile.gateway
+    init: true
+    restart: unless-stopped
+    stop_grace_period: 15s
+    env_file: ${GATEWAY_ENV_FILE:-../.env.gateway}
+    environment:
+      NODE_ENV: production
+      GATEWAY_MODE: persistent
+      GATEWAY_HOST: 0.0.0.0
+      PORT: '8787'
+      GATEWAY_PORT: '8787'
+    expose: ['8787']
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+  https:
+    image: caddy:2-alpine@sha256:5f5c8640aae01df9654968d946d8f1a56c497f1dd5c5cda4cf95ab7c14d58648
+    restart: unless-stopped
+    ports: ['80:80', '443:443']
+    environment:
+      GATEWAY_DOMAIN: ${GATEWAY_DOMAIN:?Set the approved gateway hostname}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - gateway_caddy_data:/data
+      - gateway_caddy_config:/config
+    depends_on:
+      gateway:
+        condition: service_healthy
+volumes:
+  gateway_caddy_data:
+  gateway_caddy_config:

@@ -1,0 +1,47 @@
+{
+  "file": "disconnect-10s.mp4",
+  "sha256": "5c20328a2840cdaae5e00f980e9fdc3c74416dc4544e97cd2b4bde7335f9ae4c",
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 782,
+        "height": 990,
+        "duration": "10.022727"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 2,
+        "duration": "10.005333"
+      }
+    ],
+    "format": {
+      "duration": "10.022727",
+      "size": "440130"
+    }
+  },
+  "decodedStereoSampleRate": 48000,
+  "decodedAudioSeconds": 10.004291666666667,
+  "peak": 0.1734665036201477,
+  "rms": 0.026461104130852564,
+  "rmsDBFS": -31.547840763112372,
+  "oneSecondRms": [
+    0.026017167784273612,
+    0.026476155460947403,
+    0.02655788623615309,
+    0.026582879512999136,
+    0.026489833426113225,
+    0.026569977957700545,
+    0.026413130826347414,
+    0.026515664461641282,
+    0.02644628322115572,
+    0.026527522754522276,
+    0.028681159348014892
+  ],
+  "scope": "Encoded audio signal check; not human audition or proof of glitch-free playback"
+}
