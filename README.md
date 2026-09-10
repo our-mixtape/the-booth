@@ -1,18 +1,48 @@
 # Mixtape — The Booth
 
-## Native Astra session — September 10, 2026
+A browser DJ instrument you perform in: a four-channel Web Audio mixer, crossfader, filter, EQ, tempo, stems and a Three.js booth, with **GPT-6 Astra as a read-only practice companion**.
 
-**Public source:** [our-mixtape/the-booth](https://github.com/our-mixtape/the-booth). A playable browser DJ instrument with a read-only companion. The new local session uses **gpt-6-astra native mid-turn steering and async tool calling**; the hosted app continues to use its existing HTTP hints.
+- **Live:** [Mixtape — The Booth](https://mixtape-the-booth.vercel.app/#play) — free play needs no Booth account; Astra hints need Booth sign-in. Existing Vercel deployment protection is separate.
+- **Video (60 s):** pending a shareable recording URL.
+- **Repo:** [our-mixtape/the-booth](https://github.com/our-mixtape/the-booth) · developed September 10, 2026, and prepared for the OpenAI GPT-6 Astra Hackathon NYC. [Provenance](docs/PROVENANCE.md) distinguishes work completed before the 10:30 AM hacking start; the whole repository is not claimed as event-built.
 
-- **Change the brief while Astra responds:** `response.steer` → accepted → incomplete/steered → automatic successor. A steer is queued on the same response and applied automatically. Earlier streamed text remains visible.
-- **Let the engine report later:** Astra calls async `watch_attempt`; the person uses the mixer, and the browser later returns the engine's result with the original call ID. Astra reviews the supplied measurements. It never hears audio, moves controls, or assigns a musical-quality score.
-- **Astra in development:** separate Codex server/client agents authored the new session code and focused tests; the parent task integrated and inspected the result. Source commits, validation, and known limitations are recorded in [the build log](docs/BUILD_LOG.md) and [provenance](docs/PROVENANCE.md). Existing project work is distinguished from this iteration.
+## What runs where
 
-The [real API integration log](docs/evidence/astra-session/check-1789071731.md) passed in **16.88 seconds**, with distinct successor/review IDs and a review citing the synthetic entry error (0.12 s) and tolerance (0.25 s). That log proves the transport with a synthetic result; it is **not** an audition or a browser-performed handoff. Typecheck, lint, all **92 unit tests**, all **20 selected browser checks**, and the production build passed. The complete real signed-in browser rehearsal remains pending an account sign-in error; the PR stays open. See the evidence directory and build log for details.
+Playback, timing, every control and the practice result run locally in the browser. Astra never receives the mix audio. It reads measured deck state: positions, BPM with provenance, gains, filter, EQ, tempo, available stem routing and the last eight commands. Hosted HTTP hints use the Responses API with strict Structured Outputs; the local live session streams plans and reviews over a Responses WebSocket. The domain layer rejects every agent-origin command: Astra can point, you play. Optional microphone conversation uses a separate speech model.
 
-Run with Node 25.5.0 and pnpm 10.27.0: `pnpm install --frozen-lockfile --prefer-offline`, then `PORT=5176 GATEWAY_PORT=8790 pnpm dev`. Open [the local booth](http://127.0.0.1:5176/#play). Live sessions require the existing Booth Clerk keys and `OPENAI_API_KEY` in an ignored server-side `.env` (mode 600); manual mixing needs no account. Default ports remain 5173/8787. Follow [the session runbook and rehearsal](docs/ASTRA_SESSION.md) for exact checks and behavior. No new dependencies were added.
+## Native Astra capabilities, verified on this account today
 
-**Submission video:** not yet supplied. No deployment, system-audio recording, submission, or event-eligibility claim is made by this update. The older chronological sections below describe earlier checkpoints; this session section supersedes their statements that native steering is unimplemented or that local keys are unavailable.
+- **Mid-turn steering:** a changed brief is queued through `response.steer`; `response.steer.accepted` is followed by an incomplete response with reason `steered` and an automatic successor. A steer is queued on the same response and applied automatically, with no re-prompt. Text already streamed remains visible.
+- **Async tool calling:** Astra calls `watch_attempt` (`async: true`) and continues coaching while it is pending. The browser returns the engine's result later using the original call ID; Astra reviews the measured numbers in a successor response.
+- **Real signed-in rehearsal:** brief → steer → manual fixture attempt → review completed in **56.6 seconds**, including the time spent operating the booth. The engine measured B **6.9013 seconds late**, so the attempt correctly required a retry. Astra cited that error and the **0.25-second** tolerance, and explicitly declined to infer musical quality. This was browser automation through real controls, real Clerk authentication and real `gpt-6-astra` responses; no mocked identity or model stream. [Screenshots, timings and limits](docs/evidence/astra-session/real-session.md).
+
+[Redacted API event logs](docs/evidence/astra-session/) separately verify response/call identities with synthetic numeric results; the latest transport run took **16.88 seconds**. Live sessions run on the local gateway; the hosted build keeps its HTTP hint. [Runbook](docs/ASTRA_SESSION.md) · [official steering](https://developers.openai.com/api/docs/guides/steering) · [async tools](https://developers.openai.com/api/docs/guides/async-tool-calling).
+
+## Developed with Codex on gpt-6-astra — evidence in 30 seconds
+
+- **Blender → GLB → live DSP:** [the original mixer generator](assets/blender/create_mixer.py) first ran through the community `ahujasid/blender-mcp` bridge. Later revisions and optimized exports used Blender CLI. The resulting [GLB](public/models/mixtape-mixer.glb) and [bindings](public/models/mixtape-mixer.bindings.json) connect 21 controls and real RMS meters through [the asset adapter](src/scene/mixer-asset.ts). [Original render](docs/evidence/blender-mixer.png) · [runtime visual evidence](docs/evidence/visual-iteration/).
+- **Human keeps control:** [the domain layer](src/domain/session.ts) rejects agent writes; [Ask Astra](src/AskAstra.tsx) discards feedback when the semantic deck-state revision changed while Astra was thinking. [Browser regressions](tests/ask.browser.ts).
+- **Tests exposed real timing failures:** earlier browser runs entered B 0.51 s late under parallel graphics load and 0.30 s late after scrolling. The unchanged ±0.25 s mechanic rejected the attempts; the harness was corrected without relaxing the musical target. [Build records](docs/BUILD_LOG.md).
+- **Traceable authorship:** Codex authored and revised the implementation; [PROVENANCE](docs/PROVENANCE.md) records code, dependency and asset origins. Planning documents and the first playable implementation predate the hacking start; [BUILD_LOG](docs/BUILD_LOG.md) preserves those timestamps.
+
+Hosted demo tracks are original generated fixtures: synthesized drums, bass and melody, not source separation. The private library was prepared locally with this project's Demucs adapter and is not in the repository. This rehearsal does not establish human audition or system-audio capture.
+
+## Run and verification
+
+Use Node **25.5.0** and pnpm **10.27.0**:
+
+```sh
+pnpm install --frozen-lockfile --prefer-offline
+PORT=5176 GATEWAY_PORT=8790 pnpm dev
+```
+
+Open [the local booth](http://127.0.0.1:5176/#play). Configure the existing Booth Clerk keys and `OPENAI_API_KEY` in an ignored server-side `.env` with mode 600 for live sessions. Manual mixing needs no credentials. Default ports remain 5173/8787.
+
+Typecheck, lint, **92 unit tests**, **20 selected browser tests**, and the production build passed. The real signed-in live session and existing HTTP hint both returned genuine `gpt-6-astra` feedback. Exact commands and test prerequisites are in [the runbook](docs/ASTRA_SESSION.md). No dependencies were added for live sessions, and this iteration made no deployment or DNS changes. A system-audio demo recording and its video URL remain outstanding.
+
+## Earlier checkpoints
+
+The chronological sections below preserve earlier results. The current session and verification sections above supersede their statements that native steering, local keys or signed-in rehearsal are unavailable.
 
 Production design update, September 10: Afterhours now follows Andrew's **Booth v4 – Astra** reference: light Archivo typography, an indigo glow, dark equipment surfaces and cool preparation screens. “Follow the mix” and the CDJs share lavender, cyan, periwinkle and lilac deck accents. [Open production](https://mixtape-the-booth.vercel.app), deployment `dpl_GjrAUo8YEqjibkr4JkcxWtKmAULi`. Build/lint, 61 unit tests and all 14 selected browser checks passed, including a focused retry after a local server restart interrupted an evidence download. Hosted page/bundle/style checks passed; the stylesheet matches the tested build. Existing Vercel protection and Clerk configuration remain. See [release evidence](docs/evidence/production-astra-palette/verification.json). Local preview: `pnpm dev` at [the landing page](http://127.0.0.1:5173/).
 

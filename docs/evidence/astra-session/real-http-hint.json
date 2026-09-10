@@ -1,0 +1,4 @@
+{
+  "hint": "✳ ASTRA / YOUR NEXT MOVE\n\nSay it. Type it. Try a prompt.\n◉ Talk to voice\nWhat would you like to try?\nHandoff hint\nTwo minutes left\nKeep it restrained\nAsk Astra ↗\n\ngpt-6-astra · The attempt is marked for retry, with B’s entry 6.90 seconds late. Next: On retry, press B’s play control at 8 seconds elapsed, within the ±0.25-second entry tolerance.\n\nVoice off. Voice uses a separate OpenAI speech model; your microphone is sent to it for up to 2 minutes. Use headphones. The mix output is never connected. Requests share the current deck state; Astra never moves the controls.",
+  "recordedAt": "2026-09-10T20:30:17.405Z"
+}

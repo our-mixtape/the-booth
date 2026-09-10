@@ -40,6 +40,28 @@
     "asyncToolReview": true,
     "testedSourceCommit": "8c78e3cf8d99e3a851f47bcebe8420b54b85f633"
   },
-  "realSignedInBrowserRehearsal": "pending: Clerk reports External Account was not found",
-  "hostedDeploymentPerformed": false
+  "realSignedInBrowserRehearsal": {
+    "status": "pass",
+    "recordedAt": "2026-09-10T20:28:47.059Z",
+    "sourceCommit": "5e1754061fa777dfb59a94521344a768e87f61da",
+    "identity": "real Clerk session",
+    "model": "gpt-6-astra",
+    "controls": "browser automation using ordinary visible controls",
+    "fixtures": "original generated audio",
+    "durationSeconds": 56.6,
+    "reviewDurationSeconds": 3.0,
+    "attemptStatus": "retry",
+    "entryErrorSeconds": 6.9013,
+    "toleranceSeconds": 0.25,
+    "evidence": "real-session.md",
+    "humanAudition": false,
+    "systemAudioCapture": false
+  },
+  "hostedDeploymentPerformed": false,
+  "realSignedInHttpHint": {
+    "status": "pass",
+    "recordedAt": "2026-09-10T20:30:17.405Z",
+    "model": "gpt-6-astra",
+    "evidence": "real-http-hint.json"
+  }
 }

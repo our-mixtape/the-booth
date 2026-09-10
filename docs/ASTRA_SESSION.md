@@ -23,7 +23,7 @@ node --env-file=.env scripts/astra-session-check.mjs
 
 Stop an existing preview on port 5176 before the browser suite. The existing anonymous-account/import tests require an unconfigured browser provider; the explicit empty publishable-key override applies only to the test server and does not edit `.env`. Restart ordinary `pnpm dev` afterward for real sign-in. Playwright reuses an already-running server, which would ignore that startup override.
 
-The last command makes real model calls and saves a redacted transport log. Its numeric attempt result is a **synthetic test fixture**, not browser performance or an audition. Browser tests use mocked identity/API streams; server tests separately verify signed JWTs and scripted WebSocket events. A real signed-in rehearsal is a distinct evidence item.
+The last command makes real model calls and saves a redacted transport log. Its numeric attempt result is a **synthetic test fixture**, not browser performance or an audition. Browser tests use mocked identity/API streams; server tests separately verify signed JWTs and scripted WebSocket events. The [real signed-in rehearsal](evidence/astra-session/real-session.md) is a distinct evidence item: it passed with a measured retry, using actual Clerk authentication, visible controls and genuine Astra responses.
 
 ## Session contract
 
@@ -47,6 +47,18 @@ A session is owned by both Clerk user ID and Clerk session ID. The gateway retai
 
 Submission video link has not been supplied. Record system audio separately before using this as a screen-and-audio submission; an internal master-bus regression capture is not system-audio verification.
 
+## Stage beat: 0:50–1:25
+
+Use this in the local signed-in booth after the session change is merged. Latency varies; leave time for the actual lifecycle rather than narrating a scheduled outcome.
+
+- **Brief:** “Plan the handoff and watch my attempt.” While the response is in flight, choose **Delay B one bar**: “I changed my mind.”
+- **Show the real steer:** point to Steer queued → Steered → Revising: “That update was queued on the same response and applied automatically. No re-prompt.”
+- **Perform and review:** “Astra asked to watch my attempt.” Start practice, enter B and move the crossfader. Once the actual review arrives: “The engine returned this measured entry error later through an async tool call. Astra kept coaching while it waited.”
+
+The one-bar delay intentionally conflicts with the fixed 8-second entry target. Explain the resulting retry; do not present it as a passed timing exercise. If the review is still pending, show that state and continue when it arrives.
+
+For “Is that native steering?”: “Yes: `response.steer`, accepted, then a steered termination and an automatic successor. Here is the redacted September 10 event log.” For quality claims: “Astra reads engine measurements. It does not hear the mix or grade musical taste.”
+
 ## Sources and authorship
 
-[Official steering documentation](https://developers.openai.com/api/docs/guides/steering) and [async tool calling](https://developers.openai.com/api/docs/guides/async-tool-calling), retrieved September 10, 2026, plus the user's account-verified kickoff informed the adapter. New session code was authored by Codex with separate server/client agents and integrated in the parent task. No new dependencies or draft Claude patches were used. The optional README template and draft patches mentioned in the kickoff were not present in the supplied attachment directory; this guide was authored independently.
+[Official steering documentation](https://developers.openai.com/api/docs/guides/steering) and [async tool calling](https://developers.openai.com/api/docs/guides/async-tool-calling), retrieved September 10, 2026, plus the user's account-verified kickoff informed the adapter. New session code was authored by Codex with separate server/client agents and integrated in the parent task. No new dependencies or draft Claude patches were used. The optional README template and draft patches mentioned in the kickoff were not present in the supplied attachment directory; this guide was authored independently. The user later supplied the README opening in chat, which was adapted with the evidence and provenance qualifications above.
