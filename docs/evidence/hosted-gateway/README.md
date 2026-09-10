@@ -1,6 +1,6 @@
 # Portable gateway verification — September 10, 2026
 
-**Implementation and real local rehearsal completed; persistent gateway not deployed.** The user selected “Finish portable gateway; keep app on Vercel.” No approved persistent hosting account/server or gateway hostname was available. The existing [Vercel app](https://mixtape-the-booth.vercel.app/#play) keeps the authenticated HTTP hint. Its deployment protection was not changed. The [deployment runbook](../../HOSTED_GATEWAY.md) gives the exact missing host/access, TLS hostname, secrets and origins.
+**Implementation and real local rehearsal completed; persistent gateway not deployed.** The user selected “Finish portable gateway; keep app on Vercel.” No approved persistent hosting account/server or gateway hostname was available. The existing [Vercel app](https://mixtape-the-booth.vercel.app/#play) keeps the authenticated HTTP hint. Its deployment protection was not changed. A subsequent authorized [Vercel app release](vercel-release.json) is live; this did not deploy the separate gateway. The [deployment runbook](../../HOSTED_GATEWAY.md) gives the exact missing host/access, TLS hostname, secrets and origins.
 
 Work starts from `origin/main` / PR #1 merge `72a3662`, on `codex/hosted-astra-sessions`. The original [real-session evidence](../astra-session/real-session.md), native Responses WebSocket protocol and browser HTTP/SSE contracts are preserved.
 

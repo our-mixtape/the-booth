@@ -1,0 +1,58 @@
+{
+  "checkedAt": "2026-09-10T21:40:32.869926+00:00",
+  "sourceCommit": "1500e45e49dce967c0c48a8454fbb725e1cff439",
+  "deploymentId": "dpl_6nwR7HnrwBJaeYCDM6p9F2WkSx2N",
+  "deploymentUrl": "https://mixtape-the-booth-rih0hgzld-efficient-frontier-labs.vercel.app",
+  "liveUrl": "https://mixtape-the-booth.vercel.app/#play",
+  "state": "READY, promoted to production",
+  "project": "mixtape-the-booth",
+  "scope": "efficient-frontier-labs",
+  "build": {
+    "node": "24.x (existing project runtime)",
+    "pnpm": "10.28.0 (observed cloud build)",
+    "result": "typecheck and Vite build passed",
+    "bundle": "/assets/index-j0LgMTep.js",
+    "bundleBytes": 1196621,
+    "bundleSha256": "3d4a81a621b46755b0155b20e146de52292e7438c711a602a774ded748fefc25",
+    "warning": "Existing large client chunk"
+  },
+  "checks": {
+    "exactLiveUrlMatchesCheckedIndex": true,
+    "configuredSecretsAbsentFromBundle": true,
+    "developmentGatewayAbsentFromBundle": true,
+    "unauthenticatedHintStatus": 401,
+    "privateLibraryStatus": 200,
+    "privateLibraryTracks": [],
+    "runtimeStatus": {
+      "model": "gpt-6-astra",
+      "available": true,
+      "verified": false,
+      "session": {
+        "available": false
+      },
+      "auth": {
+        "required": true,
+        "configured": true
+      },
+      "voice": {
+        "model": "gpt-realtime-2.1",
+        "available": true,
+        "verified": false
+      },
+      "message": "Key configured \u00b7 model access not yet verified"
+    }
+  },
+  "protection": "Existing Vercel deployment login remains enabled. CLI checks used authorized Vercel access; in-app browser reached the Vercel login screen.",
+  "persistentGateway": {
+    "deployed": false,
+    "reason": "No approved persistent host/account or gateway hostname supplied. App remains on Vercel with HTTP hints; native sessions are only locally verified."
+  },
+  "commands": [
+    "vercel deploy --dry --json",
+    "vercel deploy --prod --skip-domain --yes --scope efficient-frontier-labs --project prj_ZZ3gQTYQwcPd9jQHrc9mZmVUskV7 --meta sourceCommit=1500e45",
+    "vercel curl /api/status --deployment https://mixtape-the-booth-rih0hgzld-efficient-frontier-labs.vercel.app",
+    "vercel promote https://mixtape-the-booth-rih0hgzld-efficient-frontier-labs.vercel.app --yes --scope efficient-frontier-labs",
+    "vercel inspect https://mixtape-the-booth.vercel.app --scope efficient-frontier-labs",
+    "vercel curl https://mixtape-the-booth.vercel.app/ -- --silent --show-error --fail --output /tmp/booth-live-direct-index.html"
+  ]
+}

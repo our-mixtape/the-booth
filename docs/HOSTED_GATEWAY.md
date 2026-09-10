@@ -1,6 +1,6 @@
 # Persistent Astra gateway
 
-The app remains on **https://mixtape-the-booth.vercel.app**. The user selected a portable gateway on September 10, 2026; no persistent hosting account or hostname has been supplied. This configuration is ready for an approved server, **not deployed remote-session evidence**. See [verification](evidence/hosted-gateway/README.md).
+The app remains on **https://mixtape-the-booth.vercel.app**. The user selected a portable gateway on September 10, 2026; no persistent hosting account or hostname has been supplied. The app was subsequently [redeployed to Vercel](evidence/hosted-gateway/vercel-release.json) at the user’s request. The persistent configuration is ready for an approved server, **not deployed remote-session evidence**. See [verification](evidence/hosted-gateway/README.md).
 
 ## Deployment shape
 

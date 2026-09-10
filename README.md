@@ -3,6 +3,7 @@
 A browser DJ instrument you perform in: a four-channel Web Audio mixer, crossfader, filter, EQ, tempo, stems and a Three.js booth, with **GPT-6 Astra as a read-only practice companion**. Four CDJs and their mixer strips now read **A, B, C, D from left to right** ([verified controls and audio](docs/evidence/deck-order/)).
 
 - **Live:** [Mixtape — The Booth](https://mixtape-the-booth.vercel.app/#play) — free play needs no Booth account; Astra hints need Booth sign-in. Existing Vercel deployment protection is separate.
+- **Latest app deployment:** September 10, 2026 — [production checks](docs/evidence/hosted-gateway/vercel-release.json) passed. Persistent Astra sessions still await an approved gateway host; the live app retains HTTP hints.
 - **Video (60 s):** [Download the MP4](https://raw.githubusercontent.com/our-mixtape/the-booth/a8407dad5c86d1b6b1be807576ea132305449143/docs/evidence/hosted-gateway/booth-demo-60s.mp4) — real local Astra session with captured system audio; [verification](docs/evidence/hosted-gateway/README.md).
 - **Repo:** [our-mixtape/the-booth](https://github.com/our-mixtape/the-booth) · developed September 10, 2026, and prepared for the OpenAI GPT-6 Astra Hackathon NYC. [Provenance](docs/PROVENANCE.md) distinguishes work completed before the 10:30 AM hacking start; the whole repository is not claimed as event-built.
 
