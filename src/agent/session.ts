@@ -44,8 +44,10 @@ export class AstraSession {
  private getToken: BoothSession['getToken'] | null = null;
  private toolTimer: ReturnType<typeof setTimeout> | null = null;
  private resolvedCalls = new Set<string>();
- private attempt: Pick<Attempt, 'status' | 'entryError'> = { status: 'idle' };
- private sawRunning = false;
+ private attempt: Pick<Attempt, 'status' | 'entryError' | 'startedAt'> = { status: 'idle', startedAt: 0 };
+ private briefActive = false;
+ private trackedAttemptStart: number | null = null;
+ private attemptResult: { startedAt: number; output: ToolOutput } | null = null;
  private reviewExpected = false;
  private requestStartedAt = 0;
 
@@ -61,7 +63,7 @@ export class AstraSession {
   for (const controller of this.controllers) controller.abort();
   this.controllers.clear(); this.streamController = null;
   void this.reader?.cancel().catch(() => {}); this.reader = null;
-  this.clearToolTimer(); this.reviewExpected = false; this.sawRunning = false;
+  this.clearToolTimer(); this.reviewExpected = false; this.briefActive = false; this.trackedAttemptStart = null; this.attemptResult = null;
  }
  stop() { this.disconnect(); this.getToken = null; this.resolvedCalls.clear(); this.publish(initial()); }
  private fail(error?: unknown) {
@@ -79,7 +81,10 @@ export class AstraSession {
   if (!text || text.length > 1000 || this.state.inFlightResponseId || this.state.requestPending || this.state.pendingCall || this.reviewExpected || this.state.signInRequired) return;
   const followup = this.state.connected && this.state.sessionId;
   if (!followup) { this.disconnect(); this.resolvedCalls.clear(); }
-  this.getToken = getToken; this.attempt = state.attempt; this.requestStartedAt = Date.now();
+  this.getToken = getToken; this.attempt = { ...state.attempt }; this.requestStartedAt = Date.now();
+  // A brief may cover an attempt already running, but never an earlier terminal result.
+  this.briefActive = true; this.attemptResult = null;
+  this.trackedAttemptStart = state.attempt.status === 'running' ? state.attempt.startedAt : null;
   const generation = this.generation, controller = new AbortController(); this.controllers.add(controller);
   this.phase('thinking', { requestPending: true, error: '' });
   const timeout = setTimeout(() => controller.abort(), 30000);
@@ -152,9 +157,9 @@ export class AstraSession {
   if (event.t === 'tool_call') {
    if (event.name !== 'watch_attempt' || !event.async || this.resolvedCalls.has(event.callId) || this.state.pendingCall) return;
    const args = z.object({ reason: z.string().max(1000) }).safeParse(event.args);
-   this.sawRunning = this.attempt.status === 'running';
    this.publish({ pendingCall: { callId: event.callId, reason: args.success ? args.data.reason : '', receivedAt: now } });
    this.clearToolTimer(); this.toolTimer = setTimeout(() => { void this.resolveTool(event.callId, { status: 'timeout' }); }, 120000);
+   if (this.attemptResult && this.attemptResult.startedAt === this.attempt.startedAt) void this.resolveTool(event.callId, this.attemptResult.output);
    return;
   }
   if (event.t === 'completed') {
@@ -184,20 +189,30 @@ export class AstraSession {
   finally { clearTimeout(timeout); this.controllers.delete(controller); }
  }
 
- observeAttempt(attempt: Pick<Attempt, 'status' | 'entryError'>) {
-  const wasRunning = this.attempt.status === 'running'; this.attempt = attempt;
-  if (!this.state.pendingCall) return;
-  if (attempt.status === 'running') this.sawRunning = true;
-  if (this.sawRunning && wasRunning && (attempt.status === 'complete' || attempt.status === 'retry')) {
+ observeAttempt(attempt: Pick<Attempt, 'status' | 'entryError' | 'startedAt'>) {
+  const previous = this.attempt; this.attempt = { ...attempt };
+  if (!this.briefActive) return;
+  if (attempt.status === 'running') {
+   if (previous.status !== 'running' || previous.startedAt !== attempt.startedAt) this.attemptResult = null;
+   this.trackedAttemptStart = attempt.startedAt;
+   return;
+  }
+  if (attempt.status === 'idle' || this.trackedAttemptStart !== attempt.startedAt) {
+   this.trackedAttemptStart = null; this.attemptResult = null; return;
+  }
+  if (previous.status === 'running' && previous.startedAt === attempt.startedAt) {
+   // Retain this engine result even while Astra is still preparing its asynchronous call.
    // The engine has no exact handoff timestamp field. Do not fabricate one from a render clock.
-   void this.resolveTool(this.state.pendingCall.callId, { status: attempt.status, ...(Number.isFinite(attempt.entryError) ? { entryError: attempt.entryError } : {}), tolerance: 0.25 });
+   const output: ToolOutput = { status: attempt.status, ...(Number.isFinite(attempt.entryError) ? { entryError: attempt.entryError } : {}), tolerance: 0.25 };
+   this.attemptResult = { startedAt: attempt.startedAt, output };
+   if (this.state.pendingCall) void this.resolveTool(this.state.pendingCall.callId, output);
   }
  }
 
  async resolveTool(callId: string, output: ToolOutput) {
   if (this.state.pendingCall?.callId !== callId || this.resolvedCalls.has(callId) || !this.state.sessionId) return;
   const generation = this.generation, controller = new AbortController(); this.controllers.add(controller);
-  this.resolvedCalls.add(callId); this.clearToolTimer(); this.reviewExpected = true; this.requestStartedAt = Date.now();
+  this.resolvedCalls.add(callId); this.clearToolTimer(); this.attemptResult = null; this.trackedAttemptStart = null; this.reviewExpected = true; this.requestStartedAt = Date.now();
   if (this.state.inFlightResponseId) this.publish({ pendingCall: null, reviewPending: true });
   else this.phase('reviewing', { pendingCall: null, requestPending: true, reviewPending: true });
   const timeout = setTimeout(() => controller.abort(), 15000);
