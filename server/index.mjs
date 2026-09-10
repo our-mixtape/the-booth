@@ -4,6 +4,7 @@ import { libraryRoute } from './library.mjs';
 import { z } from 'zod';
 import { createVoiceRoute, voiceModel } from './voice.mjs';
 import { createSessionAuth } from './auth.mjs';
+import { createSessionRoute, sessionPaths } from './session.mjs';
 const port=Number(process.env.GATEWAY_PORT)||8787,model='gpt-6-astra';
 const unit=z.number().min(0).max(1);
 const deck=z.object({trackId:z.string().regex(/^track-[1-4]$/),position:z.number().min(0).max(600),playing:z.boolean(),gain:unit,filter:unit,eq:z.object({low:z.number().min(-12).max(12),mid:z.number().min(-12).max(12),high:z.number().min(-12).max(12)}),rate:z.number().min(0.84).max(1.16),bpm:z.number().positive().max(400).nullable(),provenance:z.enum(['fixture-known','rekordbox-verified','rekordbox-unverified','unknown']),rhythmWindow:z.object({start:z.number().nonnegative().max(600),end:z.number().positive().max(600)}).nullable(),stems:z.object({drums:z.boolean().optional(),bass:z.boolean().optional(),melody:z.boolean().optional(),vocals:z.boolean().optional(),other:z.boolean().optional()})});
@@ -13,21 +14,24 @@ const historyEvent=z.object({at:z.number().nonnegative(),origin:z.enum(['pointer
 const feedbackSchema=z.object({observation:z.string().trim().min(1).max(350),nextAction:z.string().trim().min(1).max(350)}).strict();
 const feedbackFormat={type:'json_schema',name:'practice_feedback',strict:true,schema:{type:'object',properties:{observation:{type:'string'},nextAction:{type:'string'}},required:['observation','nextAction'],additionalProperties:false}};
 const schema=z.object({exercise:z.object({entryAfter:z.number().positive().max(600),endAfter:z.number().positive().max(600)}),revision:z.number().int(),crossfader:unit,decks:z.object({A:deck,B:deck,C:deck,D:deck}),attempt:z.object({status:z.enum(['idle','running','complete','retry']),startedAt:z.number(),elapsed:z.number().nonnegative().nullable(),entryError:z.number().optional(),assisted:z.boolean()}),history:z.array(historyEvent).max(8),ask:z.object({text:z.string().trim().min(1).max(1000),source:z.enum(['text','helper','voice']),requestId:z.string().regex(/^[a-zA-Z0-9_-]{1,100}$/)}).strict().optional()});
-export function createHandler({key=process.env.OPENAI_API_KEY,request=fetch,env=process.env}={}){
+export function createHandler({key=process.env.OPENAI_API_KEY,request=fetch,env=process.env,WebSocketImpl=globalThis.WebSocket}={}){
 const origins=new Set(env.VERCEL?[]:[`http://localhost:${Number(env.PORT)||5173}`,`http://127.0.0.1:${Number(env.PORT)||5173}`]);
 for(const candidate of [env.APP_ORIGIN,...[env.VERCEL_URL,env.VERCEL_PROJECT_PRODUCTION_URL].filter(Boolean).map(host=>`https://${host}`)]){
  try{const url=new URL(candidate);if(url.protocol==='https:'||(!env.VERCEL&&url.protocol==='http:'))origins.add(url.origin);}catch{/* Only explicitly configured origins are accepted. */}
 }
 const voiceRoute=createVoiceRoute({key,request});
 const auth=createSessionAuth({env,origins});
+const sessionRoute=createSessionRoute({key,model,env,stateSchema:schema,WebSocketImpl});
 let busy=false,lastRequest=0,verified=false;
 return async(req,res)=>{
  res.setHeader('Content-Type','application/json');res.setHeader('Cache-Control','no-store');
  const reply=(status,body)=>{res.writeHead(status);res.end(JSON.stringify(body));};
  if(req.headers.origin&&!origins.has(req.headers.origin))return reply(403,{error:'Origin not allowed'});
- // Both paid entry points must pass this boundary before parsing input or dispatching upstream.
- if(req.url==='/api/hint'||req.url==='/api/voice/session'){
+ // Paid entry points pass this boundary before parsing input or dispatching upstream.
+ let identity;
+ if(req.url==='/api/hint'||req.url==='/api/voice/session'||sessionPaths.has(req.url)){
   const session=await auth.authorize(req);
+  identity=session;
   if(session.status){if(session.status===401)res.setHeader('WWW-Authenticate','Bearer');return reply(session.status,{error:session.error,code:session.code});}
  }
  if(env.VERCEL&&(req.url?.startsWith('/api/library')||req.url==='/api/exercise')){
@@ -37,7 +41,8 @@ return async(req,res)=>{
  }
  if(await libraryRoute(req,res))return;
  if(await voiceRoute(req,res))return;
- if(req.method==='GET'&&req.url==='/api/status')return reply(200,{model,available:!!key,verified,auth:{required:true,configured:auth.configured},voice:{model:voiceModel,available:!!key,verified:false},message:verified?'Astra access verified by a completed hint':key?'Key configured · model access not yet verified':'Astra unavailable · no server API key'});
+ if(await sessionRoute(req,res,identity))return;
+ if(req.method==='GET'&&req.url==='/api/status')return reply(200,{model,available:!!key,verified,session:{available:!!key&&!env.VERCEL},auth:{required:true,configured:auth.configured},voice:{model:voiceModel,available:!!key,verified:false},message:verified?'Astra access verified by a completed hint':key?'Key configured · model access not yet verified':'Astra unavailable · no server API key'});
  if(req.method!=='POST'||req.url!=='/api/hint')return reply(404,{error:'Not found'});
  if(!key)return reply(503,{error:'Astra unavailable · no server API key. Manual playback is ready.'});
  if(busy||Date.now()-lastRequest<5000)return reply(429,{error:'Wait a moment before requesting another hint.'});
