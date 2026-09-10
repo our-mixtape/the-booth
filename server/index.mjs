@@ -4,7 +4,7 @@ import { libraryRoute } from './library.mjs';
 import { z } from 'zod';
 import { createVoiceRoute, voiceModel } from './voice.mjs';
 import { createSessionAuth } from './auth.mjs';
-const port=8787,model='gpt-6-astra';
+const port=Number(process.env.GATEWAY_PORT)||8787,model='gpt-6-astra';
 const unit=z.number().min(0).max(1);
 const deck=z.object({trackId:z.string().regex(/^track-[1-4]$/),position:z.number().min(0).max(600),playing:z.boolean(),gain:unit,filter:unit,eq:z.object({low:z.number().min(-12).max(12),mid:z.number().min(-12).max(12),high:z.number().min(-12).max(12)}),rate:z.number().min(0.84).max(1.16),bpm:z.number().positive().max(400).nullable(),provenance:z.enum(['fixture-known','rekordbox-verified','rekordbox-unverified','unknown']),rhythmWindow:z.object({start:z.number().nonnegative().max(600),end:z.number().positive().max(600)}).nullable(),stems:z.object({drums:z.boolean().optional(),bass:z.boolean().optional(),melody:z.boolean().optional(),vocals:z.boolean().optional(),other:z.boolean().optional()})});
 const deckId=z.enum(['A','B','C','D']);
@@ -14,7 +14,7 @@ const feedbackSchema=z.object({observation:z.string().trim().min(1).max(350),nex
 const feedbackFormat={type:'json_schema',name:'practice_feedback',strict:true,schema:{type:'object',properties:{observation:{type:'string'},nextAction:{type:'string'}},required:['observation','nextAction'],additionalProperties:false}};
 const schema=z.object({exercise:z.object({entryAfter:z.number().positive().max(600),endAfter:z.number().positive().max(600)}),revision:z.number().int(),crossfader:unit,decks:z.object({A:deck,B:deck,C:deck,D:deck}),attempt:z.object({status:z.enum(['idle','running','complete','retry']),startedAt:z.number(),elapsed:z.number().nonnegative().nullable(),entryError:z.number().optional(),assisted:z.boolean()}),history:z.array(historyEvent).max(8),ask:z.object({text:z.string().trim().min(1).max(1000),source:z.enum(['text','helper','voice']),requestId:z.string().regex(/^[a-zA-Z0-9_-]{1,100}$/)}).strict().optional()});
 export function createHandler({key=process.env.OPENAI_API_KEY,request=fetch,env=process.env}={}){
-const origins=new Set(env.VERCEL?[]:['http://localhost:5173','http://127.0.0.1:5173']);
+const origins=new Set(env.VERCEL?[]:[`http://localhost:${Number(env.PORT)||5173}`,`http://127.0.0.1:${Number(env.PORT)||5173}`]);
 for(const candidate of [env.APP_ORIGIN,...[env.VERCEL_URL,env.VERCEL_PROJECT_PRODUCTION_URL].filter(Boolean).map(host=>`https://${host}`)]){
  try{const url=new URL(candidate);if(url.protocol==='https:'||(!env.VERCEL&&url.protocol==='http:'))origins.add(url.origin);}catch{/* Only explicitly configured origins are accepted. */}
 }
