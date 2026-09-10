@@ -191,9 +191,10 @@ struct RecordDemo {
     static let usage = """
     Booth demo recorder (macOS 14+, ScreenCaptureKit; microphone is disabled)
       booth-record-demo list [--app Codex] [--titles]
-      booth-record-demo record --window ID --output /absolute/path.mp4 [--duration 60]
+      booth-record-demo record --window ID --output /absolute/path.mp4 [--duration 60] [--region x,y,width,height]
     Requires Screen & System Audio Recording permission for the launching app.
     Existing files are never overwritten. Duration must be 1–300 seconds.
+    Region coordinates are window-local points, clipped before capture and encoding.
     Recording writes MP4 and an adjacent .capture.json with system audio signal metrics.
     Audition the MP4 before sharing; signal metrics alone do not verify musical content.
     """
@@ -244,7 +245,7 @@ struct RecordDemo {
         while index < args.count {
             let name = args[index]
             if name == "--titles", command == "list" { titles = true; index += 1; continue }
-            let allowed = command == "list" ? ["--app"] : ["--window", "--output", "--duration"]
+            let allowed = command == "list" ? ["--app"] : ["--window", "--output", "--duration", "--region"]
             guard allowed.contains(name), index + 1 < args.count, options[name] == nil else {
                 throw RecorderError("Invalid or repeated option: \(name)\n\(usage)")
             }
@@ -265,7 +266,7 @@ struct RecordDemo {
             }).sorted(by: { $0.windowID < $1.windowID }).prefix(100) {
                 let app = window.owningApplication?.applicationName ?? "Unknown"
                 let title = titles ? "\t" + String((window.title ?? "").prefix(100)).replacingOccurrences(of: "\n", with: " ") : ""
-                print("\(window.windowID)\t\(app)\(title)")
+                print("\(window.windowID)\t\(app)\t\(Int(window.frame.width))x\(Int(window.frame.height)) points\(title)")
             }
             return
         }
@@ -285,10 +286,23 @@ struct RecordDemo {
             throw RecorderError("Output or evidence file already exists; choose a new path.")
         }
         let filter = SCContentFilter(desktopIndependentWindow: window)
-        let scale = min(Double(filter.pointPixelScale), 1920 / Double(window.frame.width), 1080 / Double(window.frame.height))
+        var region = CGRect(origin: .zero, size: window.frame.size)
+        if let input = options["--region"] {
+            let fields = input.split(separator: ",", omittingEmptySubsequences: false)
+            let parts = fields.compactMap { Double($0) }
+            guard fields.count == 4, parts.count == 4, parts.allSatisfy({ $0.isFinite }),
+                  parts[0] >= 0, parts[1] >= 0, parts[2] >= 2, parts[3] >= 2,
+                  parts[0] + parts[2] <= window.frame.width,
+                  parts[1] + parts[3] <= window.frame.height else {
+                throw RecorderError("--region requires x,y,width,height within the selected window, in points.")
+            }
+            region = CGRect(x: parts[0], y: parts[1], width: parts[2], height: parts[3])
+        }
+        let scale = min(Double(filter.pointPixelScale), 1920 / Double(region.width), 1080 / Double(region.height))
         let config = SCStreamConfiguration()
-        config.width = max(2, Int(window.frame.width * scale) / 2 * 2)
-        config.height = max(2, Int(window.frame.height * scale) / 2 * 2)
+        config.sourceRect = region
+        config.width = max(2, Int(region.width * scale) / 2 * 2)
+        config.height = max(2, Int(region.height * scale) / 2 * 2)
         config.minimumFrameInterval = CMTime(value: 1, timescale: 30)
         config.queueDepth = 6
         config.pixelFormat = kCVPixelFormatType_32BGRA
@@ -315,6 +329,8 @@ struct RecordDemo {
         var stats = try await recorder.finish()
         stats["output"] = output.path
         stats["windowID"] = id
+        stats["sourceRegionPoints"] = [region.origin.x, region.origin.y, region.width, region.height]
+        stats["croppedBeforeEncoding"] = options["--region"] != nil
         stats["audioSource"] = "ScreenCaptureKit system output (content-filter scoped), AAC stereo 48 kHz"
         stats["recordedAt"] = ISO8601DateFormatter().string(from: Date())
         let json = try JSONSerialization.data(withJSONObject: stats, options: [.prettyPrinted, .sortedKeys])

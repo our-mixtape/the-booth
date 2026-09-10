@@ -1,8 +1,39 @@
 # Portable gateway verification — September 10, 2026
 
-**Implementation and real local rehearsal completed; persistent gateway not deployed.** The user selected “Finish portable gateway; keep app on Vercel.” No approved persistent hosting account/server or gateway hostname was available. The existing [Vercel app](https://mixtape-the-booth.vercel.app/#play) keeps the authenticated HTTP hint. Its deployment protection was not changed. A subsequent authorized [Vercel app release](vercel-release.json) is live; this did not deploy the separate gateway. The [deployment runbook](../../HOSTED_GATEWAY.md) gives the exact missing host/access, TLS hostname, secrets and origins.
+**Portable gateway deployed and real hosted rehearsal verified.** The [Vercel app](https://mixtape-the-booth.vercel.app/#advanced/play) connects to [the Render gateway](https://mixtape-astra-gateway.onrender.com/healthz). [Deployment evidence](hosted-release.json) records the actual source, releases, one-instance configuration, public HTTPS/CORS/authentication checks and inspected frontend bundle. Real user-completed Clerk sign-in and genuine gpt-6-astra calls then verified the flow below. Existing Vercel protection remains enabled; the user-approved private one-hour test link was revoked after testing, with no tokens in evidence. The [earlier Vercel-only release](vercel-release.json) remains as historical evidence.
 
 Work starts from `origin/main` / PR #1 merge `72a3662`, on `codex/hosted-astra-sessions`. The original [real-session evidence](../astra-session/real-session.md), native Responses WebSocket protocol and browser HTTP/SSE contracts are preserved.
+
+## Real hosted, signed-in run
+
+The final hosted recording completed at **18:47:16 EDT** on September 10, 2026. Both production services ran source `6d4f50af21f75a20a308a77b445ecfe34c3c80aa`. The browser used the canonical Vercel origin and directly authenticated its HTTP/SSE requests to the single Render gateway. The gateway retained its Responses WebSocket to OpenAI. No identity, response stream, attempt result or audio was mocked. Only original synthesized fixtures were used; Astra received measured state and no audio.
+
+| Time from brief | Recorded hosted lifecycle |
+|---|---|
+| 0.9 s | Native steer queued: Delay B one bar |
+| 2.5 s | Steered termination and automatic successor |
+| 8.1 s | Plan complete, attempt watch pending |
+| 48.9 s | Actual engine result returned; review starts |
+| 51.7 s | Genuine gpt-6-astra review complete |
+
+The visible pending interval is **40.8 seconds**, measured conservatively from the completed plan. Codex used ordinary visible controls to start practice, enter B and move the crossfader. The engine measured **+2.368 seconds** entry error and returned **retry** against the unchanged **±0.25-second** target. Astra cited these measurements and declined to infer a completed handoff, beat alignment or musical quality. The engine's UI separately reported a handoff at about 10.62 seconds; the tool does not claim that exact timestamp is available to Astra. The requested one-bar delay intentionally misses the fixed exercise target.
+
+- [60-second hosted demonstration](booth-hosted-demo-60s.mp4)
+- [Recorded hosted lifecycle and actual practice result](hosted-recorded-session.json) · [review screenshot](hosted-final-review.png)
+- [Capture-time region and system-audio metrics](hosted-capture.json) · [encoded audio check](hosted-system-audio-check.json)
+- [Earlier hosted acceptance run](hosted-session.json), with a **74.0-second** pending watch, review at **89.7 seconds**, and **+5.363-second** entry error · [screenshot](hosted-review.png)
+
+The shared take is continuous, with only encoding and trimming to 60.000 seconds of video (60.019 seconds of container/AAC timing). ScreenCaptureKit captured the Booth pane directly at `[955, 86, 699, 934]` window-local points; surrounding conversation, tabs and the private access URL were excluded before encoding. Output is 808×1080 with stereo 48 kHz AAC, decoded RMS **0.02717**, peak **0.18399**, and non-silent audio in all 60 full one-second windows. Capture reported 1,771 frames, 3,004 audio buffers and zero reported drops. Full-instrument and final-review frames were visually inspected. No replacement soundtrack, overlay, time compression or narration was used. Earlier framing/timing rehearsals remain temporary; they are not substituted for this final take. A rehearsal-control script needed correction, but the saved stream and recording remained real throughout.
+
+### Actual remote disconnect, fallback and recovery
+
+Stopped one real session while both decks played; B's filter remained usable. Then opened a new pending watch, enabled Render maintenance and issued `render restart srv-dahiqq6k1f9s73ffj0k0 --confirm --output json`. The old stream ended about **71 seconds after the restart command**, with the visible error “Astra session ended. Brief again to retry. Your mix keeps playing.” This was earlier than the watch's 120-second browser timeout. The Render instance list showed the replacement before the old stream ended; maintenance stayed enabled until stream termination was observed.
+
+The decks continued advancing across the actual disconnect and B's filter was changed to 97%. [DOM observations](hosted-disconnect.json) and a separate [10-second recording after the disconnect](hosted-disconnect.mp4) document the manual instrument. Its actual system audio remained non-silent, encoded RMS **0.02648**: [capture](hosted-disconnect-capture.json), [signal check](hosted-disconnect-system-audio-check.json). This recording verifies output after the outage; it does not claim continuous audio measurement across the entire replacement interval.
+
+The independent same-origin Vercel HTTP hint returned genuine gpt-6-astra advice while Render was in maintenance: [response](hosted-http-hint.json). Maintenance was disabled, public health returned 200, and subsequent fresh live sessions succeeded, including the final recorded take. There is no session migration claim. Real upstream provider failures were not deliberately induced remotely; simulated provider-error regressions below cover that case while verifying actual manual audio.
+
+Remaining limits: one gateway process and maintenance windows for changes; no remote 55-minute soak or capacity test; existing Clerk development instance and Vercel deployment gate; no custom-domain/DNS changes; no physical-speaker listening, Andrew's musical audition, narration or event-eligibility claim. The displayed response IDs are abbreviated; the original separate transport logs below preserve their original scope.
 
 ## Real local, signed-in run
 
@@ -46,6 +77,6 @@ Provider errors are covered with **simulated** WebSocket/SSE events. The new bro
 - **28 distinct browser checks** passed across the selected suite and focused runs: real controls/audio routing, A–D player order, clockwise exported/fallback knobs, layout continuity, auth and Astra panels. The first combined run passed 26/27; voice-stop timed out during scrolling. Its unchanged focused rerun passed. The latest session suite passed 4/4, including the additional model-failure/audio check. Do not describe this as one clean 28-test run.
 - New regression measurements/audio are copied into [regressions](regressions/); historical tracked evidence was restored unchanged.
 - Pinned Node gateway image built locally and ran as the non-root `node` user. Dummy-credential smoke check: health 200, unauthenticated brief 401, private library empty. No `.env`, private tracks, frontend audio or evidence were in the image. This does not verify real model credentials inside the container.
-- Compose configuration and the pinned Caddy configuration validated locally. No remote server, TLS issuance, DNS routing, production origin setting or gateway publication was performed.
+- Compose configuration and the pinned Caddy configuration validated locally. Those local proxy checks did not establish public routing. The subsequent Render deployment separately verifies public HTTPS and the production gateway-origin setting; DNS/custom domains remain unchanged.
 
-Exact commands and prerequisites: [deployment/testing](../../HOSTED_GATEWAY.md), [recording/rehearsal](../../DEMO_RECORDING.md). No model writes, raw audio uploads, practice-tolerance changes, library dependencies, charity-jukebox or DNS changes were introduced. Real remote sign-in → steer → successor → >30-second wait → measured review, remote disconnect/fallback checks and public TLS routing are still required after an approved host is available.
+Exact commands and prerequisites: [deployment/testing](../../HOSTED_GATEWAY.md), [recording/rehearsal](../../DEMO_RECORDING.md). No model writes, raw audio uploads, practice-tolerance changes, library dependencies, charity-jukebox or DNS changes were introduced. Real remote sign-in → native steer → successor → >30-second wait → measured review, actual remote disconnect/fallback/recovery and public HTTPS routing are now verified above. Simulated tests retain their separate scope.

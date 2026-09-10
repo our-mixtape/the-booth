@@ -1,8 +1,22 @@
 # 60-second Booth recording
 
-The [recorded rehearsal](evidence/hosted-gateway/booth-demo-60s.mp4) uses real local Clerk authentication, genuine gpt-6-astra responses and original synthesized fixtures. [Evidence and limits](evidence/hosted-gateway/README.md) distinguish this from deployment and simulated regressions. No microphone or raw mix audio is sent to Astra. This recording is not a claim of hackathon eligibility; earlier work provenance is preserved.
+The latest [hosted rehearsal](evidence/hosted-gateway/booth-hosted-demo-60s.mp4) uses real Clerk sign-in, deployed Vercel/Render, genuine gpt-6-astra responses and original synthesized fixtures. The [earlier local take](evidence/hosted-gateway/booth-demo-60s.mp4) is preserved. [Evidence and limits](evidence/hosted-gateway/README.md) distinguish this from deployment and simulated regressions. No microphone or raw mix audio is sent to Astra. This recording is not a claim of hackathon eligibility; earlier work provenance is preserved.
 
-## Exact recording commands
+## Hosted recording commands
+
+The current helper supports clipping before capture. For this run the selected window was 1654×1020 points, and the verified Booth-only pane was its bottom-right 699×934 points. Run `list` and inspect the actual pane again before reusing any coordinates. Do not capture the private deployment-access URL or surrounding conversation.
+
+```sh
+swiftc -module-cache-path /tmp/booth-swift-module-cache -parse-as-library scripts/record-demo.swift -o /tmp/booth-record-demo-region
+/tmp/booth-record-demo-region list --app ChatGPT
+/tmp/booth-record-demo-region record --window 2599 --region 955,86,699,934 --output /tmp/booth-hosted-presentation-pane.mp4 --duration 60
+ffmpeg -v error -i /tmp/booth-hosted-presentation-pane.mp4 -t 60 -c:v libx264 -preset fast -crf 20 -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart docs/evidence/hosted-gateway/booth-hosted-demo-60s.mp4
+python3 scripts/check-recording.py docs/evidence/hosted-gateway/booth-hosted-demo-60s.mp4
+```
+
+The final hosted take briefed/steered at the start, showed four players then turntables, started practice at about 39 seconds, entered B about 10 seconds later, and showed the real measured review by 52 seconds. The watch stayed pending 40.8 seconds. Use actual lifecycle state to pace a rehearsal; never fabricate or accelerate a response. ScreenCaptureKit system output and the encoded audio were checked; human musical audition remains separate.
+
+## Earlier local recording commands
 
 Prerequisites: macOS 14+, installed Swift compiler, ffmpeg/ffprobe, Python 3 and Screen & System Audio Recording permission for the launching app. The selected-window filter captures that app's system output; silence other content in the same app and prepare the window before recording. No microphone permission is needed.
 
@@ -40,4 +54,4 @@ Start with audio enabled, A playing Amber Current, B cued to zero with Afterglow
 
 Real model timing varies. If the watch or review arrives too late, preserve its true state and rehearse another take; never substitute fabricated output. A readable completed review and full instrument need deliberate scrolling in the narrow browser pane. The new response-history behavior follows a new review inside its own scroll area without moving the page.
 
-The next stage step is Andrew's audition and narration, then repeating the same flow on the approved HTTPS gateway. The current video has fixture system audio and no spoken narration.
+The same flow has now been repeated on the approved HTTPS gateway. Andrew's audition and optional narration remain the next stage steps; both videos contain fixture system audio and no spoken narration.

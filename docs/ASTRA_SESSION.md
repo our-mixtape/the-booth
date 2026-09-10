@@ -1,6 +1,6 @@
 # Astra live session
 
-Gateway companion for Mixtape — The Booth. The latest [portable deployment configuration](HOSTED_GATEWAY.md) and [recorded cross-origin rehearsal](evidence/hosted-gateway/README.md) extend the local verification below; no persistent gateway is deployed yet. The instrument stays manual: Astra reads compact operational state, never audio, and cannot move a control. The existing HTTP `/api/hint` and voice paths remain separate.
+Gateway companion for Mixtape — The Booth. The latest [portable deployment configuration](HOSTED_GATEWAY.md) and [recorded cross-origin rehearsal](evidence/hosted-gateway/README.md) extend the local verification below. The gateway is now [deployed to Render and connected to Vercel](evidence/hosted-gateway/hosted-release.json); the real signed-in hosted rehearsal is complete, including native steering, a 74-second pending watch, measured review, restart recovery and a 60-second system-audio demo. The instrument stays manual: Astra reads compact operational state, never audio, and cannot move a control. The existing HTTP `/api/hint` and voice paths remain separate.
 
 ## Run and verify
 
@@ -45,7 +45,7 @@ A session is owned by both Clerk user ID and Clerk session ID. The gateway retai
 4. Show the engine result and Astra review. Say: “The engine returned the result later through an async tool call, while Astra could keep coaching.” Explain any retry honestly; the result does not establish artistic quality or audible smoothness.
 5. For steering Q&A, show the redacted real-API log. Avoid exclusivity claims about all other models. Use the actual latency on this run rather than promising a fixed response time.
 
-A [60-second local rehearsal with actual system audio](evidence/hosted-gateway/booth-demo-60s.mp4) is now recorded. See [capture/encoding evidence](evidence/hosted-gateway/README.md) and [exact recording commands](DEMO_RECORDING.md). This is not remote deployment, human audition or event-eligibility evidence.
+A [60-second local rehearsal with actual system audio](evidence/hosted-gateway/booth-demo-60s.mp4) is now recorded. See [capture/encoding evidence](evidence/hosted-gateway/README.md) and [exact recording commands](DEMO_RECORDING.md). That earlier take is local evidence. A separate [hosted recording and remote verification](evidence/hosted-gateway/README.md) now establishes the deployed flow; neither recording establishes human audition or event eligibility.
 
 ## Stage beat: 0:50–1:25
 

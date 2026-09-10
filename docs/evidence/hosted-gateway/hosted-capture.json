@@ -1,0 +1,22 @@
+{
+  "audioSource": "ScreenCaptureKit system output (content-filter scoped), AAC stereo 48 kHz",
+  "croppedBeforeEncoding": true,
+  "droppedAudioBuffers": 0,
+  "droppedVideoFrames": 0,
+  "durationSeconds": 60.174095083,
+  "meteredSystemAudioSamples": 5767680,
+  "microphoneCaptured": false,
+  "nonSilentSystemAudio": true,
+  "recordedAt": "2026-09-10T22:47:16Z",
+  "sourceRegionPoints": [
+    955,
+    86,
+    699,
+    934
+  ],
+  "systemAudioBuffers": 3004,
+  "systemAudioPeakDBFS": -14.648921130209349,
+  "systemAudioRmsDBFS": -31.310235708349374,
+  "videoFrames": 1771,
+  "windowID": 2599
+}

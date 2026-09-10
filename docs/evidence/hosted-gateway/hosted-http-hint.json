@@ -1,0 +1,5 @@
+{
+  "checkedAt": "2026-09-10T22:38:16.691Z",
+  "condition": "Render gateway in maintenance; same-origin Vercel HTTP hint",
+  "text": "✳ ASTRA / YOUR NEXT MOVE\n\nSay it. Type it. Try a prompt.\n◉ Talk to voice\nWhat would you like to try?\nHandoff hint\nTwo minutes left\nKeep it restrained\nAsk Astra ↗\n\ngpt-6-astra · B started 5.36 seconds late, outside the 0.25-second entry tolerance. Next: On your next retry, press B’s play control at 8 seconds elapsed.\n\nVoice off. Voice uses a separate OpenAI speech model; your microphone is sent to it for up to 2 minutes. Use headphones. The mix output is never connected. Requests share the current deck state; Astra never moves the controls."
+}

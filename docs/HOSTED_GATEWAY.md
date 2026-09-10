@@ -1,6 +1,6 @@
 # Persistent Astra gateway
 
-The app remains on **https://mixtape-the-booth.vercel.app**. The user selected a portable gateway on September 10, 2026 and subsequently provided signed-in access to Andrew's Render workspace. The app was [redeployed to Vercel](evidence/hosted-gateway/vercel-release.json) at the user’s request. Render service configuration is in progress; this is **not deployed remote-session evidence**. See [verification](evidence/hosted-gateway/README.md).
+The app runs at **https://mixtape-the-booth.vercel.app** and the persistent gateway at **https://mixtape-astra-gateway.onrender.com**. Both were deployed from `6d4f50af21f75a20a308a77b445ecfe34c3c80aa` on September 10, 2026. [Deployment, HTTPS, CORS and authentication checks](evidence/hosted-gateway/hosted-release.json) passed. Separate real signed-in hosted sessions verified actual gpt-6-astra steering, automatic successors, 74-second and 40.8-second pending watches, measured reviews, a gateway restart and the independent HTTP hint. Configuration readiness alone remains distinct from those real model calls. See [verification](evidence/hosted-gateway/README.md).
 
 ## Deployment shape
 
@@ -12,9 +12,9 @@ The original `/api/hint` and optional `/api/voice/session` still use the Vercel 
 
 Vercel currently supports [WebSockets](https://vercel.com/docs/functions/websockets) and [Services on Fluid compute](https://vercel.com/kb/guide/vercel-services-fluid-compute). These do not establish process affinity for separate HTTP steer/tool requests. Function instances can vary, and connections have duration limits. A Vercel-only adaptation of these contracts would need a shared message relay and its own verification; simply increasing `maxDuration` is insufficient. The existing Vercel stateless adapter intentionally does not expose live sessions.
 
-## Required account and host information
+## Host requirements
 
-To activate remote sessions, provide:
+These requirements are supplied by the approved Render service and Booth Vercel project. They also describe what a replacement host must provide:
 
 1. An approved existing VM/container service, account/project/service ID, region, and deployment access (SSH or provider CLI). It must permit **one always-running Node 25.5.0 process**, inbound HTTPS streams longer than 150 seconds and up to the 55-minute session cap, and outbound HTTPS/WSS to OpenAI and Clerk. No sleep-to-zero or arbitrary request reassignment during a session.
 2. An approved gateway hostname with TLS routing to that service. This task has made no DNS changes. Do not use the charity-jukebox server or change its origin/authentication.
@@ -61,42 +61,51 @@ Run `up` only on the approved host after its hostname resolves there. Caddy obta
 
 ## Connect the Vercel app
 
-### Render account setup
+### Live Render service
 
-The user provided signed-in Render workspace access after the Vercel release. `render.yaml` prepares one Docker web service named `mixtape-astra-gateway`, in Virginia, on the `0.5c-512mb` plan ($7/month base compute at the checked September 10 pricing). It uses the existing pinned gateway image build and `/healthz`; Render supplies the HTTPS endpoint. No Caddy container, database or disk is needed there. This file is a proposed configuration, not evidence that a service was created or billing approved.
+The user created `mixtape-astra-gateway` (`srv-dahiqq6k1f9s73ffj0k0`) after completing billing in their normal browser. It runs the repository's `Dockerfile.gateway` on branch `codex/hosted-astra-sessions`, in Virginia, with one `0.5c-512mb` instance ($7/month base compute, explicitly approved). `render.yaml` records the configuration. Render terminates HTTPS; no Caddy container, database or disk is needed there.
 
-Use the selected workspace's **New Blueprint** flow with this repository and the `codex/hosted-astra-sessions` branch until PR #2 is merged. Review the single service and cost, then supply the existing Booth OpenAI/Clerk credentials in Render's secret fields. `sync: false` keeps their values out of Git. Leave one instance and automatic deploys off. First verify its assigned `onrender.com` HTTPS endpoint, then add the proposed exact `astra.ourmixtape.org` custom domain and the provider-specified DNS record. `booth.ourmixtape.org` belongs to the Vercel app; neither the root charity site nor a wildcard is part of this configuration.
+The first deployment failed because the new service lacked `OPENAI_API_KEY` and its Clerk credentials. With the user's existing transfer authorization, supplied the three matching Booth credentials through Render's environment API while preserving the seven public settings. Set `/healthz`, automatic deploys off and a 15-second shutdown allowance. Deployment `dep-dahirqrl550s738ao5og` completed at 22:24:00 UTC; public maintenance mode was disabled after verifying the old instance was gone. Public health, status, allowed/foreign origins, missing-auth rejection and private-library isolation checks passed.
 
-The signed-in dashboard can also use **New Web Service → Public Git Repository** without connecting a Git provider. The user approved the $7/month service and transfer of the existing Booth OpenAI/Clerk credentials. This form has been filled with the same branch, Docker runtime, `./Dockerfile.gateway`, root build context `.`, Virginia, $7/month compute, `/healthz`, automatic deploys off, and all ten environment settings. Clicking **Deploy web service** opened Render's **Add Card** dialog; service creation is waiting for the user to supply a payment method directly. No service ID, running instance or remote acceptance result exists yet. After creation, verify the instance count and set the shutdown delay to 15 seconds (these were not exposed in the creation form).
+The service uses `APP_ORIGIN=https://mixtape-the-booth.vercel.app` and the separately explicit `ALLOWED_ORIGINS=https://booth.ourmixtape.org`. The latter is a reserved exact origin, not deployed DNS. No custom domain or wildcard has been added; neither the root charity site nor its authentication/infrastructure changed. Secret values are absent from Git and deployment evidence.
 
-**Subsequent Render updates require a maintenance window.** Render's normal deploy process sends new HTTP requests to the replacement instance before terminating the old one, which can separate an existing SSE stream from its later steer/tool requests. Before deploying, restarting or changing runtime settings, enable Render's paid [maintenance mode](https://render.com/docs/maintenance-mode) to block public gateway requests. Treat existing Astra sessions as ended. Keep maintenance enabled until Render reports the deploy complete and the old instance is terminated; its [documented sequence](https://render.com/docs/deploys#zero-downtime-deploys) includes 60 seconds before SIGTERM plus our bounded shutdown. Then disable maintenance, check readiness, and brief a new session. The Vercel instrument remains independent. Do not claim uninterrupted session migration, use automatic deploys, or increase the replica count.
+**Subsequent Render updates require a maintenance window.** Render's normal deploy process sends new HTTP requests to the replacement instance before terminating the old one, which can separate an existing SSE stream from its later steer/tool requests. Before deploying, restarting or changing runtime settings, enable Render's paid [maintenance mode](https://render.com/docs/maintenance-mode) to block public gateway requests. Treat existing Astra sessions as ended. Keep maintenance enabled until Render reports the deploy complete and the old instance is terminated. The instance list can show only the replacement while an old SSE stream is still alive; it is not sufficient evidence by itself. During the actual restart check, the stream ended about 71 seconds after the restart command. Allow the complete provider grace period; its [documented sequence](https://render.com/docs/deploys#zero-downtime-deploys) includes 60 seconds before SIGTERM plus our bounded shutdown. Then disable maintenance, check readiness, and brief a new session. The Vercel instrument remains independent. Do not claim uninterrupted session migration, use automatic deploys, or increase the replica count.
 
-The [Blueprint fields](https://render.com/docs/blueprint-spec), [Docker behavior](https://render.com/docs/docker) and [pricing](https://render.com/pricing) were checked against Render's documentation. Provider-side validation and the real remote acceptance run are still required before declaring Render deployment complete.
+### Exact terminal deployment commands
 
-### Terminal access verified
-
-Render CLI v2.28.0 is installed for this task at `/tmp/booth-render-cli/cli_v2.28.0`. Its official darwin/arm64 archive SHA-256 matched `c102919d50195e1f5bc287d4fef79bbe0eb5e85f6fc01d9103e9e96fda02be2c`. The user-requested CLI authorization succeeded; the CLI selected Andrew's workspace and found no services. Its provider-side Blueprint check returned `valid: false` with the sole reported error `need_payment_info` at `services[0]`. This is a billing prerequisite, not successful provider validation or a deployment. Add payment information using Render Billing in the user's normal browser; no manual service-form setup is needed after that.
-
-Exact commands used after downloading and verifying the official release:
+Render CLI v2.28.0 was installed from its official release with verified archive SHA-256 `c102919d50195e1f5bc287d4fef79bbe0eb5e85f6fc01d9103e9e96fda02be2c`. CLI login succeeded despite the separate in-app Vercel account-login failure. Its temporary configuration contains a credential and stays outside Git.
 
 ```sh
 export RENDER_CLI_DISABLE_ANALYTICS=1
 export RENDER_CLI_CONFIG_DIR=/tmp/booth-render-cli/config
-/tmp/booth-render-cli/cli_v2.28.0 login --output text
-/tmp/booth-render-cli/cli_v2.28.0 workspace set tea-dahih7e1egvs7385ljeg --confirm --output text
-/tmp/booth-render-cli/cli_v2.28.0 services --output json
-/tmp/booth-render-cli/cli_v2.28.0 blueprints validate render.yaml --output json
+/tmp/booth-render-cli/cli_v2.28.0 services update srv-dahiqq6k1f9s73ffj0k0 --maintenance-mode=true --auto-deploy=false --health-check-path /healthz --max-shutdown-delay 15 --confirm --output json
+/tmp/booth-render-cli/cli_v2.28.0 deploys create srv-dahiqq6k1f9s73ffj0k0 --commit 6d4f50af21f75a20a308a77b445ecfe34c3c80aa --confirm --output json
+/tmp/booth-render-cli/cli_v2.28.0 deploys list srv-dahiqq6k1f9s73ffj0k0 --output json
+/tmp/booth-render-cli/cli_v2.28.0 services instances srv-dahiqq6k1f9s73ffj0k0 --output json
+# Only after deployment completes and the full old-instance grace period has ended:
+/tmp/booth-render-cli/cli_v2.28.0 services update srv-dahiqq6k1f9s73ffj0k0 --maintenance-mode=false --confirm --output json
+curl --fail https://mixtape-astra-gateway.onrender.com/healthz
 ```
 
-The CLI configuration contains a credential and stays outside Git. Render states that CLI tokens expire seven days after creation. Vercel CLI access was also rechecked successfully; the separate in-app Vercel login failure does not block terminal deployment. Real hosted browser verification still requires authorized deployment access plus real Booth Clerk sign-in.
+Future operators must authenticate the official CLI themselves; the task's temporary login is not a permanent deployment credential. Keep the maintenance guard when changing the commit above. Credentials can be maintained in Render's secret environment fields; do not print or put their values in these commands.
 
 ### Frontend connection
 
-After the gateway passes HTTPS readiness and authentication checks, set **only** the public origin in the Booth Vercel project and rebuild the relevant environment:
+The production build now uses the public origin below. Existing Vercel OpenAI/Clerk settings and deployment protection remain enabled:
 
 ```dotenv
-VITE_ASTRA_GATEWAY_ORIGIN=https://the-approved-gateway-hostname
+VITE_ASTRA_GATEWAY_ORIGIN=https://mixtape-astra-gateway.onrender.com
 ```
+
+The actual release was built without the live alias, checked, then promoted:
+
+```sh
+vercel env add VITE_ASTRA_GATEWAY_ORIGIN production --value https://mixtape-astra-gateway.onrender.com --type config --yes --scope efficient-frontier-labs --project prj_ZZ3gQTYQwcPd9jQHrc9mZmVUskV7
+vercel deploy --prod --skip-domain --yes --scope efficient-frontier-labs --project prj_ZZ3gQTYQwcPd9jQHrc9mZmVUskV7 --meta sourceCommit=6d4f50af21f75a20a308a77b445ecfe34c3c80aa
+vercel promote https://mixtape-the-booth-4eiaf96l3-efficient-frontier-labs.vercel.app --yes --scope efficient-frontier-labs
+```
+
+`env add` was the initial setting; update the existing variable for a future change instead of adding a duplicate. Deployment `dpl_223iAM9Lmbvp5QZDgNWGUSWYDJNT` passed cloud typecheck/build. The canonical live index matches the checked deployment; its bundle includes the Render origin and excludes configured server secrets and the local rehearsal gateway.
 
 The build rejects HTTP production endpoints, embedded credentials, paths, queries, and fragments. When empty, the existing same-origin development contract and Vercel HTTP-only behavior remain. The app does not proxy the session stream through Vercel's 30-second API functions.
 
@@ -118,12 +127,12 @@ For the actual **local cross-origin** flow, with the existing server-only `.env`
 VITE_ASTRA_GATEWAY_ORIGIN=http://127.0.0.1:8792 PORT=5178 GATEWAY_PORT=8792 pnpm dev
 ```
 
-Open `http://127.0.0.1:5178/#advanced/play` and sign in. HTTP loopback is allowed only in development. For remote acceptance, use the final Vercel app and real approved HTTPS gateway instead:
+Open `http://127.0.0.1:5178/#advanced/play` and sign in. HTTP loopback is allowed only in development. The remote steps below were subsequently completed against the Vercel app and Render gateway; see the redacted [hosted evidence](evidence/hosted-gateway/README.md):
 
 - Use the original generated fixtures. Brief Astra, send **Delay B one bar** during its actual response, and observe accepted → steered → automatic successor.
 - Keep `watch_attempt` pending longer than 30 seconds before performing the attempt. Enter B at the chosen time and hand over. The fixed challenge still scores 8 ± 0.25 seconds; delaying to 10 seconds should require a retry. Compare the review with the engine's measurement.
 - Stop the live session while a fixture is playing; verify playhead advancement and audible output. Repeat with an interrupted gateway. Simulated model-failure tests do not establish a real provider-failure run.
 - Check the independent HTTP hint. Save redacted lifecycle/measurement evidence, transport timings and actual model; omit keys, bearer tokens, account email, private filenames and audio.
-- Complete a 60-second screen-and-system-audio recording, audition and inspect the encoded audio/video, then supply a shareable URL for the README. Internal master-bus capture alone is insufficient.
+- Complete a 60-second screen-and-system-audio recording, inspect the encoded audio/video, then supply a shareable URL for the README. The hosted video has non-silent stereo system audio in every full one-second window; human musical audition remains outstanding. Internal master-bus capture alone is insufficient.
 
 Bounds remain: 15-second upstream connect, 90-second response, 120-second browser attempt wait, 150-second server attempt safety limit, 60 seconds of actual idle, 55-minute connection lifetime, 64 responses including automatic successors, 32 recorded calls, 16 total streams and two per Clerk user/session pair. SSE heartbeats occur every 15 seconds. Sign-out closes the stream; each separate request reauthenticates. JWT expiration does not prematurely cut the 120-second watch window; initial SSE authentication remains bounded by disconnect/idle/lifetime cleanup.
