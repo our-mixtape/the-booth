@@ -1,0 +1,24 @@
+{
+  "deploymentId": "dpl_78c2sCMNWq4qc3X4pxpnAKf6J22T",
+  "productionUrl": "https://mixtape-the-booth.vercel.app",
+  "script": "/assets/index-lCtemKFQ.js",
+  "css": "/assets/index-DcesUTwF.css",
+  "scriptSha256": "a68655a6ac5baab46fac416bf742ddd1904884f28da960d2f42b23d8b719b5f5",
+  "checks": {
+    "afterhoursLabel": true,
+    "afterhoursMixNotice": true,
+    "footerLink": true,
+    "kidsExperience": true,
+    "stylesheetMatchesLocal": true
+  },
+  "status": {
+    "keyConfigured": true,
+    "modelVerifiedThisRelease": false,
+    "authRequired": true,
+    "authConfigured": false
+  },
+  "anonymousHintStatus": 401,
+  "anonymousVoiceStatus": 401,
+  "privateLibraryEmpty": true,
+  "browserResult": "Existing Vercel login gate; hosted app visuals and audio not inspected."
+}

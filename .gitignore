@@ -1,0 +1,23 @@
+node_modules/
+.vercel/
+dist/
+.env
+.env.*
+!.env.example
+test-results/
+playwright-report/
+.DS_Store
+
+# Private local demo audio and preparation outputs
+/local-tracks/
+# Pre-existing reference script; provenance unresolved for redistribution
+/stem_splitter.py
+# Private Rekordbox collection export
+/mixtape-booth.xml
+
+# Editor backups, ad-hoc captures, and Python bytecode
+*.blend1
+/full-page.png
+/mobile(1).png
+__pycache__/
+*.pyc

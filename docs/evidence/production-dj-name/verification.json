@@ -1,0 +1,16 @@
+{
+  "deploymentId": "dpl_CvZ53AtwvZos6bn1cKV1o6BiTWcB",
+  "productionUrl": "https://mixtape-the-booth.vercel.app",
+  "script": "/assets/index-C7RRzrn0.js",
+  "checks": {
+    "Enter my name": true,
+    "Create a name": true,
+    "High school mascot": true,
+    "Favorite type of pasta": true,
+    "Edit this name": true,
+    "Continue to music": true,
+    "productionAliasServesNewBundle": true
+  },
+  "localBrowserTestsPassed": 8,
+  "hostedVisualAndAudioCheck": "Not repeated; existing Vercel browser login gate."
+}

@@ -1,0 +1,250 @@
+/* React adaptation of the supplied Kids / DJ Name / Afterhours concepts. */
+[hidden]{display:none!important}
+.experience{--ex-bg:#f1ebe2;--ex-ink:#241f19;--ex-accent:#a53b0d;--ex-line:#c9beb0;--ex-muted:#655a4c;--ex-white:#fffaf2;color:var(--ex-ink);background:var(--ex-bg);font-family:Arial,Helvetica,sans-serif;min-width:0}
+.experience h1,.experience h2,.experience h3,.experience p{margin:0}
+.experience h1:focus{outline:none}
+.experience h1{font:400 clamp(52px,7vw,104px)/.95 Georgia,serif;letter-spacing:-.055em;overflow-wrap:anywhere}
+.experience h2{font:400 clamp(36px,4vw,58px)/1.08 Georgia,serif;letter-spacing:-.04em}
+.experience h3{font:400 24px/1.2 Georgia,serif;letter-spacing:-.02em}
+.experience p{line-height:1.65;max-width:750px}
+.experience em{color:var(--ex-accent)}
+.experience button,.experience input{font:inherit;color:inherit}
+.experience button{white-space:normal;overflow-wrap:anywhere}
+.experience button,.experience-switch{min-height:46px;padding:12px 20px;border:1px solid var(--ex-line);background:transparent;color:var(--ex-ink);border-radius:999px;cursor:pointer;font-size:13px;font-weight:600}
+.experience button:hover:not(:disabled){background:var(--ex-white);border-color:var(--ex-ink)}
+.experience button:disabled{opacity:.5;cursor:default}
+.experience :focus-visible,.experience-switch:focus-visible{outline:3px solid #20788d;outline-offset:4px}
+.experience .experience-primary{background:var(--ex-ink);color:var(--ex-bg);border-color:var(--ex-ink);min-height:52px;padding:15px 24px}
+.experience .experience-primary:hover:not(:disabled){background:var(--ex-accent);color:white;border-color:var(--ex-accent)}
+.experience .experience-kicker{font:600 11px/1.5 'Courier New',monospace;letter-spacing:.16em;color:var(--ex-accent)}
+.experience small{font-size:12px;color:var(--ex-muted);line-height:1.5}
+.experience-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.experience-actions>*{min-width:0;max-width:100%;overflow-wrap:anywhere}
+.experience-actions small{max-width:420px}
+.experience-switch{display:inline-flex;align-items:center;background:#ffd166;color:#2a1f3d;border:2px solid #2a1f3d;font:bold 11px Arial,sans-serif;letter-spacing:.07em;padding:10px 20px;white-space:nowrap}
+.site-header nav .experience-switch:hover{background:#ffe5a8;color:#2a1f3d}
+.site-header nav{flex-wrap:wrap}
+.site-header .experience-switch{order:1}
+.site-header:has(.experience-switch) nav>a.experience-switch{display:inline-flex}
+.site-header .account-button{order:2}
+main[data-experience]>.site-header{background:#0c0b0a;color:#f1ebe2;border-bottom:1px solid #373028;height:auto;min-height:80px}
+main[data-experience]>.site-header .wordmark span{border-color:#ffffff45}
+main[data-experience]>.site-header .edition{color:#c8bba9}
+main[data-experience]>.site-header .entry-link{border-color:#c8bba977}
+main[data-experience="kids"]>.site-header{background:#fff7e6;color:#2a1f3d;border-color:#e0d4b8}
+main[data-experience="kids"]>.site-header .wordmark span{color:#b84931;border-color:#2a1f3d44}
+main[data-experience="kids"]>.site-header .edition{color:#554563}
+main[data-experience="kids"]>.site-header .entry-link{border-color:#554563}
+.experience-hero{min-height:calc(100svh - 80px);padding:70px 6vw;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;position:relative;overflow:hidden}
+.experience-hero-copy{z-index:1;display:grid;gap:28px;min-width:0}
+.experience-hero-copy>p:not(.experience-kicker){max-width:470px}
+.experience-rig{position:relative;min-width:0;z-index:1}
+.experience-rig:before{content:'';position:absolute;inset:-30% 0 0;border-radius:50%;background:radial-gradient(circle,#bf631d,#683008 65%,transparent 67%);filter:blur(2px);z-index:-1}
+.experience-rig img{width:115%;max-width:none;transform:perspective(1000px) rotateX(18deg) rotateZ(-9deg);filter:drop-shadow(0 30px 30px #0008)}
+.experience-rig>span{display:inline-block;background:#ffb27a;color:#241f19;padding:12px 20px;border-radius:999px;transform:rotate(-5deg);font-size:13px;position:absolute;bottom:-35px;right:0}
+.experience-advanced .experience-hero{background:#0c0b0a;color:#f1ebe2}
+.experience-advanced .experience-hero em{color:#ffb27a}
+.experience-advanced .experience-hero .experience-kicker{color:#ffb27a}
+.experience-advanced .experience-hero small{color:#c8bba9}
+.experience-advanced .experience-hero button{color:#f1ebe2;border-color:#b79c83}
+.experience-advanced .experience-hero .experience-primary{background:#f1ebe2;color:#241f19}
+.experience-advanced .experience-hero button:hover{background:#ffb27a;color:#241f19}
+.name-flow{padding:32px 24px 65px;min-height:calc(100svh - 80px);display:grid;justify-items:center;align-content:center;gap:24px;background:radial-gradient(circle at 100% 0,#f2c599 0 17%,transparent 17.1%),var(--ex-bg)}
+.name-progress{display:flex;gap:8px}
+.name-progress span{height:34px;width:34px;border:1px solid var(--ex-line);border-radius:50%;display:grid;place-items:center;font-size:13px}
+.name-progress span[aria-current]{background:var(--ex-ink);color:var(--ex-bg)}
+.name-card{width:min(720px,100%);padding:clamp(24px,4vw,48px);display:grid;gap:24px;background:var(--ex-white);border:1px solid var(--ex-line);border-radius:24px;box-shadow:0 15px 45px #2a1f3d0d}
+.name-card h1{font-size:clamp(44px,5vw,76px)}
+.name-card label{display:grid;gap:10px;font-size:15px;font-weight:600}
+.name-card input{min-width:0;width:100%;padding:16px 20px;border:2px solid var(--ex-ink);border-radius:14px;background:var(--ex-bg);font-size:22px;min-height:62px}
+.name-card p:not(.experience-kicker){color:var(--ex-muted);font-size:14px}
+.name-favorites{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px}
+.name-favorites button{border-radius:16px;padding:12px 5px;display:grid;gap:8px;font-size:12px}
+.name-favorites button span{font-size:30px}
+.name-favorites button[aria-pressed=true]{background:#ffd166;border-color:var(--ex-ink);color:#2a1f3d}
+.name-reveal{text-align:center;background:#2a1f3d;color:white;min-height:360px;align-content:center;box-shadow:7px 7px #dc7651}
+.name-reveal .experience-kicker,.name-reveal p:not(.experience-kicker){color:#ffd166}
+.name-reveal .experience-actions{justify-content:center}
+.name-reveal button{color:white;border-color:#b3a3c9}
+.name-reveal .experience-primary{background:#ffd166;color:#2a1f3d;border-color:#ffd166}
+.name-reveal button:hover:not(:disabled){color:#2a1f3d}
+.experience .experience-skip{border:0;text-decoration:underline;text-underline-offset:4px}
+.name-choice,.name-ingredients{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.name-choice button{min-height:48px;border-radius:12px}
+.name-choice button[aria-pressed=true]{background:var(--ex-ink);color:var(--ex-white);border-color:var(--ex-ink)}
+.name-ingredients input{font-size:18px;padding:16px 12px}
+.experience-advanced .name-reveal{background:#17110d;color:#fff6ec;border-color:#72543a;box-shadow:7px 7px #d56b31}
+.experience-advanced .name-reveal p:not(.experience-kicker),.experience-advanced .name-reveal .experience-kicker{color:#f1c39c}
+.experience-advanced .name-reveal .experience-primary{background:#f1c39c;border-color:#f1c39c;color:#241f19}
+@media(max-width:680px){.name-ingredients{grid-template-columns:1fr}.name-choice{gap:10px}.name-choice button{padding:12px 8px}.afterhours-name-card.name-reveal .experience-actions button{flex:1 1 40%}}
+.session-journey{padding:48px 6vw 30px;max-width:1600px;margin:0 auto}
+.session-welcome{display:flex;justify-content:space-between;gap:30px;align-items:center;margin-bottom:32px}
+.session-welcome>div{min-width:0}
+.session-welcome h1{font-size:clamp(36px,4.5vw,68px);margin-top:14px}
+.journey-steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-bottom:22px}
+.journey-steps button{border-radius:12px;display:grid;grid-template-columns:26px 1fr;align-content:start;text-align:left;gap:6px 10px;min-height:94px;padding:16px 12px;font-weight:400}
+.journey-steps button>span{grid-row:span 2;font:italic 26px Georgia,serif}
+.journey-steps button>strong{font-size:12px;line-height:1.4}
+.journey-steps button>small{font-size:10px;line-height:1.5}
+.journey-steps button[aria-current]{border-color:var(--ex-ink);background:var(--ex-ink);color:var(--ex-bg)}
+.journey-steps button[aria-current] small{color:inherit}
+.journey-steps button[aria-current]:hover{background:var(--ex-accent);color:white}
+.journey-panel{border:1px solid var(--ex-line);background:var(--ex-white);border-radius:20px;padding:clamp(24px,4vw,48px);display:grid;gap:22px;min-height:480px}
+.journey-panel>p:not(.experience-kicker){font-size:14px;color:var(--ex-muted)}
+.journey-panel .journey-note{font-size:12px;padding:18px 0;border-top:1px solid var(--ex-line);max-width:none}
+.journey-panel .journey-error{color:#99251a;background:#ffe8df;padding:16px;max-width:none;border:1px solid #bf5e44;border-radius:10px}
+.crate-drop{padding:28px;text-align:center;border:1px dashed var(--ex-line);border-radius:14px;display:grid;justify-items:center;gap:18px;background:var(--ex-bg)}
+.crate-drop>span{font-size:40px;color:var(--ex-accent)}
+.crate-drop .experience-actions{justify-content:center}
+.crate-list h3{display:flex;justify-content:space-between;font:600 14px Arial,sans-serif;padding:10px 0 20px}
+.crate-list h3 span{font-size:12px;color:var(--ex-muted)}
+.crate-list>div{display:flex;justify-content:space-between;gap:20px;padding:16px 0;border-top:1px solid var(--ex-line);font-size:14px}
+.crate-list strong{overflow-wrap:anywhere;min-width:0}
+.crate-list small{text-align:right;min-width:100px}
+.crate-list p{font-size:13px;color:var(--ex-muted)}
+.prepared-library summary{cursor:pointer;font-size:13px;padding:14px 0}
+.prepared-library button,.playlist-crate button{display:inline-block;margin:6px 8px 6px 0;max-width:100%;overflow-wrap:anywhere;text-align:left}
+.analysis-table{overflow:auto}
+.analysis-table table{width:100%;border-collapse:collapse;text-align:left;font-size:13px}
+.analysis-table th,.analysis-table td{padding:18px 14px 18px 0;border-bottom:1px solid var(--ex-line);min-width:100px}
+.analysis-table th{font-weight:600;max-width:260px;overflow-wrap:anywhere}
+.analysis-table th small{display:block;font-weight:400;margin-top:7px}
+.stem-readiness article{padding:22px 0;border-bottom:1px solid var(--ex-line)}
+.stem-readiness h3{font-size:24px;overflow-wrap:anywhere;margin-bottom:10px}
+.stem-readiness p{font-size:14px;margin-bottom:8px}
+.pair-suggestion{padding:28px;background:var(--ex-bg);border-radius:16px;display:grid;gap:20px}
+.pair-suggestion>span{font:11px monospace;letter-spacing:.1em;color:var(--ex-accent)}
+.pair-suggestion h3{font-size:clamp(24px,3vw,40px);overflow-wrap:anywhere}
+.pair-suggestion em{margin:0 18px}
+.pair-suggestion p{font-size:14px;color:var(--ex-muted)}
+.pair-suggestion button{justify-self:start}
+.playlist{list-style:none;margin:0;padding:0}
+.playlist li{display:flex;gap:20px;align-items:center;padding:18px 0;border-bottom:1px solid var(--ex-line)}
+.playlist-number{font:italic 30px Georgia,serif;color:var(--ex-accent)}
+.playlist li>div:not(.playlist-actions){min-width:0;flex:1;font-size:14px;overflow-wrap:anywhere}
+.playlist li small{display:block;margin-top:7px}
+.playlist-actions{display:flex;gap:6px}
+.playlist-actions button{padding:10px;min-width:42px;border-radius:50%;font-size:18px}
+.journey-next{display:flex;justify-content:space-between;gap:14px;border-top:1px solid var(--ex-line);padding-top:24px;margin-top:auto}
+.journey-play-note{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:13px}
+.journey-play-note a{text-decoration:underline;text-underline-offset:3px}
+main[data-experience]>.performance-shell{padding-top:38px}
+main[data-experience]>.performance-shell .mini-proof{display:none}
+main[data-experience="advanced"]>.performance-shell{background:#171713}
+.experience-kids{--ex-bg:#fff7e6;--ex-ink:#2a1f3d;--ex-accent:#b74630;--ex-line:#cbbfcf;--ex-muted:#615269;--ex-white:#fff;font-family:'Trebuchet MS',Arial,sans-serif}
+.experience-kids h1,.experience-kids h2,.experience-kids h3{font-family:'Trebuchet MS',Arial,sans-serif;font-weight:800;letter-spacing:-.045em}
+.experience-kids .experience-hero{background:radial-gradient(circle at 100% 0,#ffd166 0 25%,transparent 25.1%),radial-gradient(circle at 0 100%,#7bd3ea 0 11%,transparent 11.1%),#fff7e6}
+.experience-kids .experience-hero h1{font-size:clamp(54px,7.8vw,116px)}
+.experience-kids .experience-hero .experience-kicker{color:#2a1f3d;letter-spacing:0;font:bold 14px 'Trebuchet MS',sans-serif;background:white;border:2px solid #2a1f3d;padding:12px 18px;border-radius:999px;justify-self:start}
+.experience-kids .experience-rig:before{display:none}
+.experience-kids .experience-rig{background:white;border:3px solid #2a1f3d;border-radius:32px;padding:18px 12px;box-shadow:8px 8px #2a1f3d}
+.experience-kids .experience-rig img{width:100%;transform:none;filter:none}
+.experience-kids .experience-rig>span{background:#ffd166;border:2px solid #2a1f3d;top:-30px;bottom:auto;right:-4px}
+.experience-kids button{border-width:2px;min-height:50px;font-size:14px}
+.experience-kids .experience-primary{background:#ffd166;color:#2a1f3d;border-color:#2a1f3d;box-shadow:3px 3px #2a1f3d}
+.experience-kids .name-card{border:3px solid #2a1f3d;box-shadow:7px 7px #2a1f3d}
+.experience-kids .name-reveal{box-shadow:7px 7px #dc7651}
+.experience-kids .name-progress span[aria-current]{background:#ffd166;color:#2a1f3d;border-color:#2a1f3d}
+.experience-kids .journey-steps button[aria-current]{background:#ffd166;color:#2a1f3d;box-shadow:3px 3px #2a1f3d}
+.experience-kids .journey-panel{border:2px solid #2a1f3d;box-shadow:5px 5px #2a1f3d}
+main[data-experience="kids"]>.performance-shell{background:#262032;--lime:#ffd166;--paper:#fff7e6}
+main[data-experience="kids"]>.performance-shell button{min-height:48px;border-radius:12px}
+@media(min-width:1000px){.site-header:has(.experience-switch){gap:18px}.site-header:has(.experience-switch) nav{gap:18px}}
+@media(max-width:1000px){.experience-hero{padding:50px 6vw;gap:32px}.journey-steps{grid-template-columns:repeat(3,minmax(0,1fr))}.site-header:has(.experience-switch) .edition{display:none}.site-header:has(.experience-switch) nav{gap:8px}}
+@media(max-width:680px){.site-header:has(.experience-switch){height:auto;min-height:80px;padding:16px 20px;align-items:center;flex-wrap:wrap;gap:16px}.site-header:has(.experience-switch) nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;margin-left:auto}.site-header:has(.experience-switch) nav>a:not(.experience-switch){display:none}.site-header:has(.experience-switch) .wordmark{font-size:25px}.site-header:has(.experience-switch) .wordmark span{margin-left:7px;padding-left:8px;font-size:11px}.experience-switch{min-height:44px;padding:10px 13px}.experience-hero{grid-template-columns:1fr;min-height:0;gap:55px;padding:45px 24px 75px}.experience-hero-copy{gap:24px}.experience-hero-copy h1{font-size:72px}.experience-rig{margin:0 10px}.experience-rig img{width:100%}.experience-rig>span{bottom:-25px}.experience-kids .experience-hero h1{font-size:72px}.name-flow{padding:24px 20px 45px}.name-card{gap:22px;padding:26px 22px}.name-card h1{font-size:44px}.name-card input{font-size:18px;padding:14px 12px}.name-favorites{grid-template-columns:repeat(3,minmax(0,1fr))}.experience-actions{gap:10px}.experience-actions button{font-size:13px;padding:12px 16px}.session-journey{padding:32px 20px 24px}.session-welcome{display:grid;gap:22px}.session-welcome h1{font-size:40px}.journey-steps{gap:8px}.journey-steps button{grid-template-columns:1fr;padding:12px 10px;gap:6px;min-height:90px}.journey-steps button>span{grid-row:auto;font-size:20px}.journey-steps button>small{display:none}.journey-panel{padding:24px 20px;min-height:440px}.journey-panel h2{font-size:36px}.crate-drop{padding:24px 14px}.crate-drop h3{font-size:22px}.crate-list>div{flex-direction:column;gap:6px}.crate-list small{text-align:left}.pair-suggestion{padding:22px 18px}.pair-suggestion em{display:block;margin:8px 0}.playlist li{gap:12px;flex-wrap:wrap}.playlist-actions{margin-left:auto}.playlist-actions button{min-width:44px;min-height:44px}.journey-next button{font-size:12px;padding:12px 14px}.journey-next{gap:8px}.experience-kids .journey-steps button{font-size:12px}.experience-kids .journey-steps button>strong{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.experience *,main[data-experience] *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* Afterhours is the main site. Kids has its own song picker and play surface. */
+.site-footer .footer-home{align-items:center;flex-wrap:wrap}
+.site-footer .mixtape-home{display:inline-flex;align-items:center;min-height:44px;font-size:13px;text-decoration:underline;text-underline-offset:4px}
+.site-footer .mixtape-home:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.site-footer.site-footer-compact{padding:22px clamp(22px,6vw,88px);border-top:1px solid #ffffff24}
+.site-footer.site-footer-compact>.footer-home{border:0;padding:0;font-size:10px;flex-direction:row;gap:12px 24px}
+.kids-site .site-footer{background:#f4edff;color:#493276;border-color:#49327624}
+.kids-site .session-journey{padding-bottom:22px}
+.kids-site .session-welcome{margin-bottom:20px}
+.kids-site .session-welcome h1{font-size:clamp(34px,4vw,54px)}
+.kids-journey{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+.kids-journey a{padding:12px 22px;border:2px solid #2a1f3d;border-radius:999px;font-size:14px;font-weight:bold}
+.kids-journey a[aria-current]{background:#ffd166;box-shadow:3px 3px #2a1f3d}
+.kids-song-picker{background:white;border:3px solid #2a1f3d;border-radius:28px;padding:clamp(24px,4vw,48px);display:grid;gap:22px;box-shadow:6px 6px #2a1f3d}
+.kids-song-picker>p:not(.kids-eyebrow){max-width:550px;font-size:16px}
+.kids-song-shelf{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.kids-song-choice{display:grid;grid-template-columns:90px 1fr;gap:12px 20px;align-items:center;padding:24px;border-radius:20px;border:2px solid #2a1f3d;min-width:0;background:#fff2c9}
+.kids-song-choice.song-B{background:#e9e0fb}
+.kids-song-choice strong{font-size:24px}
+.kids-disc{grid-row:span 3;display:grid;place-items:center;width:86px;height:86px;border-radius:50%;background:repeating-radial-gradient(#2a1f3d 0 2px,#463b56 3px 4px);color:#ffd166;font-size:32px;border:8px solid #2a1f3d}
+.kids-song-choice select{min-width:0;width:100%;max-width:100%;font:15px 'Trebuchet MS',sans-serif;border:1px solid #8b7997;border-radius:10px;padding:12px;background:white;color:#2a1f3d}
+.kids-own-music{border-top:1px solid #dcd0e3;padding-top:20px;line-height:1.7}
+.kids-own-music summary{cursor:pointer;font-weight:bold;padding:12px 0}
+.kids-own-music p{font-size:14px;margin:12px 0}
+.kids-file-picker{display:block;border:2px solid #2a1f3d;border-radius:14px;padding:18px;font-weight:bold;width:fit-content;max-width:100%}
+.kids-file-picker input{display:block;font:13px Arial,sans-serif;max-width:100%;width:100%;margin-top:14px}
+main.kids-site>.performance-shell{padding:4px 6vw 36px;background:#fff7e6;color:#2a1f3d;font-family:'Trebuchet MS',Arial,sans-serif;--lime:#c85f43}
+.kids-play{color:#2a1f3d}
+.kids-play h2,.kids-real-decks h2{font:800 28px/1.12 'Trebuchet MS',sans-serif;letter-spacing:-.035em}
+.kids-play p{font-size:14px;line-height:1.5}
+.kids-play small{color:#615269;font-size:12px;line-height:1.5}
+.kids-play button{white-space:normal;background:white;border:2px solid #2a1f3d;min-height:48px;color:#2a1f3d;font-weight:bold;font-size:14px}
+.kids-play button:hover{background:#fff2c9}
+.kids-play :focus-visible,.kids-song-picker :focus-visible{outline:3px solid #137891;outline-offset:4px}
+.kids-play input[type=range]{min-height:44px;accent-color:#7a3fa0;cursor:pointer}
+.kids-eyebrow{font:bold 11px/1.5 'Trebuchet MS',sans-serif!important;letter-spacing:.12em;color:#76597f;margin:0 0 8px}
+.kids-coach{display:flex;align-items:flex-start;gap:20px;padding:26px;border:2px solid #2a1f3d;border-radius:22px;background:#fff;box-shadow:4px 4px #2a1f3d;margin-bottom:26px}
+.kids-coach-icon{font-size:38px;color:#7d4890;width:55px;flex-shrink:0}
+.kids-coach-copy{flex:1;min-width:0}
+.kids-coach-copy h2{margin:0 0 10px}
+.kids-coach-copy p{margin:0 0 8px}
+.kids-coach-actions{display:grid;gap:10px;max-width:205px;align-self:center}
+.kids-coach-actions button{background:#ffd166;box-shadow:3px 3px #2a1f3d;min-height:56px}
+.kids-coach-actions small{text-align:center}
+.kids-discoveries{padding:0;margin:18px 0 0;list-style:none;display:flex;gap:14px;flex-wrap:wrap}
+.kids-discoveries li{display:flex;gap:7px;align-items:center;font-size:11px;color:#615269}
+.kids-discoveries li span{display:grid;place-items:center;border:1px solid #ac9ab7;border-radius:50%;width:22px;height:22px}
+.kids-discoveries li[data-complete=true]{color:#26572d;font-weight:bold}
+.kids-discoveries li[data-complete=true] span{background:#d5edbe;border-color:#26572d}
+.kids-discoveries li[aria-current] span{background:#ffd166;border-color:#2a1f3d;color:#2a1f3d}
+.kids-coach .kids-observation{color:#26572d;font-weight:bold;font-size:13px;margin:14px 0 0}
+.kids-coach.discovered{background:#eaf7d8}
+.kids-decks{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.kids-deck{padding:24px;border:2px solid #2a1f3d;border-radius:24px;background:#fff3cd;min-width:0}
+.kids-deck.song-B{background:#eee5fa}
+.kids-track-heading{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.kids-track-heading>div{min-width:0}
+.kids-track-heading h3{font:800 22px/1.2 'Trebuchet MS',sans-serif;letter-spacing:-.03em;margin:0 0 7px;overflow-wrap:anywhere}
+.kids-track-heading output{font:12px 'Trebuchet MS',sans-serif;color:#615269}
+.kids-deck-token{border:2px solid #2a1f3d;border-radius:50%;width:60px;height:60px;display:grid;place-items:center;font-size:28px;flex-shrink:0;background:#ffd166}
+.song-B .kids-deck-token{background:#cfb1ef}
+.kids-transport{display:flex;gap:12px;margin-bottom:20px}
+.kids-transport button:first-child{background:#2a1f3d;color:white;min-width:135px;font-size:20px}
+.kids-transport button[aria-pressed=true]{background:#415b35}
+.kids-deck>label{display:block;font-size:14px;font-weight:bold;margin:12px 0 0}
+.kids-deck>label>output,.kids-deck>label>span{float:right}
+.kids-parts{border-top:1px solid #2a1f3d33;margin-top:14px;padding-top:4px}
+.kids-parts summary{cursor:pointer;padding:14px 0;font-size:14px;font-weight:bold}
+.kids-parts>div{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.kids-parts button[aria-pressed=true]{background:#2a1f3d;color:white}
+.kids-blend{display:grid;grid-template-columns:1fr 1.5fr;align-items:center;gap:24px;background:#7bd3ea;border:2px solid #2a1f3d;border-radius:22px;margin-top:22px;padding:22px 26px}
+.kids-blend h2{margin:0}.kids-blend p{margin:8px 0 0}
+.kids-blend label{display:flex;justify-content:space-between;flex-wrap:wrap;font-size:14px;font-weight:bold}
+.kids-blend input{flex-basis:100%;accent-color:#2a1f3d!important}
+.kids-play-links{display:flex;justify-content:space-between;align-items:center;gap:14px;margin:22px 0;font-size:14px;font-weight:bold}
+.kids-play-links a{text-decoration:underline;text-underline-offset:4px}
+.kids-extra-songs{padding:18px;border:2px solid #2a1f3d;border-radius:14px;margin-top:20px;background:#fff}
+.kids-real-decks{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:40px 0 14px}
+.kids-real-decks p{font:bold 10px 'Trebuchet MS',sans-serif;letter-spacing:.1em;color:#615269}
+.kids-real-decks nav{display:flex;gap:12px}
+.kids-real-decks button{color:#2a1f3d;border:2px solid #2a1f3d;background:white;font-size:14px}
+.kids-real-decks button[aria-pressed=true]{background:#ffd166}
+.kids-site .stage{background:#272630;border-radius:24px;margin:0;overflow:hidden;height:350px}
+.kids-site .stage-note .muted{display:none}
+.kids-site .stage-note,.kids-site .stage-help{color:#e7def3}
+.kids-site .stage-note{font-size:10px}.kids-site .stage-help{bottom:0}
+.kids-site .ask-astra{margin-top:30px;background:#fff;border:2px solid #2a1f3d;border-radius:22px;color:#2a1f3d}
+.kids-site .ask-astra h3{font-family:'Trebuchet MS',sans-serif;font-weight:bold}
+.kids-site .ask-astra .eyebrow,.kids-site .ask-astra small,.kids-site .ask-result{color:#615269}
+.kids-site .ask-astra button{color:#2a1f3d;border-color:#2a1f3d;background:#fff7e6}
+.kids-site .ask-astra textarea{background:#fff7e6;color:#2a1f3d;border:1px solid #938299}
+.kids-site .session-actions button,.kids-site .session-actions a{color:#2a1f3d;border-color:#938299}
+@media(max-width:900px){.kids-coach{flex-wrap:wrap}.kids-coach-actions{max-width:none;margin-left:75px;display:flex;align-items:center;gap:18px}.kids-song-choice{grid-template-columns:1fr;padding:20px}.kids-disc{grid-row:auto}.kids-blend{grid-template-columns:1fr;gap:18px}}
+@media(max-width:680px){.kids-site .session-journey{padding:26px 20px 0}.kids-site .session-welcome h1{font-size:32px}main.kids-site>.performance-shell{padding:6px 20px 30px}.kids-journey a{font-size:13px;padding:12px 16px}.kids-song-shelf{grid-template-columns:1fr;gap:16px}.kids-song-choice{grid-template-columns:66px 1fr;gap:10px 14px}.kids-disc{width:60px;height:60px;grid-row:span 3;font-size:22px}.kids-song-choice strong{font-size:20px}.kids-song-choice select{font-size:13px;padding:12px 8px}.kids-coach{padding:22px 18px;gap:12px}.kids-coach-icon{font-size:28px;width:32px}.kids-coach h2{font-size:23px}.kids-coach-copy{min-width:230px}.kids-coach-actions{margin-left:0;flex-wrap:wrap}.kids-coach-actions button{font-size:13px}.kids-decks{grid-template-columns:1fr;gap:18px}.kids-deck{padding:22px}.kids-track-heading h3{font-size:23px}.kids-transport{gap:10px}.kids-transport button{font-size:12px;padding:12px}.kids-transport button:first-child{font-size:18px;min-width:130px}.kids-blend{padding:22px}.kids-blend h2{font-size:26px}.kids-real-decks{align-items:flex-start;flex-direction:column;gap:12px}.kids-real-decks h2{font-size:25px}.kids-play-links{font-size:12px}.kids-play-links button{font-size:12px;padding:12px}.kids-site .stage{height:270px}.kids-site .stage-note{font-size:8px;letter-spacing:.05em}.kids-site .ask-astra{padding:22px 18px}}

@@ -1,0 +1,71 @@
+{
+  "requests": [
+    {
+      "audio": false,
+      "video": {
+        "facingMode": "user",
+        "width": {
+          "ideal": 640,
+          "max": 1280
+        },
+        "height": {
+          "ideal": 640,
+          "max": 1280
+        },
+        "frameRate": {
+          "ideal": 24,
+          "max": 24
+        }
+      }
+    },
+    {
+      "audio": {
+        "echoCancellation": true,
+        "noiseSuppression": true
+      },
+      "video": false
+    },
+    {
+      "audio": false,
+      "video": {
+        "facingMode": "user",
+        "width": {
+          "ideal": 640,
+          "max": 1280
+        },
+        "height": {
+          "ideal": 640,
+          "max": 1280
+        },
+        "frameRate": {
+          "ideal": 24,
+          "max": 24
+        }
+      }
+    }
+  ],
+  "video": [
+    "ended",
+    "ended"
+  ],
+  "audio": [
+    "ended"
+  ],
+  "peerTracks": [
+    "audio"
+  ],
+  "closes": 1,
+  "outgoing": [
+    {
+      "url": "http://127.0.0.1:5173/api/voice/session",
+      "body": "mock-offer"
+    }
+  ],
+  "signal": {
+    "rms": 0.027508266669710683,
+    "peak": 0.17863047122955322,
+    "duration": 6.6,
+    "channels": 2
+  },
+  "note": "Synthetic canvas video, synthetic microphone track and mocked voice peer/SDP; actual booth master-bus fixture recording. No physical camera, microphone, or genuine voice conversation verified."
+}

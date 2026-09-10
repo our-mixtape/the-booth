@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:Anton;src:url(assets/fonts/anton-latin.woff2) format('woff2');font-display:swap}
+@font-face{font-family:Archivo;src:url(assets/fonts/archivo-latin.woff2) format('woff2');font-weight:100 900;font-display:swap}
+body{margin:0;background:#070708;color:#ece9e2;font-family:Archivo,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}a:hover{color:#ff4b2b}
+*{box-sizing:border-box}
+input[type=range]{width:100%;accent-color:#ff4b2b;margin:8px 0 0;min-height:24px}
+@keyframes slide{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
+@keyframes wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</helmet>
+<main data-screen-label="Signal" style="min-width:0;overflow-x:clip;display:grid;grid-template-columns:minmax(0,1fr)">
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:50;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:16px clamp(16px,3vw,40px);font:500 11px/1 'Courier New',monospace;letter-spacing:.14em;text-transform:uppercase;color:#ece9e2;background:linear-gradient(#070708,#07070800)">
+<a href="#top" style="font:400 22px/1 Anton,Impact,sans-serif;letter-spacing:.02em;text-transform:uppercase">Mixtape<span style="color:#ff4b2b">/</span>Booth</a>
+<nav style="display:flex;gap:22px"><a href="#booth">01 Rig</a><a href="#play">02 Session</a><a href="#astra">03 Astra</a><a href="#together">04 Mixtape</a></nav>
+<span style="text-align:right;color:#8d8880">Vol. 001 · <span style="color:#ff4b2b;animation:pulse 2s infinite">● Live</span></span>
+</header>
+
+<section id="top" data-screen-label="Hero" style="position:relative;height:100vh;display:grid;grid-template-rows:1fr auto;border-bottom:1px solid #26262a;overflow:hidden">
+<div aria-hidden="true" style="position:absolute;inset:0;background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:clamp(60px,8vw,120px) clamp(60px,8vw,120px)"></div>
+<img src="assets/stage-four-cdjs.png" alt="" style="position:absolute;left:50%;top:50%;width:min(1400px,120vw);transform:translate(-50%,-38%);opacity:.55;filter:saturate(.6) contrast(1.1);pointer-events:none;mask-image:radial-gradient(ellipse at 50% 50%,#000 30%,transparent 70%)">
+<div style="position:relative;align-self:end;padding:0 clamp(16px,3vw,40px)">
+<p style="font:500 11px/1 'Courier New',monospace;letter-spacing:.2em;text-transform:uppercase;color:#ff4b2b;margin:0 0 20px">A playable DJ booth · For the ones who feel the music</p>
+<h1 style="font:400 clamp(88px,19vw,330px)/.82 Anton,Impact,sans-serif;text-transform:uppercase;letter-spacing:-.01em;margin:0 0 -0.04em;text-wrap:balance">Step into<br><span style="color:#ff4b2b">the mix</span></h1>
+</div>
+<div style="position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:24px;padding:24px clamp(16px,3vw,40px);border-top:1px solid #26262a;background:#070708">
+<p style="font:400 clamp(15px,1.2vw,18px)/1.5 Archivo,sans-serif;color:#c9c4bb;margin:0;max-width:440px;text-wrap:pretty">Two rigs, one live mix, and a companion that reads the decks but never touches them. Sound starts when you do.</p>
+<a href="#booth" style="justify-self:end;align-self:center;display:inline-flex;align-items:center;gap:14px;background:#ff4b2b;color:#120705;padding:16px 22px;font:500 12px/1 'Courier New',monospace;letter-spacing:.14em;text-transform:uppercase;min-height:48px">Enter the booth →</a>
+</div>
+</section>
+
+<section id="booth" data-screen-label="01 Rig" style="position:relative;display:grid;grid-template-columns:minmax(0,1fr);border-bottom:1px solid #26262a">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));border-bottom:1px solid #26262a">
+<div style="padding:clamp(40px,6vw,80px) clamp(16px,3vw,40px);border-right:1px solid #26262a;animation:slide .7s ease both;animation-timeline:view();animation-range:entry 0% entry 40%">
+<span style="font:400 clamp(80px,12vw,180px)/.8 Anton,Impact,sans-serif;color:#26262a;display:block">01</span>
+<h2 style="font:400 clamp(44px,6vw,96px)/.9 Anton,Impact,sans-serif;text-transform:uppercase;margin:16px 0 0">Two rigs.<br><span style="color:#ff4b2b">One mix.</span></h2>
+</div>
+<div style="padding:clamp(40px,6vw,80px) clamp(16px,3vw,40px);display:grid;align-content:end;gap:24px">
+<p style="font:400 clamp(15px,1.2vw,18px)/1.5 Archivo,sans-serif;color:#c9c4bb;margin:0;max-width:420px;text-wrap:pretty">CDJs or turntables. Swap the surface mid-set — tracks, blend, stems and position carry over. The 3D booth is the instrument, not wallpaper.</p>
+<div style="display:flex;gap:1px;background:#26262a;border:1px solid #26262a;width:fit-content;max-width:100%;flex-wrap:wrap"><button onClick="{{ pick2 }}" style="{{ rig2Style }}">2 CDJs</button><button onClick="{{ pick4 }}" style="{{ rig4Style }}">4 CDJs</button><button onClick="{{ pickVinyl }}" style="{{ rigVinylStyle }}">Turntables</button></div>
+<span style="font:500 11px/1 'Courier New',monospace;letter-spacing:.14em;text-transform:uppercase;color:#8d8880">{{ rigCaption }}</span>
+</div>
+</div>
+<div style="position:relative;background:#0c0c0e">
+<img src="assets/stage-four-cdjs.png" alt="The live 3D booth" style="display:block;width:100%;aspect-ratio:1276/400;object-fit:cover;object-position:center 45%">
+<div style="position:absolute;top:16px;left:clamp(16px,3vw,40px);right:clamp(16px,3vw,40px);display:flex;justify-content:space-between;font:500 11px/1 'Courier New',monospace;letter-spacing:.14em;text-transform:uppercase;color:#8d8880"><span><span style="color:#ff4b2b">●</span> {{ rigName }}</span><span>Drag a fader · Click play / cue</span></div>
+</div>
+<img src="assets/waveforms-live.png" alt="Follow-the-mix waveforms" style="display:block;width:100%;border-top:1px solid #26262a">
+</section>
+
+<section id="play" data-screen-label="02 Session" style="border-bottom:1px solid #26262a">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));border-bottom:1px solid #26262a">
+<div style="padding:clamp(40px,6vw,80px) clamp(16px,3vw,40px);border-right:1px solid #26262a;animation:slide .7s ease both;animation-timeline:view();animation-range:entry 0% entry 40%">
+<span style="font:400 clamp(80px,12vw,180px)/.8 Anton,Impact,sans-serif;color:#26262a;display:block">02</span>
+<h2 style="font:400 clamp(44px,6vw,96px)/.9 Anton,Impact,sans-serif;text-transform:uppercase;margin:16px 0 0">Your music.<br><span style="color:#ff4b2b">Your set.</span></h2>
+</div>
+<div style="padding:clamp(40px,6vw,80px) clamp(16px,3vw,40px);display:grid;align-content:end"><p style="font:400 clamp(15px,1.2vw,18px)/1.5 Archivo,sans-serif;color:#c9c4bb;margin:0;max-width:420px;text-wrap:pretty">Five steps, one surface. Add songs, let the booth analyze them, pick a pairing, line up a set, then play. The mixer opens when you want it.</p></div>
+</div>
+<nav aria-label="Session steps" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:#26262a;border-bottom:1px solid #26262a">
+<sc-for list="{{ steps }}" as="s" hint-placeholder-count="5"><button onClick="{{ s.go }}" style="{{ s.style }}"><span style="font:400 28px/1 Anton,Impact,sans-serif">{{ s.n }}</span><span style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase">{{ s.label }}</span><span style="font:400 12px Archivo,sans-serif;opacity:.7;text-transform:none;letter-spacing:0">{{ s.sub }}</span></button></sc-for>
+</nav>
+
+<sc-if value="{{ isAdd }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="Step 1 Add music" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:1px;background:#26262a">
+<div style="background:#0c0c0e;padding:clamp(24px,3vw,40px);display:grid;gap:16px;align-content:center;justify-items:start;border:1px dashed #3a3a40;margin:1px"><span style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#ff4b2b">Step 1 · Add music</span><h3 style="font:400 clamp(34px,3.6vw,56px)/.9 Anton,Impact,sans-serif;text-transform:uppercase;margin:0">Drop songs here.</h3><p style="font:400 15px/1.55 Archivo,sans-serif;color:#c9c4bb;margin:0;max-width:420px;text-wrap:pretty">MP3, WAV, M4A. Files stay on this computer — nothing is uploaded.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button onClick="{{ addDemo }}" style="background:#ff4b2b;color:#120705;border:0;padding:14px 20px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:44px">Choose files</button><button onClick="{{ addDemo }}" style="border:1px solid #3a3a40;background:transparent;color:#ece9e2;padding:12px 16px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:44px">Use the demo tracks</button></div></div>
+<div style="background:#0c0c0e;padding:clamp(24px,3vw,40px);display:grid;gap:12px;align-content:start"><div style="display:flex;justify-content:space-between;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880"><span>In your crate</span><span>{{ crateCount }}</span></div><div style="display:grid;border-top:1px solid #26262a"><sc-for list="{{ crate }}" as="t" hint-placeholder-count="3"><div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid #26262a;font:400 15px Archivo,sans-serif"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ t.title }}</span><span style="{{ t.badge }}">{{ t.state }}</span></div></sc-for></div><button onClick="{{ goAnalyze }}" style="background:#ece9e2;color:#070708;border:0;padding:14px 20px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:44px;justify-self:end">Next · Analyze →</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isAnalyze }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Step 2 Analyze" style="background:#0c0c0e;padding:clamp(24px,3vw,40px);display:grid;gap:20px">
+<div style="display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap"><div><span style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#ff4b2b">Step 2 · Analyze</span><h3 style="font:400 clamp(34px,3.6vw,56px)/.9 Anton,Impact,sans-serif;text-transform:uppercase;margin:8px 0 0">Tempo, key, stems.</h3></div><p style="font:400 14px/1.5 Archivo,sans-serif;color:#8d8880;margin:0;max-width:380px;text-wrap:pretty">Beat grid and key are estimates. Stems are split into drums, bass and melody so you can mute parts live.</p></div>
+<div style="display:grid;border-top:1px solid #26262a"><div style="display:grid;grid-template-columns:minmax(0,2fr) repeat(3,minmax(0,1fr)) auto;gap:14px;padding:10px 0;border-bottom:1px solid #26262a;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880"><span>Track</span><span>BPM</span><span>Key</span><span>Stems</span><span></span></div>
+<sc-for list="{{ analyzed }}" as="t" hint-placeholder-count="3"><div style="display:grid;grid-template-columns:minmax(0,2fr) repeat(3,minmax(0,1fr)) auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid #26262a;font:400 15px Archivo,sans-serif"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ t.title }}</span><span>{{ t.bpm }}</span><span>{{ t.key }}</span><span style="{{ t.badge }}">{{ t.state }}</span><div style="height:2px;width:80px;background:#26262a;position:relative"><span style="{{ t.bar }}"></span></div></div></sc-for></div>
+<div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><button onClick="{{ goAdd }}" style="border:1px solid #3a3a40;background:transparent;color:#ece9e2;padding:12px 16px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:44px">← Add more</button><button onClick="{{ goRecs }}" style="background:#ece9e2;color:#070708;border:0;padding:14px 20px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:44px">Next · Recommendations →</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isRecs }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Step 3 Recommendations" style="background:#0c0c0e;padding:clamp(24px,3vw,40px);display:grid;gap:20px">
+<div><span style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#ff4b2b">Step 3 · Recommendations</span><h3 style="font:400 clamp(34px,3.6vw,56px)/.9 Anton,Impact,sans-serif;text-transform:uppercase;margin:8px 0 0">Pairs that mix well.</h3></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:1px;background:#26262a;border:1px solid #26262a">
+<sc-for list="{{ recs }}" as="r" hint-placeholder-count="3"><article style="background:#070708;padding:24px;display:grid;gap:16px;align-content:space-between"><div style="display:grid;gap:6px"><span style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880">{{ r.why }}</span><h4 style="font:500 18px/1.3 Archivo,sans-serif;margin:0">{{ r.a }} <span style="color:#ff4b2b">→</span> {{ r.b }}</h4><p style="font:400 14px/1.5 Archivo,sans-serif;color:#8d8880;margin:0">{{ r.note }}</p></div><button onClick="{{ r.add }}" style="{{ r.style }}">{{ r.cta }}</button></article></sc-for>
+</div>
+<div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><button onClick="{{ goAnalyze }}" style="border:1px solid #3a3a40;background:transparent;color:#ece9e2;padding:12px 16px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:44px">← Back</button><button onClick="{{ goPlaylist }}" style="background:#ece9e2;color:#070708;border:0;padding:14px 20px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:44px">Next · Playlist →</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isPlaylist }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Step 4 Playlist" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:1px;background:#26262a">
+<div style="background:#0c0c0e;padding:clamp(24px,3vw,40px);display:grid;gap:16px;align-content:start"><div><span style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#ff4b2b">Step 4 · Playlist</span><h3 style="font:400 clamp(34px,3.6vw,56px)/.9 Anton,Impact,sans-serif;text-transform:uppercase;margin:8px 0 0">Tonight's set.</h3></div><div style="display:grid;border-top:1px solid #26262a"><sc-for list="{{ playlist }}" as="p" hint-placeholder-count="3"><div style="display:grid;grid-template-columns:32px minmax(0,1fr) auto auto;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid #26262a;font:400 15px Archivo,sans-serif"><span style="font:400 22px/1 Anton,Impact,sans-serif;color:#8d8880">{{ p.n }}</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ p.title }}</span><span style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880">{{ p.meta }}</span><button onClick="{{ p.remove }}" style="border:0;background:transparent;color:#8d8880;cursor:pointer;font:16px Archivo,sans-serif;padding:6px">×</button></div></sc-for></div><p style="font:400 13px Archivo,sans-serif;color:#8d8880;margin:0">{{ playlistHint }}</p></div>
+<div style="background:#0c0c0e;padding:clamp(24px,3vw,40px);display:grid;gap:16px;align-content:start"><span style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880">Add from your crate</span><div style="display:grid;border-top:1px solid #26262a"><sc-for list="{{ crateForPlaylist }}" as="t" hint-placeholder-count="3"><div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid #26262a;font:400 15px Archivo,sans-serif"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ t.title }}</span><button onClick="{{ t.add }}" style="{{ t.style }}">{{ t.cta }}</button></div></sc-for></div><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:8px"><button onClick="{{ goRecs }}" style="border:1px solid #3a3a40;background:transparent;color:#ece9e2;padding:12px 16px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:44px">← Back</button><button onClick="{{ loadToDecks }}" style="background:#ff4b2b;color:#120705;border:0;padding:14px 20px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:44px">Load first two to decks →</button></div></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isPlay }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Step 5 Play" style="display:grid;gap:1px;background:#26262a">
+<div style="background:#0c0c0e;padding:16px clamp(16px,3vw,40px);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><div style="display:flex;gap:1px;background:#26262a;border:1px solid #26262a"><button onClick="{{ modeFree }}" style="{{ freeStyle }}">Free play</button><button onClick="{{ modePractice }}" style="{{ practiceStyle }}">Practice a handoff</button></div><button onClick="{{ toggleMixer }}" style="border:1px solid #3a3a40;background:transparent;color:#ece9e2;padding:12px 16px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:44px">{{ mixerLabel }}</button></div>
+<sc-if value="{{ isPractice }}" hint-placeholder-val="{{ false }}"><div style="background:#0c0c0e;padding:clamp(20px,2.5vw,32px) clamp(16px,3vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px;align-items:center"><div><span style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#ff4b2b">The first handoff</span><h3 style="font:400 clamp(28px,3vw,44px)/.9 Anton,Impact,sans-serif;text-transform:uppercase;margin:8px 0 8px">Bring B in on bar 5. Own it by bar 9.</h3><p style="font:400 14px/1.5 Archivo,sans-serif;color:#c9c4bb;margin:0">Start B at 8.00 s, finish the blend by 16.00 s. Retry resets both decks to the same bar.</p></div><div style="display:grid;gap:14px"><div style="position:relative;height:4px;background:#26262a"><span style="position:absolute;left:0;top:0;height:4px;width:42%;background:#ff4b2b"></span><i style="position:absolute;left:50%;top:-6px;width:2px;height:16px;background:#ece9e2"></i></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button style="background:#ece9e2;color:#070708;border:0;padding:14px 20px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:44px">Start practice</button><button style="border:1px solid #3a3a40;background:transparent;color:#ece9e2;padding:12px 16px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:44px">↻ Retry</button></div></div></div></sc-if>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:1px;background:#26262a"><article style="background:#0c0c0e;padding:clamp(20px,2.5vw,32px);display:grid;gap:20px;min-width:0">
+<header style="display:flex;align-items:center;justify-content:space-between;gap:16px"><div style="display:flex;gap:16px;align-items:center;min-width:0"><span style="font:400 56px/1 Anton,Impact,sans-serif;color:#ff4b2b">{{ deckA.id }}</span><div style="min-width:0"><h3 style="font:500 18px/1.2 Archivo,sans-serif;margin:0 0 6px;overflow-wrap:anywhere">{{ deckA.title }}</h3><p style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880;margin:0">{{ deckA.meta }}</p></div></div><button onClick="{{ goPlaylist }}" style="border:1px solid #3a3a40;background:transparent;color:#ece9e2;padding:12px 16px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:44px">Swap</button></header>
+<div style="display:flex;gap:1px;background:#26262a;border:1px solid #26262a"><button style="flex:1;background:#ece9e2;color:#070708;border:0;padding:14px 20px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:44px;padding:18px;min-height:56px">{{ deckA.transport }}</button><button style="background:#0c0c0e;color:#ece9e2;border:0;padding:18px 20px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:56px">Cue</button></div>
+<sc-if value="{{ mixerOpen }}" hint-placeholder-val="{{ false }}"><div style="display:grid;gap:18px;border-top:1px solid #26262a;padding-top:18px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px 24px"><label style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880;display:block">Level <output style="float:right;color:#ece9e2">80%</output><input type="range" min="0" max="100" defaultValue="80"></label><label style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880;display:block">Filter <output style="float:right;color:#ece9e2">Open</output><input type="range" min="0" max="100" defaultValue="100"></label></div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px"><label style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880;display:block">Low<output style="display:block;color:#ece9e2;margin-top:4px">0.0 dB</output><input type="range" min="-12" max="12" defaultValue="0"></label><label style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880;display:block">Mid<output style="display:block;color:#ece9e2;margin-top:4px">0.0 dB</output><input type="range" min="-12" max="12" defaultValue="0"></label><label style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880;display:block">High<output style="display:block;color:#ece9e2;margin-top:4px">0.0 dB</output><input type="range" min="-12" max="12" defaultValue="0"></label></div>
+<label style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880;display:block">Tempo <output style="float:right;color:#ece9e2">120.0 BPM · 0.0%</output><input type="range" min="84" max="116" step="0.1" defaultValue="100"></label>
+<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><span style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880;margin-right:8px">Stems</span><button style="background:#ff4b2b;color:#120705;border:0;padding:8px 12px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer">drums</button><button style="background:#ff4b2b;color:#120705;border:0;padding:8px 12px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer">bass</button><button style="background:#ff4b2b;color:#120705;border:0;padding:8px 12px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer">melody</button></div>
+</div></sc-if>
+</article><article style="background:#0c0c0e;padding:clamp(20px,2.5vw,32px);display:grid;gap:20px;min-width:0">
+<header style="display:flex;align-items:center;justify-content:space-between;gap:16px"><div style="display:flex;gap:16px;align-items:center;min-width:0"><span style="font:400 56px/1 Anton,Impact,sans-serif;color:#ff4b2b">{{ deckB.id }}</span><div style="min-width:0"><h3 style="font:500 18px/1.2 Archivo,sans-serif;margin:0 0 6px;overflow-wrap:anywhere">{{ deckB.title }}</h3><p style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880;margin:0">{{ deckB.meta }}</p></div></div><button onClick="{{ goPlaylist }}" style="border:1px solid #3a3a40;background:transparent;color:#ece9e2;padding:12px 16px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:44px">Swap</button></header>
+<div style="display:flex;gap:1px;background:#26262a;border:1px solid #26262a"><button style="flex:1;background:#ece9e2;color:#070708;border:0;padding:14px 20px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:44px;padding:18px;min-height:56px">{{ deckB.transport }}</button><button style="background:#0c0c0e;color:#ece9e2;border:0;padding:18px 20px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;min-height:56px">Cue</button></div>
+<sc-if value="{{ mixerOpen }}" hint-placeholder-val="{{ false }}"><div style="display:grid;gap:18px;border-top:1px solid #26262a;padding-top:18px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px 24px"><label style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880;display:block">Level <output style="float:right;color:#ece9e2">80%</output><input type="range" min="0" max="100" defaultValue="80"></label><label style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880;display:block">Filter <output style="float:right;color:#ece9e2">Open</output><input type="range" min="0" max="100" defaultValue="100"></label></div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px"><label style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880;display:block">Low<output style="display:block;color:#ece9e2;margin-top:4px">0.0 dB</output><input type="range" min="-12" max="12" defaultValue="0"></label><label style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880;display:block">Mid<output style="display:block;color:#ece9e2;margin-top:4px">0.0 dB</output><input type="range" min="-12" max="12" defaultValue="0"></label><label style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880;display:block">High<output style="display:block;color:#ece9e2;margin-top:4px">0.0 dB</output><input type="range" min="-12" max="12" defaultValue="0"></label></div>
+<label style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880;display:block">Tempo <output style="float:right;color:#ece9e2">120.0 BPM · 0.0%</output><input type="range" min="84" max="116" step="0.1" defaultValue="100"></label>
+<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><span style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880;margin-right:8px">Stems</span><button style="background:#ff4b2b;color:#120705;border:0;padding:8px 12px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer">drums</button><button style="background:#ff4b2b;color:#120705;border:0;padding:8px 12px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer">bass</button><button style="background:#ff4b2b;color:#120705;border:0;padding:8px 12px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer">melody</button></div>
+</div></sc-if>
+</article></div>
+<div style="background:#0c0c0e;padding:clamp(20px,2.5vw,32px) clamp(16px,3vw,40px);display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:24px;align-items:center"><span style="font:400 40px/1 Anton,Impact,sans-serif">A</span><label style="font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880;display:block;text-align:center">Blend <output style="color:#ff4b2b;margin-left:8px">50% B</output><input type="range" min="0" max="100" defaultValue="50" style="min-height:40px"></label><span style="font:400 40px/1 Anton,Impact,sans-serif">B</span></div>
+<div style="background:#0c0c0e;padding:14px clamp(16px,3vw,40px);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8d8880"><span>Up next · {{ upNext }}</span><span><kbd style="font:inherit;border:1px solid #3a3a40;padding:3px 6px;color:#ece9e2">Q</kbd> A · <kbd style="font:inherit;border:1px solid #3a3a40;padding:3px 6px;color:#ece9e2">P</kbd> B · <kbd style="font:inherit;border:1px solid #3a3a40;padding:3px 6px;color:#ece9e2">← →</kbd> blend · <kbd style="font:inherit;border:1px solid #3a3a40;padding:3px 6px;color:#ece9e2">R</kbd> retry</span></div>
+</div>
+</sc-if>
+</section>
+
+<section id="astra" data-screen-label="03 Astra" style="border-bottom:1px solid #26262a">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))">
+<div style="padding:clamp(40px,6vw,80px) clamp(16px,3vw,40px);border-right:1px solid #26262a;animation:slide .7s ease both;animation-timeline:view();animation-range:entry 0% entry 40%">
+<span style="font:400 clamp(80px,12vw,180px)/.8 Anton,Impact,sans-serif;color:#26262a;display:block">03</span>
+<h2 style="font:400 clamp(44px,6vw,96px)/.9 Anton,Impact,sans-serif;text-transform:uppercase;margin:16px 0 24px">Your taste.<br><span style="color:#ff4b2b">Your call.</span></h2>
+<p style="font:400 clamp(15px,1.2vw,18px)/1.5 Archivo,sans-serif;color:#c9c4bb;margin:0;max-width:420px;text-wrap:pretty">Ask, and Astra reads the decks — position, tempo, what's playing — then hands back one observation and one next move. It never moves the mixer.</p>
+</div>
+<div style="padding:clamp(24px,3vw,40px) clamp(16px,3vw,40px);display:grid;gap:16px;align-content:center;background:#0c0c0e">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><span style="font:500 11px/1 'Courier New',monospace;letter-spacing:.14em;text-transform:uppercase;color:#8d8880">✳ Ask beside the decks</span><button onClick="{{ toggleVoice }}" style="{{ voiceStyle }}">{{ voiceLabel }}</button></div>
+<textarea value="{{ ask }}" onChange="{{ setAsk }}" rows="3" placeholder="Keep the energy low and leave the bass handoff to me…" style="width:100%;background:#070708;border:1px solid #26262a;padding:16px;font:400 15px/1.5 Archivo,sans-serif;color:#ece9e2;resize:vertical"></textarea>
+<div style="display:flex;gap:1px;background:#26262a;border:1px solid #26262a;width:fit-content;max-width:100%;flex-wrap:wrap"><sc-for list="{{ helpers }}" as="h" hint-placeholder-count="3"><button onClick="{{ h.pick }}" style="background:#0c0c0e;color:#c9c4bb;border:0;padding:10px 14px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer">{{ h.label }}</button></sc-for></div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span style="font:400 13px Archivo,sans-serif;color:#8d8880">{{ astraStatus }}</span><button style="background:#ff4b2b;color:#120705;border:0;padding:14px 20px;font:500 12px 'Courier New',monospace;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;min-height:44px">Ask Astra →</button></div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:1px;background:#26262a;border-top:1px solid #26262a">
+<sc-for list="{{ values }}" as="v" hint-placeholder-count="3">
+<article style="background:#070708;padding:clamp(24px,3vw,40px) clamp(16px,3vw,40px);min-height:260px;display:grid;align-content:space-between;gap:24px"><span style="font:400 48px/1 Anton,Impact,sans-serif;color:#ff4b2b">{{ v.n }}</span><div><h3 style="font:400 clamp(26px,2.4vw,36px)/.95 Anton,Impact,sans-serif;text-transform:uppercase;margin:0 0 12px">{{ v.title }}</h3><p style="font:400 14px/1.55 Archivo,sans-serif;color:#8d8880;margin:0;text-wrap:pretty">{{ v.body }}</p></div></article>
+</sc-for>
+</div>
+</section>
+
+<section id="together" data-screen-label="04 Together" style="background:#ff4b2b;color:#120705;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));border-bottom:1px solid #26262a">
+<div style="padding:clamp(40px,6vw,80px) clamp(16px,3vw,40px);border-right:1px solid #12070533">
+<span style="font:400 clamp(80px,12vw,180px)/.8 Anton,Impact,sans-serif;color:#e0361a;display:block">04</span>
+<h2 style="font:400 clamp(44px,6vw,96px)/.9 Anton,Impact,sans-serif;text-transform:uppercase;margin:16px 0 24px">Good music.<br>Better together.</h2>
+<p style="font:400 clamp(15px,1.2vw,18px)/1.5 Archivo,sans-serif;max-width:420px;margin:0 0 28px;text-wrap:pretty">Mixtape's charity jukebox turns song requests into giving on the dance floor. The Booth is the same feeling from the other side of the table.</p>
+<a href="https://www.ourmixtape.org" style="display:inline-flex;align-items:center;gap:14px;background:#120705;color:#ece9e2;padding:16px 22px;font:500 12px 'Courier New',monospace;letter-spacing:.14em;text-transform:uppercase;min-height:48px">Meet the charity jukebox →</a>
+</div>
+<div aria-hidden="true" style="padding:clamp(40px,6vw,80px) clamp(16px,3vw,40px);display:grid;place-items:center">
+<div style="width:min(100%,440px);background:#120705;color:#ece9e2;padding:24px;border:1px solid #3a1a12">
+<div style="border:1px solid #3a3a40;padding:20px;display:flex;justify-content:space-between;align-items:start;gap:12px"><span style="font:400 34px/.95 Anton,Impact,sans-serif;text-transform:uppercase">Good people.<br>Groovy tunes.</span><b style="font:400 44px/1 Anton,Impact,sans-serif;color:#ff4b2b">B</b></div>
+<div style="display:flex;justify-content:space-between;width:80%;height:46px;margin:22px auto 0;background:#1e1210;border-radius:23px;padding:6px 10px;align-items:center"><span style="width:34px;height:34px;border-radius:50%;border:6px solid #ff4b2b"></span><span style="width:34px;height:34px;border-radius:50%;border:6px solid #ff4b2b"></span></div>
+<p style="font:500 11px/1.6 'Courier New',monospace;letter-spacing:.14em;text-transform:uppercase;text-align:center;color:#8d8880;margin:20px 0 0">Request a song · Make some good</p>
+</div>
+</div>
+</section>
+
+<footer style="padding:clamp(48px,8vh,96px) clamp(16px,3vw,40px) 28px;display:grid;gap:32px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap"><p style="font:400 clamp(36px,5vw,80px)/.9 Anton,Impact,sans-serif;text-transform:uppercase;margin:0">Enough reading.<br><span style="color:#ff4b2b">Find your first mix.</span></p><a href="#booth" style="display:inline-flex;align-items:center;gap:14px;background:#ece9e2;color:#070708;padding:16px 22px;font:500 12px 'Courier New',monospace;letter-spacing:.14em;text-transform:uppercase;min-height:48px">Back to the booth →</a></div>
+<p aria-hidden="true" style="font:400 clamp(90px,24vw,400px)/.8 Anton,Impact,sans-serif;text-transform:uppercase;margin:0;color:#141416;letter-spacing:-.01em">Mixtape</p>
+<div style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font:500 11px/1.6 'Courier New',monospace;letter-spacing:.14em;text-transform:uppercase;color:#8d8880;border-top:1px solid #26262a;padding-top:18px"><span>Mixtape — The Booth · 2026</span><span>Local audio · Human-owned controls</span><a href="https://www.ourmixtape.org">Mixtape home →</a></div>
+</footer>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { rig: '4', ask: '', voice: false, step: 0, crate: [], playlist: [], mode: 'free', mixerOpen: false, decks: null };
+  demo = [
+    { id: 'afterglow', title: 'Afterglow Steps', bpm: '120.0', key: 'A min', stems: true },
+    { id: 'amber', title: 'Amber Current', bpm: '120.0', key: 'A min', stems: true },
+    { id: 'shooting', title: 'Shooting Stars', bpm: '124.0', key: 'F maj', stems: false },
+    { id: 'cirrus', title: 'Cirrus', bpm: '128.0', key: 'C min', stems: false }
+  ];
+  sessionVals() {
+    const { step, crate, playlist, mode, mixerOpen, decks } = this.state;
+    const mono = "font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase";
+    const badge = (bg, fg) => `${mono};background:${bg};color:${fg};padding:6px 10px;white-space:nowrap`;
+    const ready = badge('#1c2a1e', '#8fd19e'), pending = badge('#26262a', '#c9c4bb'), orig = badge('#26262a', '#8d8880');
+    const go = i => () => this.setState({ step: i });
+    const names = ['Add music', 'Analyze', 'Recommend', 'Playlist', 'Play'];
+    const subs = ['Drop files or use demos', 'Tempo · key · stems', 'Pairs that mix well', 'Line up the set', 'Decks, blend, practice'];
+    const tracks = crate.map(id => this.demo.find(t => t.id === id));
+    const inList = id => playlist.includes(id);
+    const addToList = id => () => { if (!inList(id)) this.setState({ playlist: [...playlist, id] }); };
+    const smallBtn = on => `border:1px solid ${on ? '#26262a' : '#3a3a40'};background:${on ? '#26262a' : 'transparent'};color:${on ? '#8d8880' : '#ece9e2'};padding:8px 12px;${mono};cursor:${on ? 'default' : 'pointer'}`;
+    const list = playlist.map(id => this.demo.find(t => t.id === id));
+    const d = decks || [list[0] || this.demo[0], list[1] || this.demo[1]];
+    const seg = on => `background:${on ? '#ece9e2' : '#0c0c0e'};color:${on ? '#070708' : '#c9c4bb'};border:0;padding:12px 16px;${mono};cursor:pointer;min-height:44px`;
+    return {
+      steps: names.map((label, i) => ({ n: `0${i + 1}`, label, sub: subs[i], go: go(i), style: `display:grid;gap:8px;justify-items:start;text-align:left;background:${i === step ? '#ece9e2' : '#0c0c0e'};color:${i === step ? '#070708' : i < step ? '#ece9e2' : '#8d8880'};border:0;padding:18px clamp(12px,2vw,24px);cursor:pointer;min-height:96px;min-width:0` })),
+      isAdd: step === 0, isAnalyze: step === 1, isRecs: step === 2, isPlaylist: step === 3, isPlay: step === 4,
+      goAdd: go(0), goAnalyze: go(1), goRecs: go(2), goPlaylist: go(3), goPlay: go(4),
+      addDemo: () => this.setState({ crate: this.demo.map(t => t.id) }),
+      crateCount: crate.length ? `${crate.length} tracks` : 'Empty',
+      crate: tracks.length ? tracks.map(t => ({ title: t.title, state: t.stems ? 'Ready' : 'Original', badge: t.stems ? ready : orig })) : [{ title: 'Nothing here yet — add a song or use the demos.', state: '', badge: '' }],
+      analyzed: (tracks.length ? tracks : this.demo.slice(0, 2)).map(t => ({ title: t.title, bpm: t.bpm, key: t.key, state: t.stems ? '3 stems' : 'Analyzing…', badge: t.stems ? ready : pending, bar: `position:absolute;left:0;top:0;height:2px;background:#ff4b2b;width:${t.stems ? 100 : 62}%` })),
+      recs: [
+        { a: 'Afterglow Steps', b: 'Amber Current', why: 'Same tempo · same key', note: 'Easiest first handoff. Both at 120 BPM in A minor; stems ready on both.', ids: ['afterglow', 'amber'] },
+        { a: 'Amber Current', b: 'Shooting Stars', why: '+4 BPM · compatible key', note: 'Nudge B\'s tempo down 3%. F major sits well over A minor.', ids: ['amber', 'shooting'] },
+        { a: 'Shooting Stars', b: 'Cirrus', why: '+4 BPM · key clash', note: 'Works if you cut B\'s melody stem until the drop.', ids: ['shooting', 'cirrus'] }
+      ].map(r => { const on = r.ids.every(inList); return { ...r, cta: on ? 'In playlist' : 'Add pair to playlist', style: smallBtn(on), add: () => { if (!on) this.setState({ playlist: [...playlist, ...r.ids.filter(id => !inList(id))] }); } }; }),
+      playlist: list.length ? list.map((t, i) => ({ n: `0${i + 1}`, title: t.title, meta: `${t.bpm} · ${t.key}`, remove: () => this.setState({ playlist: playlist.filter(id => id !== t.id) }) })) : [{ n: '—', title: 'Empty. Add a pair from Recommendations or your crate.', meta: '', remove: () => {} }],
+      playlistHint: list.length >= 2 ? 'The first two go to decks A and B. The rest queue up as "up next".' : 'Add at least two tracks to load the decks.',
+      crateForPlaylist: (tracks.length ? tracks : this.demo).map(t => { const on = inList(t.id); return { title: t.title, cta: on ? 'Added' : '+ Add', style: smallBtn(on), add: addToList(t.id) }; }),
+      loadToDecks: () => this.setState({ decks: [list[0] || this.demo[0], list[1] || this.demo[1]], step: 4 }),
+      modeFree: () => this.setState({ mode: 'free' }), modePractice: () => this.setState({ mode: 'practice' }),
+      freeStyle: seg(mode === 'free'), practiceStyle: seg(mode === 'practice'), isPractice: mode === 'practice',
+      toggleMixer: () => this.setState({ mixerOpen: !mixerOpen }), mixerOpen, mixerLabel: mixerOpen ? 'Hide mixer' : 'Open mixer · level, EQ, tempo, stems',
+      deckA: { id: 'A', title: d[0].title, meta: `${d[0].bpm} BPM · ${d[0].key} · playing`, transport: 'Ⅱ Pause A' },
+      deckB: { id: 'B', title: d[1].title, meta: `${d[1].bpm} BPM · ${d[1].key} · cued`, transport: '▶ Play B' },
+      upNext: list[2] ? list[2].title : 'nothing queued'
+    };
+  }
+  renderVals() {
+    const { rig, ask, voice } = this.state;
+    const btn = on => `background:${on ? '#ff4b2b' : '#0c0c0e'};color:${on ? '#120705' : '#c9c4bb'};border:0;padding:12px 16px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer`;
+    const caps = { '2': 'Two digital players · A / B', '4': 'Four digital players · A+C left / B+D right', vinyl: 'Vinyl surface · A / B · same live mix' };
+    const names = { '2': 'Two digital players', '4': 'Four digital players', vinyl: 'Two turntables' };
+    const set = v => () => this.setState({ ask: v });
+    return {
+      ...this.sessionVals(),
+      pick2: () => this.setState({ rig: '2' }), pick4: () => this.setState({ rig: '4' }), pickVinyl: () => this.setState({ rig: 'vinyl' }),
+      rig2Style: btn(rig === '2'), rig4Style: btn(rig === '4'), rigVinylStyle: btn(rig === 'vinyl'), rigCaption: caps[rig], rigName: names[rig],
+      decks: [
+        { id: 'A', title: 'Afterglow Steps', status: '1.7 s · playing', transport: 'Ⅱ Pause A', level: '80%', levelVal: 80 },
+        { id: 'B', title: 'Afterglow Steps', status: '0.0 s · paused', transport: '▶ Play B', level: '80%', levelVal: 80 }
+      ],
+      library: [
+        { deck: 'A', title: 'Afterglow Steps', meta: '120 BPM · 3 stems' },
+        { deck: 'B', title: 'Afterglow Steps', meta: '120 BPM · 3 stems' },
+        { deck: 'C', title: 'Amber Current', meta: '120 BPM · 3 stems' },
+        { deck: 'D', title: 'Afterglow Steps', meta: '120 BPM · 3 stems' }
+      ],
+      ask, setAsk: e => this.setState({ ask: e.target.value }),
+      helpers: [
+        { label: 'Handoff hint', pick: set('Give me one focused hint for this handoff.') },
+        { label: 'Two minutes left', pick: set('With two minutes left, suggest a feasible transition using the loaded decks.') },
+        { label: 'Keep it restrained', pick: set('Suggest a restrained next move. Leave the controls to me.') }
+      ],
+      toggleVoice: () => this.setState({ voice: !voice }), voiceLabel: voice ? '■ Stop voice' : '◉ Voice',
+      voiceStyle: `border:1px solid ${voice ? '#ff4b2b' : '#3a3a40'};background:${voice ? '#ff4b2b' : 'transparent'};color:${voice ? '#120705' : '#ece9e2'};padding:10px 14px;font:500 11px 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer`,
+      astraStatus: voice ? 'Listening · headphones recommended' : 'Astra reads the current deck state. It never moves a control.',
+      values: [
+        { n: '01', title: 'Prepare, then play.', body: 'Load local tracks and validated stems. Your music stays on this machine.' },
+        { n: '02', title: 'Room to change.', body: 'Swap the rig, shape the sound, change direction mid-set. Every control is yours.' },
+        { n: '03', title: 'Find that moment.', body: 'Practice one handoff, inspect the timing, reset to the same bar and go again.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face{font-family:Archivo;src:url(assets/fonts/archivo-latin.woff2) format('woff2');font-weight:100 900;font-display:swap}
+body{margin:0;background:#08080b;color:#f3f3f5;font-family:Archivo,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}a:hover{color:#8f9dff}
+*{box-sizing:border-box}
+em{font-style:normal}
+input[type=range]{width:100%;accent-color:#8f9dff;margin:8px 0 0;min-height:24px}
+@keyframes rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+@keyframes fadeout{from{opacity:1;transform:scale(1)}to{opacity:.15;transform:scale(.94)}}
+@keyframes glow{0%,100%{opacity:.55}50%{opacity:.9}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</helmet>
+<main data-screen-label="Astra" style="min-width:0;overflow-x:clip">
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px clamp(20px,4vw,56px);mix-blend-mode:difference;color:#fff">
+<a href="#top" style="font:600 20px/1 Archivo,sans-serif;letter-spacing:-.04em;white-space:nowrap">mixtape <span style="font:400 20px Archivo,sans-serif;letter-spacing:-.02em;margin-left:8px;color:#9a9ca8">the booth</span></a>
+<nav style="display:flex;gap:28px;font:500 12px/1 Archivo,sans-serif;letter-spacing:.08em;text-transform:uppercase"><a href="#booth">Booth</a><a href="#play">Session</a><a href="#astra">Astra</a><a href="#together">Mixtape</a></nav>
+</header>
+
+<section id="top" data-screen-label="Hero" style="position:relative;height:130vh">
+<div style="position:sticky;top:0;height:100vh;overflow:hidden;display:grid;place-items:center;animation:fadeout linear both;animation-timeline:view();animation-range:exit 0% exit 100%">
+<div aria-hidden="true" style="position:absolute;width:78vmin;height:78vmin;border-radius:50%;background:radial-gradient(circle at 40% 35%,#dfe4ff,#8f9dff 30%,#4353d6 55%,#1c1d4a 78%,transparent 80%);filter:blur(36px);opacity:.85;animation:glow 6s ease-in-out infinite"></div>
+<div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 120%,#0f1020 0%,transparent 60%)"></div>
+<img src="assets/booth-illustration.svg" alt="" style="position:absolute;width:min(1100px,92vw);bottom:-16vh;left:50%;transform:translateX(-50%) perspective(1600px) rotateX(48deg);filter:drop-shadow(0 60px 60px #000c) saturate(.6) brightness(.7);pointer-events:none">
+<div aria-hidden="true" style="position:absolute;left:0;right:0;bottom:0;height:60vh;background:linear-gradient(#08080b00,#08080b 85%);pointer-events:none"></div>
+<div style="position:relative;text-align:center;padding:0 20px 14vh;z-index:2">
+<p style="font:500 11px/1 Archivo,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#8f9dff;margin:0 0 28px">Mixtape × Astra Hackathon NYC · Vol. 001</p>
+<h1 style="font:300 clamp(72px,14vw,220px)/.92 Archivo,sans-serif;letter-spacing:-.045em;margin:0;text-wrap:balance">Step into<br><em style="color:#c3c9ff">the mix.</em></h1>
+<p style="font:400 clamp(15px,1.3vw,19px)/1.5 Archivo,sans-serif;color:#c4c6cf;max-width:420px;margin:34px auto 0;text-wrap:pretty">A playable DJ booth in your browser. Two setups, one live mix, and a companion who only speaks when asked.</p>
+</div>
+<div style="position:absolute;bottom:28px;left:0;right:0;display:flex;justify-content:space-between;align-items:end;padding:0 clamp(20px,4vw,56px);font:500 11px/1.6 Archivo,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#9a9ca8"><span>No sign-up<br>Sound starts when you do</span><span style="color:#8f9dff">Scroll ↓</span><span style="text-align:right">Local tracks<br>Always your hands</span></div>
+</div>
+</section>
+
+<section id="booth" data-screen-label="01 The Booth" style="position:relative;background:#08080b;z-index:2">
+<div style="min-height:100vh;display:grid;align-content:center;padding:clamp(80px,12vh,140px) clamp(20px,4vw,56px)">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:40px;align-items:end">
+<div style="animation:rise .8s ease both;animation-timeline:view();animation-range:entry 10% entry 50%">
+<p style="font:500 11px/1 Archivo,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#8f9dff;margin:0 0 22px">01 — The booth</p>
+<h2 style="font:300 clamp(56px,7.5vw,128px)/.9 Archivo,sans-serif;letter-spacing:-.045em;margin:0;text-wrap:balance">Two rigs.<br><em style="color:#c3c9ff">One mix.</em></h2>
+</div>
+<p style="font:400 clamp(15px,1.2vw,18px)/1.6 Archivo,sans-serif;color:#c4c6cf;max-width:380px;margin:0;justify-self:end;text-wrap:pretty">CDJs or turntables — swap the surface mid-set and nothing stops. Tracks, blend, stems and position all carry over.</p>
+</div>
+<div style="position:relative;margin-top:36px;border-radius:24px;overflow:hidden;background:#10101a;border:1px solid #22232e;animation:rise .8s ease both;animation-timeline:view();animation-range:entry 20% entry 60%">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 20px;border-bottom:1px solid #22232e;flex-wrap:wrap">
+<div style="display:flex;gap:6px;flex-wrap:wrap"><button onClick="{{ pick2 }}" style="{{ rig2Style }}">2 CDJs</button><button onClick="{{ pick4 }}" style="{{ rig4Style }}">4 CDJs</button><button onClick="{{ pickVinyl }}" style="{{ rigVinylStyle }}">Turntables</button></div>
+<span style="font:500 11px/1 Archivo,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#9a9ca8">{{ rigCaption }}</span>
+</div>
+<img src="assets/stage-four-cdjs.png" alt="The live 3D booth" style="display:block;width:100%;aspect-ratio:1276/430;object-fit:cover;object-position:center 40%">
+<img src="assets/waveforms-live.png" alt="Follow-the-mix waveforms" style="display:block;width:100%;border-top:1px solid #22232e;opacity:.9">
+</div>
+</div>
+</section>
+
+<section id="play" data-screen-label="02 Session" style="position:relative;background:#f3f3f5;color:#111117;padding:clamp(80px,12vh,160px) clamp(20px,4vw,56px);z-index:3;border-radius:36px 36px 0 0">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:40px;align-items:end;margin-bottom:40px">
+<div style="animation:rise .8s ease both;animation-timeline:view();animation-range:entry 0% entry 40%">
+<p style="font:500 11px/1 Archivo,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#4353d6;margin:0 0 22px">02 — Your session</p>
+<h2 style="font:300 clamp(56px,7.5vw,128px)/.9 Archivo,sans-serif;letter-spacing:-.045em;margin:0;text-wrap:balance">Your music.<br><em style="color:#4353d6">Your set.</em></h2>
+</div>
+<p style="font:400 clamp(15px,1.2vw,18px)/1.6 Archivo,sans-serif;color:#4a4b55;max-width:380px;margin:0;justify-self:end;text-wrap:pretty">Five steps on one surface. Add songs, let the booth analyze them, pick a pairing, line up a set, then play. The mixer opens when you want it.</p>
+</div>
+
+<nav aria-label="Session steps" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:8px;margin-bottom:16px">
+<sc-for list="{{ steps }}" as="s" hint-placeholder-count="5"><button onClick="{{ s.go }}" style="{{ s.style }}"><span style="font:400 30px/1 Archivo,sans-serif">{{ s.n }}</span><span style="font:500 13px Archivo,sans-serif">{{ s.label }}</span><span style="font:400 12px Archivo,sans-serif;opacity:.65">{{ s.sub }}</span></button></sc-for>
+</nav>
+
+<sc-if value="{{ isAdd }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="Step 1 Add music" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px">
+<div style="background:#fff;border-radius:24px;padding:28px;box-shadow:0 1px 0 #0000000d,0 24px 60px -30px #00000033;min-width:0;border:2px dashed #d7d8de;background:#f7f7f9;box-shadow:none;display:grid;gap:16px;align-content:center;justify-items:start"><p style="font:500 11px/1 Archivo,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#4353d6;margin:0">Step 1 · Add music</p><h3 style="font:300 clamp(30px,3vw,44px)/1 Archivo,sans-serif;letter-spacing:-.045em;margin:0;text-wrap:balance">Drop songs here.</h3><p style="font:400 15px/1.6 Archivo,sans-serif;color:#4a4b55;margin:0;max-width:400px;text-wrap:pretty">MP3, WAV, M4A. Files stay on this computer — nothing is uploaded.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button onClick="{{ addDemo }}" style="background:#4353d6;color:#fff;border:0;border-radius:999px;padding:14px 22px;font:500 13px Archivo,sans-serif;cursor:pointer;min-height:44px">Choose files</button><button onClick="{{ addDemo }}" style="border:1px solid #d7d8de;background:transparent;border-radius:999px;padding:12px 18px;font:500 13px Archivo,sans-serif;cursor:pointer;color:#111117;min-height:44px">Use the demo tracks</button></div></div>
+<div style="background:#fff;border-radius:24px;padding:28px;box-shadow:0 1px 0 #0000000d,0 24px 60px -30px #00000033;min-width:0;display:grid;gap:12px;align-content:start"><div style="display:flex;justify-content:space-between;font:500 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7a7c88"><span>In your crate</span><span>{{ crateCount }}</span></div><div style="display:grid;border-top:1px solid #e8e9ee"><sc-for list="{{ crate }}" as="t" hint-placeholder-count="3"><div style="grid-template-columns:minmax(0,1fr) auto;display:grid;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid #e8e9ee;font:400 15px Archivo,sans-serif"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ t.title }}</span><span style="{{ t.badge }}">{{ t.state }}</span></div></sc-for></div><button onClick="{{ goAnalyze }}" style="background:#111117;color:#f3f3f5;border:0;border-radius:999px;padding:14px 22px;font:500 13px Archivo,sans-serif;cursor:pointer;min-height:44px;justify-self:end;margin-top:8px">Next · Analyze →</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isAnalyze }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Step 2 Analyze" style="background:#fff;border-radius:24px;padding:28px;box-shadow:0 1px 0 #0000000d,0 24px 60px -30px #00000033;min-width:0;display:grid;gap:20px">
+<div style="display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap"><div><p style="font:500 11px/1 Archivo,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#4353d6;margin:0 0 10px">Step 2 · Analyze</p><h3 style="font:300 clamp(30px,3vw,44px)/1 Archivo,sans-serif;letter-spacing:-.045em;margin:0;text-wrap:balance">Tempo, key, stems.</h3></div><p style="font:400 14px/1.5 Archivo,sans-serif;color:#7a7c88;margin:0;max-width:380px;text-wrap:pretty">Beat grid and key are estimates. Stems split into drums, bass and melody so you can mute parts live.</p></div>
+<div style="display:grid;border-top:1px solid #e8e9ee"><div style="display:grid;grid-template-columns:minmax(0,2fr) repeat(3,minmax(0,1fr)) auto;gap:14px;padding:10px 0;border-bottom:1px solid #e8e9ee;font:500 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7a7c88"><span>Track</span><span>BPM</span><span>Key</span><span>Stems</span><span></span></div>
+<sc-for list="{{ analyzed }}" as="t" hint-placeholder-count="3"><div style="grid-template-columns:minmax(0,2fr) repeat(3,minmax(0,1fr)) auto;display:grid;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid #e8e9ee;font:400 15px Archivo,sans-serif"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ t.title }}</span><span>{{ t.bpm }}</span><span>{{ t.key }}</span><span style="{{ t.badge }}">{{ t.state }}</span><div style="height:4px;width:80px;background:#e8e9ee;border-radius:2px;position:relative"><span style="{{ t.bar }}"></span></div></div></sc-for></div>
+<div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><button onClick="{{ goAdd }}" style="border:1px solid #d7d8de;background:transparent;border-radius:999px;padding:12px 18px;font:500 13px Archivo,sans-serif;cursor:pointer;color:#111117;min-height:44px">← Add more</button><button onClick="{{ goRecs }}" style="background:#111117;color:#f3f3f5;border:0;border-radius:999px;padding:14px 22px;font:500 13px Archivo,sans-serif;cursor:pointer;min-height:44px">Next · Recommendations →</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isRecs }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Step 3 Recommendations" style="display:grid;gap:16px">
+<div style="padding:0 4px"><p style="font:500 11px/1 Archivo,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#4353d6;margin:0 0 10px">Step 3 · Recommendations</p><h3 style="font:300 clamp(30px,3vw,44px)/1 Archivo,sans-serif;letter-spacing:-.045em;margin:0;text-wrap:balance">Pairs that mix well.</h3></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px">
+<sc-for list="{{ recs }}" as="r" hint-placeholder-count="3"><article style="background:#fff;border-radius:24px;padding:28px;box-shadow:0 1px 0 #0000000d,0 24px 60px -30px #00000033;min-width:0;display:grid;gap:18px;align-content:space-between"><div style="display:grid;gap:8px"><span style="font:500 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7a7c88">{{ r.why }}</span><h4 style="font:500 19px/1.3 Archivo,sans-serif;letter-spacing:-.02em;margin:0">{{ r.a }} <span style="color:#4353d6">→</span> {{ r.b }}</h4><p style="font:400 14px/1.55 Archivo,sans-serif;color:#7a7c88;margin:0;text-wrap:pretty">{{ r.note }}</p></div><button onClick="{{ r.add }}" style="{{ r.style }}">{{ r.cta }}</button></article></sc-for>
+</div>
+<div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><button onClick="{{ goAnalyze }}" style="border:1px solid #d7d8de;background:transparent;border-radius:999px;padding:12px 18px;font:500 13px Archivo,sans-serif;cursor:pointer;color:#111117;min-height:44px">← Back</button><button onClick="{{ goPlaylist }}" style="background:#111117;color:#f3f3f5;border:0;border-radius:999px;padding:14px 22px;font:500 13px Archivo,sans-serif;cursor:pointer;min-height:44px">Next · Playlist →</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isPlaylist }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Step 4 Playlist" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px">
+<div style="background:#fff;border-radius:24px;padding:28px;box-shadow:0 1px 0 #0000000d,0 24px 60px -30px #00000033;min-width:0;display:grid;gap:16px;align-content:start"><div><p style="font:500 11px/1 Archivo,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#4353d6;margin:0 0 10px">Step 4 · Playlist</p><h3 style="font:300 clamp(30px,3vw,44px)/1 Archivo,sans-serif;letter-spacing:-.045em;margin:0;text-wrap:balance">Tonight's set.</h3></div><div style="display:grid;border-top:1px solid #e8e9ee"><sc-for list="{{ playlist }}" as="p" hint-placeholder-count="3"><div style="grid-template-columns:32px minmax(0,1fr) auto auto;display:grid;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid #e8e9ee;font:400 15px Archivo,sans-serif"><span style="font:400 22px/1 Archivo,sans-serif;color:#7a7c88">{{ p.n }}</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ p.title }}</span><span style="font:500 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7a7c88">{{ p.meta }}</span><button onClick="{{ p.remove }}" style="border:0;background:transparent;color:#7a7c88;cursor:pointer;font:18px Archivo,sans-serif;padding:6px;min-width:32px">×</button></div></sc-for></div><p style="font:400 13px/1.5 Archivo,sans-serif;color:#7a7c88;margin:0">{{ playlistHint }}</p></div>
+<div style="background:#fff;border-radius:24px;padding:28px;box-shadow:0 1px 0 #0000000d,0 24px 60px -30px #00000033;min-width:0;display:grid;gap:16px;align-content:start"><span style="font:500 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7a7c88">Add from your crate</span><div style="display:grid;border-top:1px solid #e8e9ee"><sc-for list="{{ crateForPlaylist }}" as="t" hint-placeholder-count="3"><div style="grid-template-columns:minmax(0,1fr) auto;display:grid;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid #e8e9ee;font:400 15px Archivo,sans-serif;padding:10px 0"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ t.title }}</span><button onClick="{{ t.add }}" style="{{ t.style }}">{{ t.cta }}</button></div></sc-for></div><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:8px"><button onClick="{{ goRecs }}" style="border:1px solid #d7d8de;background:transparent;border-radius:999px;padding:12px 18px;font:500 13px Archivo,sans-serif;cursor:pointer;color:#111117;min-height:44px">← Back</button><button onClick="{{ loadToDecks }}" style="background:#4353d6;color:#fff;border:0;border-radius:999px;padding:14px 22px;font:500 13px Archivo,sans-serif;cursor:pointer;min-height:44px">Load first two to decks →</button></div></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isPlay }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Step 5 Play" style="display:grid;gap:16px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><div style="display:flex;gap:4px;background:#e6e7ec;border-radius:999px;padding:4px"><button onClick="{{ modeFree }}" style="{{ freeStyle }}">Free play</button><button onClick="{{ modePractice }}" style="{{ practiceStyle }}">Practice a handoff</button></div><button onClick="{{ toggleMixer }}" style="border:1px solid #d7d8de;background:transparent;border-radius:999px;padding:12px 18px;font:500 13px Archivo,sans-serif;cursor:pointer;color:#111117;min-height:44px">{{ mixerLabel }}</button></div>
+<sc-if value="{{ isPractice }}" hint-placeholder-val="{{ false }}"><div style="background:#fff;border-radius:24px;padding:28px;box-shadow:0 1px 0 #0000000d,0 24px 60px -30px #00000033;min-width:0;background:#111117;color:#f3f3f5;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:24px;align-items:center"><div><p style="font:500 11px/1 Archivo,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#c3c9ff;margin:0 0 12px">The first handoff</p><h3 style="font:300 clamp(28px,3vw,42px)/1 Archivo,sans-serif;letter-spacing:-.045em;margin:0 0 10px;text-wrap:balance">Bring B in on bar 5. <em>Own it by bar 9.</em></h3><p style="font:400 14px/1.55 Archivo,sans-serif;color:#c4c6cf;margin:0;text-wrap:pretty">Start B at 8.00 s, finish the blend by 16.00 s. Retry resets both decks to the same bar.</p></div><div style="display:grid;gap:16px"><div style="position:relative;height:6px;background:#22232e;border-radius:3px"><span style="position:absolute;left:0;top:0;height:6px;width:42%;background:#8f9dff;border-radius:3px"></span><i style="position:absolute;left:50%;top:-5px;width:2px;height:16px;background:#f3f3f5"></i></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button style="background:#f3f3f5;color:#111117;border:0;border-radius:999px;padding:14px 22px;font:500 13px Archivo,sans-serif;cursor:pointer;min-height:44px">Start practice</button><button style="border:1px solid #34364a;background:transparent;color:#f3f3f5;border-radius:999px;padding:14px 20px;font:500 13px Archivo,sans-serif;cursor:pointer;min-height:44px">↻ Retry</button></div></div></div></sc-if>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px"><article style="background:#fff;border-radius:24px;padding:28px;box-shadow:0 1px 0 #0000000d,0 24px 60px -30px #00000033;min-width:0;display:grid;gap:22px">
+<header style="display:flex;align-items:center;justify-content:space-between;gap:16px"><div style="display:flex;gap:16px;align-items:center;min-width:0"><span style="font:400 44px/1 Archivo,sans-serif;color:#4353d6">{{ deckA.id }}</span><div style="min-width:0"><h3 style="font:500 20px/1.2 Archivo,sans-serif;letter-spacing:-.02em;margin:0 0 4px;overflow-wrap:anywhere">{{ deckA.title }}</h3><p style="font:500 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7a7c88;margin:0">{{ deckA.meta }}</p></div></div><button onClick="{{ goPlaylist }}" style="border:1px solid #d7d8de;background:transparent;border-radius:999px;padding:12px 18px;font:500 13px Archivo,sans-serif;cursor:pointer;color:#111117;min-height:44px">Swap</button></header>
+<div style="display:flex;gap:8px"><button style="flex:1;background:#111117;color:#f3f3f5;border:0;border-radius:999px;padding:14px 22px;font:500 13px Archivo,sans-serif;cursor:pointer;min-height:44px;padding:18px;min-height:56px">{{ deckA.transport }}</button><button style="border:1px solid #d7d8de;background:transparent;border-radius:999px;padding:12px 18px;font:500 13px Archivo,sans-serif;cursor:pointer;color:#111117;min-height:44px;padding:16px 22px;min-height:56px">Cue</button></div>
+<sc-if value="{{ mixerOpen }}" hint-placeholder-val="{{ false }}"><div style="display:grid;gap:18px;border-top:1px solid #e8e9ee;padding-top:20px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px 24px"><label style="font:500 12px Archivo,sans-serif;color:#4a4b55;display:block">Level <output style="float:right;color:#111117">80%</output><input type="range" min="0" max="100" defaultValue="80"></label><label style="font:500 12px Archivo,sans-serif;color:#4a4b55;display:block">Filter <output style="float:right;color:#111117">Open</output><input type="range" min="0" max="100" defaultValue="100"></label></div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px"><label style="font:500 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7a7c88">Low<output style="display:block;color:#111117;letter-spacing:0;text-transform:none;margin-top:4px">0.0 dB</output><input type="range" min="-12" max="12" defaultValue="0"></label><label style="font:500 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7a7c88">Mid<output style="display:block;color:#111117;letter-spacing:0;text-transform:none;margin-top:4px">0.0 dB</output><input type="range" min="-12" max="12" defaultValue="0"></label><label style="font:500 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7a7c88">High<output style="display:block;color:#111117;letter-spacing:0;text-transform:none;margin-top:4px">0.0 dB</output><input type="range" min="-12" max="12" defaultValue="0"></label></div>
+<label style="font:500 12px Archivo,sans-serif;color:#4a4b55;display:block">Tempo <output style="float:right;color:#111117">120.0 BPM · 0.0%</output><input type="range" min="84" max="116" step="0.1" defaultValue="100"></label>
+<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><span style="font:500 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7a7c88;margin-right:8px">Stems</span><button style="background:#e6e9ff;color:#2f3aa8;border:0;border-radius:999px;padding:8px 14px;font:500 12px Archivo,sans-serif;cursor:pointer">drums</button><button style="background:#e6e9ff;color:#2f3aa8;border:0;border-radius:999px;padding:8px 14px;font:500 12px Archivo,sans-serif;cursor:pointer">bass</button><button style="background:#e6e9ff;color:#2f3aa8;border:0;border-radius:999px;padding:8px 14px;font:500 12px Archivo,sans-serif;cursor:pointer">melody</button></div>
+</div></sc-if>
+</article><article style="background:#fff;border-radius:24px;padding:28px;box-shadow:0 1px 0 #0000000d,0 24px 60px -30px #00000033;min-width:0;display:grid;gap:22px">
+<header style="display:flex;align-items:center;justify-content:space-between;gap:16px"><div style="display:flex;gap:16px;align-items:center;min-width:0"><span style="font:400 44px/1 Archivo,sans-serif;color:#4353d6">{{ deckB.id }}</span><div style="min-width:0"><h3 style="font:500 20px/1.2 Archivo,sans-serif;letter-spacing:-.02em;margin:0 0 4px;overflow-wrap:anywhere">{{ deckB.title }}</h3><p style="font:500 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7a7c88;margin:0">{{ deckB.meta }}</p></div></div><button onClick="{{ goPlaylist }}" style="border:1px solid #d7d8de;background:transparent;border-radius:999px;padding:12px 18px;font:500 13px Archivo,sans-serif;cursor:pointer;color:#111117;min-height:44px">Swap</button></header>
+<div style="display:flex;gap:8px"><button style="flex:1;background:#111117;color:#f3f3f5;border:0;border-radius:999px;padding:14px 22px;font:500 13px Archivo,sans-serif;cursor:pointer;min-height:44px;padding:18px;min-height:56px">{{ deckB.transport }}</button><button style="border:1px solid #d7d8de;background:transparent;border-radius:999px;padding:12px 18px;font:500 13px Archivo,sans-serif;cursor:pointer;color:#111117;min-height:44px;padding:16px 22px;min-height:56px">Cue</button></div>
+<sc-if value="{{ mixerOpen }}" hint-placeholder-val="{{ false }}"><div style="display:grid;gap:18px;border-top:1px solid #e8e9ee;padding-top:20px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px 24px"><label style="font:500 12px Archivo,sans-serif;color:#4a4b55;display:block">Level <output style="float:right;color:#111117">80%</output><input type="range" min="0" max="100" defaultValue="80"></label><label style="font:500 12px Archivo,sans-serif;color:#4a4b55;display:block">Filter <output style="float:right;color:#111117">Open</output><input type="range" min="0" max="100" defaultValue="100"></label></div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px"><label style="font:500 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7a7c88">Low<output style="display:block;color:#111117;letter-spacing:0;text-transform:none;margin-top:4px">0.0 dB</output><input type="range" min="-12" max="12" defaultValue="0"></label><label style="font:500 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7a7c88">Mid<output style="display:block;color:#111117;letter-spacing:0;text-transform:none;margin-top:4px">0.0 dB</output><input type="range" min="-12" max="12" defaultValue="0"></label><label style="font:500 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7a7c88">High<output style="display:block;color:#111117;letter-spacing:0;text-transform:none;margin-top:4px">0.0 dB</output><input type="range" min="-12" max="12" defaultValue="0"></label></div>
+<label style="font:500 12px Archivo,sans-serif;color:#4a4b55;display:block">Tempo <output style="float:right;color:#111117">120.0 BPM · 0.0%</output><input type="range" min="84" max="116" step="0.1" defaultValue="100"></label>
+<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><span style="font:500 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7a7c88;margin-right:8px">Stems</span><button style="background:#e6e9ff;color:#2f3aa8;border:0;border-radius:999px;padding:8px 14px;font:500 12px Archivo,sans-serif;cursor:pointer">drums</button><button style="background:#e6e9ff;color:#2f3aa8;border:0;border-radius:999px;padding:8px 14px;font:500 12px Archivo,sans-serif;cursor:pointer">bass</button><button style="background:#e6e9ff;color:#2f3aa8;border:0;border-radius:999px;padding:8px 14px;font:500 12px Archivo,sans-serif;cursor:pointer">melody</button></div>
+</div></sc-if>
+</article></div>
+<div style="background:#111117;color:#f3f3f5;border-radius:24px;padding:28px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:24px;align-items:center"><span style="font:400 32px/1 Archivo,sans-serif;color:#c3c9ff">A</span><label style="font:500 12px Archivo,sans-serif;color:#9a9ca8;display:block;text-align:center">Blend <output style="color:#f3f3f5;margin-left:8px">50% B</output><input type="range" min="0" max="100" defaultValue="50" style="min-height:40px"></label><span style="font:400 32px/1 Archivo,sans-serif;color:#c3c9ff">B</span></div>
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font:500 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7a7c88;padding:0 8px"><span>Up next · {{ upNext }}</span><span style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><kbd style="font:500 11px Archivo,sans-serif;border:1px solid #d7d8de;border-radius:6px;padding:4px 7px;color:#111117">Q</kbd>A<kbd style="font:500 11px Archivo,sans-serif;border:1px solid #d7d8de;border-radius:6px;padding:4px 7px;color:#111117;margin-left:8px">P</kbd>B<kbd style="font:500 11px Archivo,sans-serif;border:1px solid #d7d8de;border-radius:6px;padding:4px 7px;color:#111117;margin-left:8px">← →</kbd>blend<kbd style="font:500 11px Archivo,sans-serif;border:1px solid #d7d8de;border-radius:6px;padding:4px 7px;color:#111117;margin-left:8px">R</kbd>retry</span></div>
+</div>
+</sc-if>
+</section>
+
+<section id="astra" data-screen-label="03 Astra" style="position:relative;background:#08080b;z-index:4;padding:clamp(80px,14vh,180px) clamp(20px,4vw,56px)">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:48px;align-items:center">
+<div style="animation:rise .8s ease both;animation-timeline:view();animation-range:entry 0% entry 40%">
+<p style="font:500 11px/1 Archivo,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#8f9dff;margin:0 0 22px">03 — Astra, backstage</p>
+<h2 style="font:300 clamp(56px,7.5vw,128px)/.9 Archivo,sans-serif;letter-spacing:-.045em;margin:0 0 30px;text-wrap:balance">Your taste.<br><em style="color:#c3c9ff">Your call.</em></h2>
+<p style="font:400 clamp(15px,1.2vw,18px)/1.6 Archivo,sans-serif;color:#c4c6cf;max-width:420px;margin:0;text-wrap:pretty">Ask, and Astra reads the decks — position, tempo, what's playing — then gives you one observation and one next move. It never touches the mixer.</p>
+</div>
+<div style="background:#10101a;border:1px solid #22232e;border-radius:24px;padding:28px;display:grid;gap:18px;animation:rise .8s ease both;animation-timeline:view();animation-range:entry 10% entry 50%">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><span style="font:500 11px/1 Archivo,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#9a9ca8">✳ Ask beside the decks</span><button onClick="{{ toggleVoice }}" style="{{ voiceStyle }}">{{ voiceLabel }}</button></div>
+<textarea value="{{ ask }}" onChange="{{ setAsk }}" rows="3" placeholder="Keep the energy low and leave the bass handoff to me…" style="width:100%;background:#08080b;border:1px solid #22232e;border-radius:16px;padding:16px;font:400 15px/1.5 Archivo,sans-serif;color:#f3f3f5;resize:vertical"></textarea>
+<div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ helpers }}" as="h" hint-placeholder-count="3"><button onClick="{{ h.pick }}" style="border:1px solid #22232e;background:transparent;color:#c4c6cf;border-radius:999px;padding:9px 14px;font:500 12px Archivo,sans-serif;cursor:pointer">{{ h.label }}</button></sc-for></div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span style="font:400 13px Archivo,sans-serif;color:#9a9ca8">{{ astraStatus }}</span><button style="background:#8f9dff;color:#0b0b18;border:0;border-radius:999px;padding:14px 22px;font:500 13px Archivo,sans-serif;cursor:pointer;min-height:44px">Ask Astra ↗</button></div>
+</div>
+</div>
+<div style="margin-top:clamp(64px,10vh,120px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px">
+<sc-for list="{{ values }}" as="v" hint-placeholder-count="3">
+<article style="border:1px solid #22232e;border-radius:24px;padding:28px;background:#0d0d14;min-height:240px;display:grid;align-content:space-between;gap:24px"><span style="font:400 36px/1 Archivo,sans-serif;color:#8f9dff">{{ v.n }}</span><div><h3 style="font:400 clamp(26px,2.4vw,34px)/1.05 Archivo,sans-serif;letter-spacing:-.02em;margin:0 0 12px">{{ v.title }}</h3><p style="font:400 14px/1.6 Archivo,sans-serif;color:#9a9ca8;margin:0;text-wrap:pretty">{{ v.body }}</p></div></article>
+</sc-for>
+</div>
+</section>
+
+<section id="together" data-screen-label="04 Together" style="position:relative;z-index:5;background:#8f9dff;color:#0b0b18;padding:clamp(80px,14vh,180px) clamp(20px,4vw,56px);border-radius:36px 36px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:48px;align-items:center">
+<div>
+<p style="font:500 11px/1 Archivo,sans-serif;letter-spacing:.32em;text-transform:uppercase;margin:0 0 22px;color:#262d8a">04 — The other side of Mixtape</p>
+<h2 style="font:300 clamp(56px,7.5vw,128px)/.9 Archivo,sans-serif;letter-spacing:-.045em;margin:0 0 30px;text-wrap:balance">Good music.<br><em>Better together.</em></h2>
+<p style="font:400 clamp(15px,1.2vw,18px)/1.6 Archivo,sans-serif;max-width:420px;margin:0 0 32px;text-wrap:pretty">Mixtape's charity jukebox turns song requests into giving on the dance floor. The Booth is the same feeling from the other side of the table.</p>
+<a href="https://www.ourmixtape.org" style="display:inline-flex;align-items:center;gap:16px;background:#0b0b18;color:#f3f3f5;border-radius:999px;padding:16px 24px;font:500 13px Archivo,sans-serif;min-height:48px">Meet the charity jukebox <span>↗</span></a>
+</div>
+<div aria-hidden="true" style="justify-self:center;width:min(100%,460px);background:#0b0b18;color:#f3f3f5;border-radius:20px;padding:28px;transform:rotate(-3deg);box-shadow:0 40px 80px -30px #0008">
+<div style="border:1px solid #2a2c48;border-radius:12px;padding:22px;display:flex;justify-content:space-between;align-items:start;gap:12px"><span style="font:400 34px/1 Archivo,sans-serif">Good people.<br>Groovy tunes.</span><b style="font:600 40px/1 Archivo,sans-serif;color:#ff7a1f">B</b></div>
+<div style="display:flex;justify-content:space-between;width:80%;height:46px;margin:24px auto 0;background:#1c1d33;border-radius:23px;padding:6px 10px;align-items:center"><span style="width:34px;height:34px;border-radius:50%;border:6px solid #ff7a1f"></span><span style="width:34px;height:34px;border-radius:50%;border:6px solid #ff7a1f"></span></div>
+<p style="font:500 11px/1.6 Archivo,sans-serif;letter-spacing:.14em;text-transform:uppercase;text-align:center;color:#9a9ca8;margin:22px 0 0">Request a song · Make some good</p>
+</div>
+</section>
+
+<footer style="position:relative;z-index:6;background:#08080b;padding:clamp(60px,10vh,120px) clamp(20px,4vw,56px) 32px;display:grid;gap:40px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap"><p style="font:300 clamp(34px,4vw,60px)/1 Archivo,sans-serif;letter-spacing:-.045em;margin:0">Enough reading. <em style="color:#c3c9ff">Find your first mix.</em></p><a href="#booth" style="display:inline-flex;align-items:center;gap:16px;background:#f3f3f5;color:#111117;border-radius:999px;padding:16px 24px;font:500 13px Archivo,sans-serif;min-height:48px">Back to the booth ↗</a></div>
+<p aria-hidden="true" style="font:600 clamp(80px,22vw,360px)/.85 Archivo,sans-serif;letter-spacing:-.06em;margin:0;color:#15151e">mixtape</p>
+<div style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font:500 11px/1.6 Archivo,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#6b6d78;border-top:1px solid #22232e;padding-top:20px"><span>Mixtape — The Booth · 2026</span><span>Local audio · Human-owned controls</span><a href="https://www.ourmixtape.org">Mixtape home ↗</a></div>
+</footer>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { rig: '4', ask: '', voice: false, step: 0, crate: [], playlist: [], mode: 'free', mixerOpen: false, decks: null };
+  demo = [
+    { id: 'afterglow', title: 'Afterglow Steps', bpm: '120.0', key: 'A min', stems: true },
+    { id: 'amber', title: 'Amber Current', bpm: '120.0', key: 'A min', stems: true },
+    { id: 'shooting', title: 'Shooting Stars', bpm: '124.0', key: 'F maj', stems: false },
+    { id: 'cirrus', title: 'Cirrus', bpm: '128.0', key: 'C min', stems: false }
+  ];
+  sessionVals() {
+    const { step, crate, playlist, mode, mixerOpen, decks } = this.state;
+    const meta = "font:500 11px Archivo,sans-serif;letter-spacing:.12em;text-transform:uppercase";
+    const badge = (bg, fg) => `${meta};background:${bg};color:${fg};padding:6px 10px;border-radius:999px;white-space:nowrap`;
+    const ready = badge('#e3f2e6', '#1f6b35'), pending = badge('#f3f3f5', '#4a4b55'), orig = badge('#f3f3f5', '#7a7c88');
+    const go = i => () => this.setState({ step: i });
+    const names = ['Add music', 'Analyze', 'Recommend', 'Playlist', 'Play'];
+    const subs = ['Drop files or use demos', 'Tempo · key · stems', 'Pairs that mix well', 'Line up the set', 'Decks, blend, practice'];
+    const tracks = crate.map(id => this.demo.find(t => t.id === id));
+    const inList = id => playlist.includes(id);
+    const smallBtn = on => `border:1px solid ${on ? '#e8e9ee' : '#d7d8de'};background:${on ? '#f3f3f5' : 'transparent'};color:${on ? '#7a7c88' : '#111117'};border-radius:999px;padding:9px 14px;font:500 12px Archivo,sans-serif;cursor:${on ? 'default' : 'pointer'}`;
+    const list = playlist.map(id => this.demo.find(t => t.id === id));
+    const d = decks || [list[0] || this.demo[0], list[1] || this.demo[1]];
+    const seg = on => `background:${on ? '#111117' : 'transparent'};color:${on ? '#f3f3f5' : '#4a4b55'};border:0;border-radius:999px;padding:12px 18px;font:500 13px Archivo,sans-serif;cursor:pointer;min-height:44px`;
+    return {
+      steps: names.map((label, i) => ({ n: `0${i + 1}`, label, sub: subs[i], go: go(i), style: `display:grid;gap:6px;justify-items:start;text-align:left;background:${i === step ? '#111117' : '#fff'};color:${i === step ? '#f3f3f5' : i < step ? '#111117' : '#7a7c88'};border:0;border-radius:20px;padding:18px 20px;cursor:pointer;min-height:104px;min-width:0;box-shadow:0 1px 0 #0000000d` })),
+      isAdd: step === 0, isAnalyze: step === 1, isRecs: step === 2, isPlaylist: step === 3, isPlay: step === 4,
+      goAdd: go(0), goAnalyze: go(1), goRecs: go(2), goPlaylist: go(3), goPlay: go(4),
+      addDemo: () => this.setState({ crate: this.demo.map(t => t.id) }),
+      crateCount: crate.length ? `${crate.length} tracks` : 'Empty',
+      crate: tracks.length ? tracks.map(t => ({ title: t.title, state: t.stems ? 'Ready' : 'Original', badge: t.stems ? ready : orig })) : [{ title: 'Nothing here yet — add a song or use the demos.', state: '', badge: '' }],
+      analyzed: (tracks.length ? tracks : this.demo.slice(0, 2)).map(t => ({ title: t.title, bpm: t.bpm, key: t.key, state: t.stems ? '3 stems' : 'Analyzing…', badge: t.stems ? ready : pending, bar: `position:absolute;left:0;top:0;height:4px;border-radius:2px;background:#4353d6;width:${t.stems ? 100 : 62}%` })),
+      recs: [
+        { a: 'Afterglow Steps', b: 'Amber Current', why: 'Same tempo · same key', note: 'Easiest first handoff. Both at 120 BPM in A minor; stems ready on both.', ids: ['afterglow', 'amber'] },
+        { a: 'Amber Current', b: 'Shooting Stars', why: '+4 BPM · compatible key', note: 'Nudge B\'s tempo down 3%. F major sits well over A minor.', ids: ['amber', 'shooting'] },
+        { a: 'Shooting Stars', b: 'Cirrus', why: '+4 BPM · key clash', note: 'Works if you cut B\'s melody stem until the drop.', ids: ['shooting', 'cirrus'] }
+      ].map(r => { const on = r.ids.every(inList); return { ...r, cta: on ? 'In playlist' : 'Add pair to playlist', style: smallBtn(on), add: () => { if (!on) this.setState({ playlist: [...playlist, ...r.ids.filter(id => !inList(id))] }); } }; }),
+      playlist: list.length ? list.map((t, i) => ({ n: `0${i + 1}`, title: t.title, meta: `${t.bpm} · ${t.key}`, remove: () => this.setState({ playlist: playlist.filter(id => id !== t.id) }) })) : [{ n: '—', title: 'Empty. Add a pair from Recommendations or your crate.', meta: '', remove: () => {} }],
+      playlistHint: list.length >= 2 ? 'The first two go to decks A and B. The rest queue up as "up next".' : 'Add at least two tracks to load the decks.',
+      crateForPlaylist: (tracks.length ? tracks : this.demo).map(t => { const on = inList(t.id); return { title: t.title, cta: on ? 'Added' : '+ Add', style: smallBtn(on), add: () => { if (!on) this.setState({ playlist: [...playlist, t.id] }); } }; }),
+      loadToDecks: () => this.setState({ decks: [list[0] || this.demo[0], list[1] || this.demo[1]], step: 4 }),
+      modeFree: () => this.setState({ mode: 'free' }), modePractice: () => this.setState({ mode: 'practice' }),
+      freeStyle: seg(mode === 'free'), practiceStyle: seg(mode === 'practice'), isPractice: mode === 'practice',
+      toggleMixer: () => this.setState({ mixerOpen: !mixerOpen }), mixerOpen, mixerLabel: mixerOpen ? 'Hide mixer' : 'Open mixer · level, EQ, tempo, stems',
+      deckA: { id: 'A', title: d[0].title, meta: `${d[0].bpm} BPM · ${d[0].key} · playing`, transport: 'Ⅱ Pause A' },
+      deckB: { id: 'B', title: d[1].title, meta: `${d[1].bpm} BPM · ${d[1].key} · cued`, transport: '▶ Play B' },
+      upNext: list[2] ? list[2].title : 'nothing queued'
+    };
+  }
+  renderVals() {
+    const { rig, ask, voice } = this.state;
+    const btn = on => `border:1px solid ${on ? '#8f9dff' : '#22232e'};background:${on ? '#8f9dff' : 'transparent'};color:${on ? '#0b0b18' : '#c4c6cf'};border-radius:999px;padding:10px 16px;font:500 12px Archivo,sans-serif;cursor:pointer`;
+    const caps = { '2': 'Two digital players · A / B', '4': 'Four digital players · A+C left / B+D right', vinyl: 'Vinyl surface · A / B · same live mix' };
+    const set = v => e => this.setState({ ask: v });
+    return {
+      ...this.sessionVals(),
+      pick2: () => this.setState({ rig: '2' }), pick4: () => this.setState({ rig: '4' }), pickVinyl: () => this.setState({ rig: 'vinyl' }),
+      rig2Style: btn(rig === '2'), rig4Style: btn(rig === '4'), rigVinylStyle: btn(rig === 'vinyl'), rigCaption: caps[rig],
+      decks: [
+        { id: 'A', title: 'Afterglow Steps', status: '1.7 s · playing', transport: 'Ⅱ Pause A', level: '80%', levelVal: 80, filter: '100%' },
+        { id: 'B', title: 'Afterglow Steps', status: '0.0 s · paused', transport: '▶ Play B', level: '80%', levelVal: 80, filter: '100%' }
+      ],
+      library: [
+        { deck: 'A', title: 'Afterglow Steps', meta: '120 BPM · 3 stems' },
+        { deck: 'B', title: 'Afterglow Steps', meta: '120 BPM · 3 stems' },
+        { deck: 'C', title: 'Amber Current', meta: '120 BPM · 3 stems' },
+        { deck: 'D', title: 'Afterglow Steps', meta: '120 BPM · 3 stems' }
+      ],
+      ask, setAsk: e => this.setState({ ask: e.target.value }),
+      helpers: [
+        { label: 'Handoff hint', pick: set('Give me one focused hint for this handoff.') },
+        { label: 'Two minutes left', pick: set('With two minutes left, suggest a feasible transition using the loaded decks.') },
+        { label: 'Keep it restrained', pick: set('Suggest a restrained next move. Leave the controls to me.') }
+      ],
+      voice, toggleVoice: () => this.setState({ voice: !voice }), voiceLabel: voice ? '■ Stop voice' : '◉ Voice',
+      voiceStyle: btn(voice),
+      astraStatus: voice ? 'Listening · headphones recommended' : 'Astra reads the current deck state. It never moves a control.',
+      values: [
+        { n: '01', title: 'Prepare, then play.', body: 'Load local tracks and validated stems. Your music stays on this machine.' },
+        { n: '02', title: 'Room to change.', body: 'Swap the rig, shape the sound, change direction mid-set. Every control is yours.' },
+        { n: '03', title: 'Find that moment.', body: 'Practice one handoff, inspect the timing, reset to the same bar and go again.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

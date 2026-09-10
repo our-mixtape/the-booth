@@ -1,0 +1,86 @@
+[
+  {
+    "id": "amber",
+    "title": "Amber Current",
+    "duration": 32,
+    "sampleRate": 24000,
+    "channels": 1,
+    "preparationVersion": 1,
+    "sourceOrigin": 0,
+    "bpm": 120,
+    "beatOrigin": 0,
+    "cues": [
+      0,
+      8,
+      16,
+      24
+    ],
+    "provenance": "fixture-known · original procedural synthesis",
+    "capabilities": [
+      "original-playable",
+      "fixture-grid",
+      "stems-available"
+    ],
+    "original": "/audio/amber.wav",
+    "sha256": "881d3b52cd07294ffaeaaf1a3d9cd02541a24e4a4113573cc9bd6ba1b9e9f825",
+    "stems": [
+      {
+        "name": "drums",
+        "file": "/audio/amber-drums.wav",
+        "sha256": "d609325d3a37cbaa57e4b1d753927f250319b878b5de293e65eb0c327edefe6a"
+      },
+      {
+        "name": "bass",
+        "file": "/audio/amber-bass.wav",
+        "sha256": "d14cfdd96d0c9ba6452950e8d030282ec60e66877515cace71ddb5c6c80e0bc6"
+      },
+      {
+        "name": "melody",
+        "file": "/audio/amber-melody.wav",
+        "sha256": "5d63b6703d55f2d09a81eee7aadcd4aaf730ea24e9090f85bcabb817f9c0e00e"
+      }
+    ]
+  },
+  {
+    "id": "afterglow",
+    "title": "Afterglow Steps",
+    "duration": 32,
+    "sampleRate": 24000,
+    "channels": 1,
+    "preparationVersion": 1,
+    "sourceOrigin": 0,
+    "bpm": 120,
+    "beatOrigin": 0,
+    "cues": [
+      0,
+      8,
+      16,
+      24
+    ],
+    "provenance": "fixture-known · original procedural synthesis",
+    "capabilities": [
+      "original-playable",
+      "fixture-grid",
+      "stems-available"
+    ],
+    "original": "/audio/afterglow.wav",
+    "sha256": "8fcca68e3fe0ee395247ffde2b458169e0d1606789f7881d1f842450cf79d9b6",
+    "stems": [
+      {
+        "name": "drums",
+        "file": "/audio/afterglow-drums.wav",
+        "sha256": "820183f5f3ff4a9764d04d6f1a86c5a6a0f180e124b69d416cfe1390dfff7cdd"
+      },
+      {
+        "name": "bass",
+        "file": "/audio/afterglow-bass.wav",
+        "sha256": "d14cfdd96d0c9ba6452950e8d030282ec60e66877515cace71ddb5c6c80e0bc6"
+      },
+      {
+        "name": "melody",
+        "file": "/audio/afterglow-melody.wav",
+        "sha256": "4bfcc6520d3dc5390757b75f6052e4fe891872f4b8ad4cb18c8a9f77d95c42d3"
+      }
+    ]
+  }
+]

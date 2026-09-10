@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "trebleCutRMS": 0.2835223378608565,
+  "openRMS": 0.56568484786951,
+  "mutedRMS": 0,
+  "darkRMS": 0.0010002034183530335,
+  "fixtureRMS": 0.04158027656217685,
+  "peak": 0.31192755699157715,
+  "checks": [
+    "actual gain routing",
+    "low-pass attenuation",
+    "six decoded fixture stems",
+    "equal-power handoff",
+    "non-silent unclipped mix"
+  ],
+  "sequence": "0–4 A; 4–8 A→B; 9–10 B filter closes; 10–12 dark B"
+}

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#fff7e6;color:#2a1f3d;font-family:Fredoka,'Trebuchet MS',sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}a:hover{color:#ff6b4a}
+*{box-sizing:border-box}
+input[type=range]{width:100%;accent-color:#ff6b4a;margin:10px 0 0;min-height:36px}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</helmet>
+<main data-screen-label="For Kids" style="min-width:0;overflow-x:clip">
+
+<header style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px clamp(16px,4vw,48px);background:#fff7e6f2;backdrop-filter:blur(8px)">
+<a href="#top" style="font:700 26px/1 Fredoka,sans-serif;letter-spacing:-.02em;white-space:nowrap">mixtape <span style="color:#ff6b4a">booth</span></a>
+<nav style="display:flex;gap:8px;flex-wrap:wrap;justify-content:end"><a href="#booth" style="background:#fff;border:2px solid #2a1f3d;border-radius:999px;padding:12px 18px;font:600 15px Fredoka,sans-serif;min-height:44px;display:inline-flex;align-items:center">The decks</a><a href="#play" style="background:#fff;border:2px solid #2a1f3d;border-radius:999px;padding:12px 18px;font:600 15px Fredoka,sans-serif;min-height:44px;display:inline-flex;align-items:center">Play</a><a href="#astra" style="background:#fff;border:2px solid #2a1f3d;border-radius:999px;padding:12px 18px;font:600 15px Fredoka,sans-serif;min-height:44px;display:inline-flex;align-items:center">Ask Astra</a></nav>
+</header>
+
+<section id="top" data-screen-label="Hero" style="position:relative;min-height:calc(100vh - 76px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:32px;align-items:center;padding:clamp(32px,6vh,80px) clamp(16px,4vw,48px);overflow:hidden">
+<div aria-hidden="true" style="position:absolute;width:38vmax;height:38vmax;border-radius:50%;background:#ffd166;right:-10vmax;top:-8vmax;z-index:0"></div>
+<div aria-hidden="true" style="position:absolute;width:22vmax;height:22vmax;border-radius:50%;background:#7bd3ea;left:-8vmax;bottom:-6vmax;z-index:0"></div>
+<div style="position:relative;z-index:1;animation:pop .6s ease both">
+<p style="display:inline-flex;align-items:center;gap:10px;background:#fff;border:2px solid #2a1f3d;border-radius:999px;padding:10px 16px;font:600 15px Fredoka,sans-serif;margin:0 0 24px;white-space:nowrap">🎧 A DJ booth you can play</p>
+<h1 style="font:700 clamp(56px,9vw,140px)/.95 Fredoka,sans-serif;letter-spacing:-.03em;margin:0 0 24px;text-wrap:balance">Make the<br><span style="color:#ff6b4a">music</span> move.</h1>
+<p style="font:400 clamp(18px,1.6vw,24px)/1.45 Fredoka,sans-serif;color:#4b405e;max-width:460px;margin:0 0 32px;text-wrap:pretty">Press play. Slide the big fader. Turn a song into two songs. No sign-up, no wrong answers — just sound.</p>
+<div style="display:flex;gap:12px;flex-wrap:wrap"><a href="#booth" style="display:inline-flex;align-items:center;gap:12px;background:#ff6b4a;color:#fff;border:2px solid #2a1f3d;border-radius:999px;padding:18px 28px;font:600 20px Fredoka,sans-serif;min-height:60px;box-shadow:4px 4px 0 #2a1f3d">▶ Start playing</a><a href="#astra" style="display:inline-flex;align-items:center;gap:12px;background:#fff;color:#2a1f3d;border:2px solid #2a1f3d;border-radius:999px;padding:18px 28px;font:600 20px Fredoka,sans-serif;min-height:60px;box-shadow:4px 4px 0 #2a1f3d">Meet Astra</a></div>
+</div>
+<div style="position:relative;z-index:1;justify-self:center;width:100%;max-width:640px;animation:bob 5s ease-in-out infinite">
+<div style="background:#fff;border:3px solid #2a1f3d;border-radius:32px;padding:16px;box-shadow:8px 8px 0 #2a1f3d;overflow:hidden"><img src="assets/stage-four-cdjs.png" alt="The DJ booth" style="display:block;width:100%;aspect-ratio:1276/500;object-fit:cover;object-position:center 40%;border-radius:20px"></div>
+<span style="position:absolute;top:-18px;right:-8px;background:#ffd166;border:2px solid #2a1f3d;border-radius:999px;padding:10px 16px;font:600 15px Fredoka,sans-serif;transform:rotate(6deg)">✳ Always your hands</span>
+</div>
+</section>
+
+<section id="booth" data-screen-label="01 Pick your decks" style="padding:clamp(56px,10vh,120px) clamp(16px,4vw,48px);background:#fff;border-top:3px solid #2a1f3d;border-bottom:3px solid #2a1f3d">
+<div style="display:flex;align-items:center;gap:16px;margin-bottom:12px"><span style="width:56px;height:56px;border-radius:50%;background:#7bd3ea;border:2px solid #2a1f3d;display:grid;place-items:center;font:700 24px Fredoka,sans-serif">1</span><h2 style="font:700 clamp(36px,5vw,72px)/1 Fredoka,sans-serif;letter-spacing:-.02em;margin:0">Pick your decks</h2></div>
+<p style="font:400 clamp(17px,1.4vw,21px)/1.45 Fredoka,sans-serif;color:#4b405e;max-width:560px;margin:0 0 28px;text-wrap:pretty">Big round players or spinning records? Switch anytime — the music keeps going.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px;margin-bottom:24px">
+<button onClick="{{ pick2 }}" style="{{ rig2Style }}"><span style="font-size:40px;line-height:1">◉◉</span><span>2 players</span><small style="font:400 15px Fredoka,sans-serif;opacity:.75">Nice and simple</small></button>
+<button onClick="{{ pick4 }}" style="{{ rig4Style }}"><span style="font-size:40px;line-height:1">◉◉◉◉</span><span>4 players</span><small style="font:400 15px Fredoka,sans-serif;opacity:.75">Room for more</small></button>
+<button onClick="{{ pickVinyl }}" style="{{ rigVinylStyle }}"><span style="font-size:40px;line-height:1">◎◎</span><span>Records</span><small style="font:400 15px Fredoka,sans-serif;opacity:.75">Spinning vinyl</small></button>
+</div>
+<div style="border:3px solid #2a1f3d;border-radius:32px;overflow:hidden;background:#1c2524;box-shadow:8px 8px 0 #2a1f3d">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;background:#ffd166;border-bottom:3px solid #2a1f3d;font:600 16px Fredoka,sans-serif;flex-wrap:wrap"><span>{{ rigName }}</span><span>Drag a slider · Tap play</span></div>
+<img src="assets/stage-four-cdjs.png" alt="The live 3D booth" style="display:block;width:100%;aspect-ratio:1276/420;object-fit:cover;object-position:center 42%">
+</div>
+</section>
+
+<section id="play" data-screen-label="02 Play" style="padding:clamp(56px,10vh,120px) clamp(16px,4vw,48px);background:#e8f7fb">
+<div style="display:flex;align-items:center;gap:16px;margin-bottom:12px"><span style="width:56px;height:56px;border-radius:50%;background:#ffd166;border:2px solid #2a1f3d;display:grid;place-items:center;font:700 24px Fredoka,sans-serif">2</span><h2 style="font:700 clamp(36px,5vw,72px)/1 Fredoka,sans-serif;letter-spacing:-.02em;margin:0">Play two songs</h2></div>
+<p style="font:400 clamp(17px,1.4vw,21px)/1.45 Fredoka,sans-serif;color:#4b405e;max-width:560px;margin:0 0 28px;text-wrap:pretty">Each song has its own deck. Press play, make it louder or softer, then slide between them.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px">
+<sc-for list="{{ decks }}" as="d" hint-placeholder-count="2">
+<article style="{{ d.cardStyle }}">
+<header style="display:flex;align-items:center;gap:14px"><span style="width:64px;height:64px;border-radius:50%;background:#fff;border:2px solid #2a1f3d;display:grid;place-items:center;font:700 30px Fredoka,sans-serif;flex-shrink:0">{{ d.id }}</span><div style="min-width:0"><h3 style="font:600 22px/1.2 Fredoka,sans-serif;margin:0 0 2px;overflow-wrap:anywhere">{{ d.title }}</h3><p style="font:400 15px Fredoka,sans-serif;margin:0;opacity:.75">{{ d.status }}</p></div></header>
+<div style="display:grid;grid-template-columns:2fr 1fr;gap:10px"><button style="{{ d.playStyle }}">{{ d.transport }}</button><button style="background:#fff;color:#2a1f3d;border:2px solid #2a1f3d;border-radius:999px;padding:16px;font:600 18px Fredoka,sans-serif;cursor:pointer;min-height:60px">⏮ Start</button></div>
+<label style="font:600 16px Fredoka,sans-serif;display:block">🔊 Loud <output style="float:right;font-weight:400">{{ d.level }}</output><input type="range" min="0" max="100" defaultValue="{{ d.levelVal }}"></label>
+<label style="font:600 16px Fredoka,sans-serif;display:block">🌫 Muffle <output style="float:right;font-weight:400">Clear</output><input type="range" min="0" max="100" defaultValue="100"></label>
+<div><span style="font:600 16px Fredoka,sans-serif;display:block;margin-bottom:10px">Turn parts on and off</span><div style="display:flex;gap:8px;flex-wrap:wrap"><button style="background:#fff;color:#2a1f3d;border:2px solid #2a1f3d;border-radius:999px;padding:12px 18px;font:600 16px Fredoka,sans-serif;cursor:pointer;min-height:48px;white-space:nowrap">🥁 Drums</button><button style="background:#fff;color:#2a1f3d;border:2px solid #2a1f3d;border-radius:999px;padding:12px 18px;font:600 16px Fredoka,sans-serif;cursor:pointer;min-height:48px;white-space:nowrap">🎸 Bass</button><button style="background:#fff;color:#2a1f3d;border:2px solid #2a1f3d;border-radius:999px;padding:12px 18px;font:600 16px Fredoka,sans-serif;cursor:pointer;min-height:48px;white-space:nowrap">🎹 Melody</button></div></div>
+<button style="background:transparent;color:#2a1f3d;border:2px dashed #2a1f3d;border-radius:999px;padding:12px;font:600 16px Fredoka,sans-serif;cursor:pointer;min-height:48px">Choose a different song</button>
+</article>
+</sc-for>
+<div style="grid-column:1/-1;background:#fff;border:3px solid #2a1f3d;border-radius:32px;padding:24px clamp(20px,3vw,40px);box-shadow:8px 8px 0 #2a1f3d;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:20px;align-items:center">
+<span style="width:64px;height:64px;border-radius:50%;background:#ff6b4a;color:#fff;border:2px solid #2a1f3d;display:grid;place-items:center;font:700 30px Fredoka,sans-serif">A</span>
+<label style="font:600 18px Fredoka,sans-serif;display:block;text-align:center">Slide between the songs<input type="range" min="0" max="100" defaultValue="50" style="min-height:48px"></label>
+<span style="width:64px;height:64px;border-radius:50%;background:#7bd3ea;border:2px solid #2a1f3d;display:grid;place-items:center;font:700 30px Fredoka,sans-serif">B</span>
+</div>
+</div>
+
+<div style="margin-top:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px">
+<article style="background:#ffd166;border:3px solid #2a1f3d;border-radius:32px;padding:28px;box-shadow:8px 8px 0 #2a1f3d;display:grid;gap:16px;align-content:start">
+<p style="display:inline-flex;width:fit-content;background:#fff;border:2px solid #2a1f3d;border-radius:999px;padding:8px 14px;font:600 14px Fredoka,sans-serif;margin:0;white-space:nowrap">⭐ Challenge</p>
+<h3 style="font:700 clamp(28px,3vw,42px)/1.05 Fredoka,sans-serif;margin:0;text-wrap:balance">Bring in song B<br>right on the beat.</h3>
+<p style="font:400 17px/1.45 Fredoka,sans-serif;margin:0;text-wrap:pretty">Wait for the marker, press play on B, then slide across. Miss it? Tap retry and both songs jump back to the start.</p>
+<div style="position:relative;height:14px;background:#fff;border:2px solid #2a1f3d;border-radius:8px"><span style="position:absolute;left:0;top:0;bottom:0;width:42%;background:#ff6b4a;border-radius:6px 0 0 6px"></span><i style="position:absolute;left:50%;top:-8px;width:4px;height:26px;background:#2a1f3d;border-radius:2px"></i></div>
+<div style="display:flex;gap:10px;flex-wrap:wrap"><button style="background:#2a1f3d;color:#fff;border:2px solid #2a1f3d;border-radius:999px;padding:16px 26px;font:600 18px Fredoka,sans-serif;cursor:pointer;min-height:56px">Start challenge</button><button style="background:#fff;color:#2a1f3d;border:2px solid #2a1f3d;border-radius:999px;padding:16px 22px;font:600 18px Fredoka,sans-serif;cursor:pointer;min-height:56px">↻ Retry</button></div>
+</article>
+<article style="background:#fff;border:3px solid #2a1f3d;border-radius:32px;padding:28px;box-shadow:8px 8px 0 #2a1f3d;display:grid;gap:16px;align-content:start">
+<p style="display:inline-flex;width:fit-content;background:#e8f7fb;border:2px solid #2a1f3d;border-radius:999px;padding:8px 14px;font:600 14px Fredoka,sans-serif;margin:0;white-space:nowrap">🎵 Your songs</p>
+<h3 style="font:700 clamp(28px,3vw,42px)/1.05 Fredoka,sans-serif;margin:0">Pick a song for each deck.</h3>
+<div style="display:grid;gap:10px">
+<sc-for list="{{ library }}" as="t" hint-placeholder-count="4">
+<button style="display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px 14px;border:2px solid #2a1f3d;border-radius:20px;background:#fff7e6;font:500 17px Fredoka,sans-serif;text-align:left;cursor:pointer;min-height:64px;color:#2a1f3d"><span style="width:44px;height:44px;border-radius:50%;background:#fff;border:2px solid #2a1f3d;display:grid;place-items:center;font-weight:700">{{ t.deck }}</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ t.title }}</span><span style="font:400 14px Fredoka,sans-serif;opacity:.7">{{ t.meta }}</span></button>
+</sc-for>
+</div>
+<button style="background:transparent;color:#2a1f3d;border:2px dashed #2a1f3d;border-radius:20px;padding:16px;font:600 17px Fredoka,sans-serif;cursor:pointer;min-height:56px;white-space:nowrap">＋ Add a song from this computer</button>
+</article>
+</div>
+</section>
+
+<section id="astra" data-screen-label="03 Ask Astra" style="padding:clamp(56px,10vh,120px) clamp(16px,4vw,48px);background:#fff;border-top:3px solid #2a1f3d;border-bottom:3px solid #2a1f3d">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:40px;align-items:center">
+<div>
+<div style="display:flex;align-items:center;gap:16px;margin-bottom:12px"><span style="width:56px;height:56px;border-radius:50%;background:#ff6b4a;color:#fff;border:2px solid #2a1f3d;display:grid;place-items:center;font:700 24px Fredoka,sans-serif">3</span><h2 style="font:700 clamp(36px,5vw,72px)/1 Fredoka,sans-serif;letter-spacing:-.02em;margin:0">Stuck? Ask Astra</h2></div>
+<p style="font:400 clamp(17px,1.4vw,21px)/1.45 Fredoka,sans-serif;color:#4b405e;max-width:520px;margin:0;text-wrap:pretty">Astra is your DJ buddy. It listens to what your decks are doing and gives you one tip at a time. It never grabs the controls — that's your job.</p>
+</div>
+<div style="background:#e8f7fb;border:3px solid #2a1f3d;border-radius:32px;padding:28px;box-shadow:8px 8px 0 #2a1f3d;display:grid;gap:16px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span style="font:600 18px Fredoka,sans-serif">✳ What do you want to try?</span><button onClick="{{ toggleVoice }}" style="{{ voiceStyle }}">{{ voiceLabel }}</button></div>
+<textarea value="{{ ask }}" onChange="{{ setAsk }}" rows="3" placeholder="How do I make the drums sound bigger?" style="width:100%;background:#fff;border:2px solid #2a1f3d;border-radius:20px;padding:16px;font:400 18px/1.4 Fredoka,sans-serif;color:#2a1f3d;resize:vertical"></textarea>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ helpers }}" as="h" hint-placeholder-count="3"><button onClick="{{ h.pick }}" style="background:#fff;color:#2a1f3d;border:2px solid #2a1f3d;border-radius:999px;padding:12px 18px;font:600 15px Fredoka,sans-serif;cursor:pointer;min-height:48px">{{ h.label }}</button></sc-for></div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span style="font:400 15px Fredoka,sans-serif;color:#4b405e">{{ astraStatus }}</span><button style="background:#ff6b4a;color:#fff;border:2px solid #2a1f3d;border-radius:999px;padding:16px 26px;font:600 18px Fredoka,sans-serif;cursor:pointer;min-height:56px;box-shadow:4px 4px 0 #2a1f3d">Ask Astra →</button></div>
+</div>
+</div>
+<div style="margin-top:clamp(48px,8vh,96px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:20px">
+<sc-for list="{{ values }}" as="v" hint-placeholder-count="3">
+<article style="{{ v.style }}"><span style="font-size:44px;line-height:1">{{ v.icon }}</span><div><h3 style="font:700 clamp(24px,2.2vw,32px)/1.1 Fredoka,sans-serif;margin:0 0 8px">{{ v.title }}</h3><p style="font:400 16px/1.45 Fredoka,sans-serif;margin:0;color:#4b405e;text-wrap:pretty">{{ v.body }}</p></div></article>
+</sc-for>
+</div>
+</section>
+
+<section id="together" data-screen-label="04 Together" style="padding:clamp(56px,10vh,120px) clamp(16px,4vw,48px);background:#ff6b4a;color:#fff;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:40px;align-items:center">
+<div>
+<p style="display:inline-flex;background:#fff;color:#2a1f3d;border:2px solid #2a1f3d;border-radius:999px;padding:8px 14px;font:600 14px Fredoka,sans-serif;margin:0 0 20px;white-space:nowrap">💛 The other side of Mixtape</p>
+<h2 style="font:700 clamp(40px,5.5vw,80px)/.98 Fredoka,sans-serif;letter-spacing:-.02em;margin:0 0 20px;text-wrap:balance">Good music.<br>Better together.</h2>
+<p style="font:400 clamp(17px,1.4vw,21px)/1.45 Fredoka,sans-serif;max-width:480px;margin:0 0 28px;text-wrap:pretty">Mixtape's jukebox lets people pick a song and give to a good cause. The Booth is where you learn to play the songs yourself.</p>
+<a href="https://www.ourmixtape.org" style="display:inline-flex;align-items:center;gap:12px;background:#2a1f3d;color:#fff;border:2px solid #2a1f3d;border-radius:999px;padding:18px 28px;font:600 18px Fredoka,sans-serif;min-height:60px;box-shadow:4px 4px 0 #fff">Visit the jukebox →</a>
+</div>
+<div aria-hidden="true" style="justify-self:center;width:min(100%,440px);background:#ffd166;color:#2a1f3d;border:3px solid #2a1f3d;border-radius:28px;padding:24px;transform:rotate(-3deg);box-shadow:8px 8px 0 #2a1f3d">
+<div style="border:2px solid #2a1f3d;border-radius:16px;padding:20px;background:#fff;display:flex;justify-content:space-between;align-items:start;gap:12px"><span style="font:700 30px/1 Fredoka,sans-serif">Good people.<br>Groovy tunes.</span><b style="font:700 44px/1 Fredoka,sans-serif;color:#ff6b4a">B</b></div>
+<div style="display:flex;justify-content:space-between;width:80%;height:52px;margin:22px auto 0;background:#2a1f3d;border-radius:26px;padding:6px 10px;align-items:center"><span style="width:40px;height:40px;border-radius:50%;border:8px solid #7bd3ea"></span><span style="width:40px;height:40px;border-radius:50%;border:8px solid #7bd3ea"></span></div>
+</div>
+</section>
+
+<footer style="padding:clamp(40px,7vh,80px) clamp(16px,4vw,48px) 24px;display:grid;gap:28px;background:#fff7e6">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap"><p style="font:700 clamp(30px,4vw,56px)/1 Fredoka,sans-serif;letter-spacing:-.02em;margin:0">Ready? <span style="color:#ff6b4a">Go make some noise.</span></p><a href="#booth" style="display:inline-flex;align-items:center;gap:12px;background:#ff6b4a;color:#fff;border:2px solid #2a1f3d;border-radius:999px;padding:18px 28px;font:600 18px Fredoka,sans-serif;min-height:60px;box-shadow:4px 4px 0 #2a1f3d">▶ Back to the decks</a></div>
+<div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font:500 15px Fredoka,sans-serif;color:#4b405e;border-top:2px solid #2a1f3d;padding-top:18px"><span>Mixtape — The Booth · 2026</span><span>Your songs stay on your computer · Grown-ups: headphones for voice</span><a href="https://www.ourmixtape.org">Mixtape home →</a></div>
+</footer>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { rig: '2', ask: '', voice: false };
+  renderVals() {
+    const { rig, ask, voice } = this.state;
+    const tile = on => `display:grid;gap:8px;justify-items:start;text-align:left;background:${on ? '#ffd166' : '#fff'};color:#2a1f3d;border:3px solid #2a1f3d;border-radius:28px;padding:24px;font:600 22px Fredoka,sans-serif;cursor:pointer;min-height:140px;box-shadow:${on ? '8px 8px 0 #2a1f3d' : '4px 4px 0 #2a1f3d'};transform:${on ? 'translate(-2px,-2px)' : 'none'};transition:all .15s`;
+    const names = { '2': 'Two players · A and B', '4': 'Four players · A B C D', vinyl: 'Two records · A and B' };
+    const set = v => () => this.setState({ ask: v });
+    const card = bg => `background:${bg};border:3px solid #2a1f3d;border-radius:32px;padding:24px;box-shadow:8px 8px 0 #2a1f3d;display:grid;gap:20px;min-width:0`;
+    return {
+      pick2: () => this.setState({ rig: '2' }), pick4: () => this.setState({ rig: '4' }), pickVinyl: () => this.setState({ rig: 'vinyl' }),
+      rig2Style: tile(rig === '2'), rig4Style: tile(rig === '4'), rigVinylStyle: tile(rig === 'vinyl'), rigName: names[rig],
+      decks: [
+        { id: 'A', title: 'Afterglow Steps', status: 'Playing · 1.7 s', transport: '⏸ Pause', level: 'Loud', levelVal: 80, cardStyle: card('#ffe3d9'), playStyle: 'background:#ff6b4a;color:#fff;border:2px solid #2a1f3d;border-radius:999px;padding:16px;font:600 20px Fredoka,sans-serif;cursor:pointer;min-height:60px;box-shadow:4px 4px 0 #2a1f3d' },
+        { id: 'B', title: 'Amber Current', status: 'Ready · 0.0 s', transport: '▶ Play', level: 'Loud', levelVal: 80, cardStyle: card('#d9f1f8'), playStyle: 'background:#7bd3ea;color:#2a1f3d;border:2px solid #2a1f3d;border-radius:999px;padding:16px;font:600 20px Fredoka,sans-serif;cursor:pointer;min-height:60px;box-shadow:4px 4px 0 #2a1f3d' }
+      ],
+      library: [
+        { deck: 'A', title: 'Afterglow Steps', meta: '120 BPM' },
+        { deck: 'B', title: 'Amber Current', meta: '120 BPM' },
+        { deck: 'C', title: 'Afterglow Steps', meta: '120 BPM' },
+        { deck: 'D', title: 'Amber Current', meta: '120 BPM' }
+      ],
+      ask, setAsk: e => this.setState({ ask: e.target.value }),
+      helpers: [
+        { label: 'Give me a tip', pick: set('Give me one tip for switching songs.') },
+        { label: 'Make it smooth', pick: set('How do I make the change sound smooth?') },
+        { label: 'What next?', pick: set('What should I try next?') }
+      ],
+      toggleVoice: () => this.setState({ voice: !voice }), voiceLabel: voice ? '■ Stop talking' : '🎙 Talk instead',
+      voiceStyle: `white-space:nowrap;background:${voice ? '#ff6b4a' : '#fff'};color:${voice ? '#fff' : '#2a1f3d'};border:2px solid #2a1f3d;border-radius:999px;padding:12px 18px;font:600 15px Fredoka,sans-serif;cursor:pointer;min-height:48px`,
+      astraStatus: voice ? 'Listening… say what you want to try' : 'Astra only gives tips. You stay in charge.',
+      values: [
+        { icon: '🎵', title: 'Pick your songs', body: 'Use the ones already here, or add your own from this computer.', style: 'background:#fff7e6;border:3px solid #2a1f3d;border-radius:28px;padding:24px;display:grid;gap:14px;align-content:start;box-shadow:4px 4px 0 #2a1f3d' },
+        { icon: '🎚', title: 'Change anything', body: 'Louder, softer, drums off, records instead of players. Nothing breaks.', style: 'background:#e8f7fb;border:3px solid #2a1f3d;border-radius:28px;padding:24px;display:grid;gap:14px;align-content:start;box-shadow:4px 4px 0 #2a1f3d' },
+        { icon: '🔁', title: 'Try again', body: 'Every challenge starts from the same spot, so you can practice until it clicks.', style: 'background:#ffe3d9;border:3px solid #2a1f3d;border-radius:28px;padding:24px;display:grid;gap:14px;align-content:start;box-shadow:4px 4px 0 #2a1f3d' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

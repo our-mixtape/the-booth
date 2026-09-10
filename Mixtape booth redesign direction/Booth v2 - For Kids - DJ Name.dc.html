@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#fff7e6;color:#2a1f3d;font-family:Fredoka,'Trebuchet MS',sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}a:hover{color:#ff6b4a}
+*{box-sizing:border-box}
+input[type=text]::placeholder{color:#9a91a8}
+@keyframes pop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+@keyframes wiggle{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</helmet>
+<main data-screen-label="DJ name flow" style="min-height:100vh;display:grid;grid-template-rows:auto 1fr;overflow-x:clip;position:relative">
+<div aria-hidden="true" style="position:absolute;width:38vmax;height:38vmax;border-radius:50%;background:#ffd166;right:-12vmax;top:-10vmax;z-index:0"></div>
+<div aria-hidden="true" style="position:absolute;width:24vmax;height:24vmax;border-radius:50%;background:#7bd3ea;left:-9vmax;bottom:-8vmax;z-index:0"></div>
+
+<header style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px clamp(16px,4vw,48px)">
+<a href="#" style="font:700 26px/1 Fredoka,sans-serif;letter-spacing:-.02em;white-space:nowrap">mixtape <span style="color:#ff6b4a">booth</span></a>
+<div style="display:flex;gap:8px;align-items:center">
+<sc-for list="{{ steps }}" as="s" hint-placeholder-count="3"><span style="{{ s.style }}">{{ s.n }}</span></sc-for>
+</div>
+</header>
+
+<section style="position:relative;z-index:1;display:grid;place-items:center;padding:clamp(16px,4vh,48px) clamp(16px,4vw,48px) clamp(40px,8vh,96px)">
+<div style="width:100%;max-width:720px;display:grid;gap:24px">
+
+<sc-if value="{{ isName }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="Step 1 name" style="background:#fff;border:3px solid #2a1f3d;border-radius:32px;padding:clamp(24px,4vw,44px);box-shadow:8px 8px 0 #2a1f3d;display:grid;gap:22px;animation:pop .4s ease both">
+<p style="display:inline-flex;width:fit-content;background:#ffd166;border:2px solid #2a1f3d;border-radius:999px;padding:8px 14px;font:600 14px Fredoka,sans-serif;margin:0">Step 1 of 3</p>
+<h1 style="font:700 clamp(40px,6vw,72px)/1 Fredoka,sans-serif;letter-spacing:-.02em;margin:0;text-wrap:balance">Every DJ needs a name.<br><span style="color:#ff6b4a">What's yours?</span></h1>
+<label style="display:grid;gap:8px;font:600 18px Fredoka,sans-serif">Your first name<input type="text" value="{{ name }}" onChange="{{ setName }}" onKeyDown="{{ enterNext }}" placeholder="Maia" autoFocus="{{ true }}" style="width:100%;border:3px solid #2a1f3d;border-radius:20px;padding:18px 20px;font:600 28px Fredoka,sans-serif;color:#2a1f3d;background:#fff7e6;min-height:72px"></label>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span style="font:400 15px Fredoka,sans-serif;color:#4b405e">We only use this to build your DJ name. It stays on this computer.</span><button onClick="{{ next }}" disabled="{{ nameEmpty }}" style="{{ nextStyle }}">Next →</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isFave }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Step 2 favorite" style="background:#fff;border:3px solid #2a1f3d;border-radius:32px;padding:clamp(24px,4vw,44px);box-shadow:8px 8px 0 #2a1f3d;display:grid;gap:22px;animation:pop .4s ease both">
+<p style="display:inline-flex;width:fit-content;background:#7bd3ea;border:2px solid #2a1f3d;border-radius:999px;padding:8px 14px;font:600 14px Fredoka,sans-serif;margin:0">Step 2 of 3</p>
+<h1 style="font:700 clamp(40px,6vw,72px)/1 Fredoka,sans-serif;letter-spacing:-.02em;margin:0;text-wrap:balance">Hi {{ name }}! Pick a<br><span style="color:#ff6b4a">favorite animal</span> or character.</h1>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px">
+<sc-for list="{{ faves }}" as="f" hint-placeholder-count="8"><button onClick="{{ f.pick }}" style="{{ f.style }}"><span style="font-size:36px;line-height:1">{{ f.icon }}</span><span>{{ f.label }}</span></button></sc-for>
+</div>
+<label style="display:grid;gap:8px;font:600 16px Fredoka,sans-serif">Or type your own<input type="text" value="{{ custom }}" onChange="{{ setCustom }}" onKeyDown="{{ enterNext }}" placeholder="Dragon, Bluey, Pikachu…" style="width:100%;border:3px solid #2a1f3d;border-radius:20px;padding:14px 18px;font:600 22px Fredoka,sans-serif;color:#2a1f3d;background:#fff7e6;min-height:60px"></label>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><button onClick="{{ back }}" style="background:#fff;color:#2a1f3d;border:2px solid #2a1f3d;border-radius:999px;padding:14px 22px;font:600 17px Fredoka,sans-serif;cursor:pointer;min-height:56px">← Back</button><button onClick="{{ next }}" disabled="{{ faveEmpty }}" style="{{ nextStyle2 }}">Make my DJ name →</button></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isReveal }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Step 3 reveal" style="display:grid;gap:20px;animation:pop .4s ease both">
+<div style="background:#2a1f3d;color:#fff;border:3px solid #2a1f3d;border-radius:32px;padding:clamp(28px,5vw,56px);box-shadow:8px 8px 0 #ff6b4a;display:grid;gap:18px;text-align:center;position:relative;overflow:hidden">
+<span aria-hidden="true" style="position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;border:16px solid #ffd166;border-top-color:#7bd3ea;animation:spin 8s linear infinite;opacity:.6"></span>
+<p style="display:inline-flex;justify-self:center;background:#ffd166;color:#2a1f3d;border:2px solid #2a1f3d;border-radius:999px;padding:8px 14px;font:600 14px Fredoka,sans-serif;margin:0">Step 3 of 3 · Your DJ name</p>
+<p style="font:600 clamp(18px,2vw,24px) Fredoka,sans-serif;margin:0;color:#ffd166">Ladies and gentlemen, please welcome…</p>
+<h1 style="font:700 clamp(44px,8vw,104px)/.95 Fredoka,sans-serif;letter-spacing:-.03em;margin:0;text-wrap:balance;animation:wiggle 3s ease-in-out infinite">{{ djName }}</h1>
+<p style="font:400 clamp(16px,1.5vw,20px)/1.4 Fredoka,sans-serif;margin:0;color:#e8e2f2;max-width:460px;justify-self:center;text-wrap:pretty">{{ tagline }}</p>
+</div>
+<div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
+<button onClick="{{ another }}" style="background:#fff;color:#2a1f3d;border:2px solid #2a1f3d;border-radius:999px;padding:18px 26px;font:600 20px Fredoka,sans-serif;cursor:pointer;min-height:64px;box-shadow:4px 4px 0 #2a1f3d;white-space:nowrap">🎲 Give me another</button>
+<a href="Booth v2 - For Kids.dc.html#booth" style="display:inline-flex;align-items:center;justify-content:center;text-align:center;background:#ff6b4a;color:#fff;border:2px solid #2a1f3d;border-radius:999px;padding:18px 30px;font:600 20px Fredoka,sans-serif;min-height:64px;box-shadow:4px 4px 0 #2a1f3d"><span>▶ I'm {{ djName }} — let's play</span></a>
+</div>
+<div style="display:flex;justify-content:center;gap:16px;font:500 15px Fredoka,sans-serif;color:#4b405e;flex-wrap:wrap"><button onClick="{{ back }}" style="background:transparent;border:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer;padding:8px">Change my favorite</button><button onClick="{{ restart }}" style="background:transparent;border:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer;padding:8px">Start over</button></div>
+</div>
+</sc-if>
+
+</div>
+</section>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { step: 0, name: 'Maia', fave: '', custom: '', seed: 0 };
+  faves = [['🦁','Lion'],['🐬','Dolphin'],['🦄','Unicorn'],['🐉','Dragon'],['🐼','Panda'],['🦊','Fox'],['🦋','Butterfly'],['🐙','Octopus'],['🤖','Robot'],['🦖','T-Rex'],['🐸','Frog'],['🦉','Owl']];
+  patterns = [
+    (n, f) => `DJ ${f} ${n}`, (n, f) => `${n} the ${f}`, (n, f) => `Lil' ${f} ${n}`, (n, f) => `DJ ${n}saurus`,
+    (n, f) => `${f}beat ${n}`, (n, f) => `DJ ${n} ${f}funk`, (n, f) => `Captain ${f} ${n}`, (n, f) => `${n} Mega${f}`,
+    (n, f) => `DJ Disco ${f}`, (n, f) => `${f} ${n} 3000`, (n, f) => `Super ${n} ${f}`, (n, f) => `${n}-a-tron the ${f}`
+  ];
+  taglines = ['Spins beats faster than a %f can run.', 'Known for legendary drum drops and excellent snacks.', 'Never misses the beat. Sometimes misses bedtime.', 'The only DJ with a %f on the guest list.', 'Turns every room into a dance floor.', 'Fresh out of the booth. Ready for the crowd.'];
+  renderVals() {
+    const { step, name, fave, custom, seed } = this.state;
+    const n = name.trim() || 'Maia';
+    const f = (custom.trim() || fave || 'Lion');
+    const idx = seed % this.patterns.length;
+    const djName = this.patterns[idx](n, f);
+    const tagline = this.taglines[seed % this.taglines.length].replace('%f', f.toLowerCase());
+    const nameEmpty = !name.trim(), faveEmpty = !fave && !custom.trim();
+    const primary = dis => `background:${dis ? '#d9d2c6' : '#ff6b4a'};color:#fff;border:2px solid #2a1f3d;border-radius:999px;padding:16px 26px;font:600 18px Fredoka,sans-serif;cursor:${dis ? 'default' : 'pointer'};min-height:56px;box-shadow:4px 4px 0 #2a1f3d`;
+    const next = () => { if (step === 0 && nameEmpty) return; if (step === 1 && faveEmpty) return; this.setState({ step: Math.min(2, step + 1) }); };
+    return {
+      steps: [1, 2, 3].map((k, i) => ({ n: k, style: `width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font:700 15px Fredoka,sans-serif;border:2px solid #2a1f3d;background:${i <= step ? '#ff6b4a' : '#fff'};color:${i <= step ? '#fff' : '#2a1f3d'}` })),
+      isName: step === 0, isFave: step === 1, isReveal: step === 2,
+      name, setName: e => this.setState({ name: e.target.value }), nameEmpty, nextStyle: primary(nameEmpty), nextStyle2: primary(faveEmpty),
+      enterNext: e => { if (e.key === 'Enter') next(); },
+      next, back: () => this.setState({ step: Math.max(0, step - 1) }), restart: () => this.setState({ step: 0, fave: '', custom: '', seed: 0 }),
+      faves: this.faves.map(([icon, label]) => ({ icon, label, pick: () => this.setState({ fave: label, custom: '' }), style: `display:grid;gap:6px;justify-items:center;background:${fave === label && !custom.trim() ? '#ffd166' : '#fff7e6'};color:#2a1f3d;border:2px solid #2a1f3d;border-radius:20px;padding:14px 8px;font:600 15px Fredoka,sans-serif;cursor:pointer;min-height:96px;box-shadow:${fave === label && !custom.trim() ? '4px 4px 0 #2a1f3d' : 'none'}` })),
+      custom, setCustom: e => this.setState({ custom: e.target.value }), faveEmpty,
+      djName, tagline, another: () => this.setState({ seed: seed + 1 })
+    };
+  }
+}
+</script>
+</body>
+</html>

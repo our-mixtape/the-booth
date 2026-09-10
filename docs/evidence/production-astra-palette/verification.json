@@ -1,0 +1,24 @@
+{
+  "deploymentId": "dpl_GjrAUo8YEqjibkr4JkcxWtKmAULi",
+  "productionUrl": "https://mixtape-the-booth.vercel.app",
+  "immutableUrl": "https://mixtape-the-booth-63p00v0mt-efficient-frontier-labs.vercel.app",
+  "script": "/assets/index-DQEGaJN0.js",
+  "stylesheet": "/assets/index-V4G9rIFc.css",
+  "stylesheetSha256": "378d7df1b0bcf0f77d3afcf94f5c0f59ce8e861ce87660af8a200a87b82cfc1a",
+  "checks": {
+    "newProductionBundle": true,
+    "newProductionStylesheet": true,
+    "stylesheetMatchesTestedBuild": true,
+    "hero": true,
+    "waveformPanel": true,
+    "deckPalette": true,
+    "equipmentFinish": true,
+    "directAndGeneratedNames": true,
+    "authRequired": true,
+    "authConfigured": true
+  },
+  "unitTestsPassed": 61,
+  "browserTestsPassed": 14,
+  "browserRerun": "13 passed initially; one audio-download test was interrupted by a local Vite environment-file restart. The focused retry passed in 7.7s with source unchanged.",
+  "hostedVisualAndAudioCheck": "Local visual and audio-regression evidence; no new hosted sign-in or playback audition."
+}

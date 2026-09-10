@@ -1,0 +1,35 @@
+{
+  "label": "after",
+  "mixer": "Blender export",
+  "measuredAt": "2026-09-10T18:00:46.658Z",
+  "browser": "153.0.8010.12",
+  "platform": "darwin",
+  "arch": "arm64",
+  "processor": "Apple M4 Pro",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "layout": "digital4",
+  "playingDecks": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "samples": 120,
+  "intervalMs": {
+    "median": 50,
+    "p95": 66.69999999999982
+  },
+  "renderCpuMs": {
+    "median": 1.200000001117587,
+    "p95": 4.800000000745058
+  },
+  "calls": 164,
+  "triangles": 49919,
+  "width": 1267,
+  "height": 518,
+  "pixelRatio": 1,
+  "note": "Headless Chromium on this laptop; bounded rendered-frame intervals and CPU submission time, not GPU completion or a live-audio latency budget."
+}

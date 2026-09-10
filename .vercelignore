@@ -1,0 +1,22 @@
+# Only the application and build inputs may leave this checkout.
+/*
+!/api/
+!/api/**
+!/server/
+!/server/**
+!/src/
+!/src/**
+!/public/
+!/public/**
+!/package.json
+!/pnpm-lock.yaml
+!/tsconfig.json
+!/vite.config.ts
+!/playwright.config.ts
+!/index.html
+!/vercel.json
+!/tests/
+!/tests/**
+# Tests are typechecked by the build; no private recordings or results are included.
+**/.DS_Store
+**/.env*

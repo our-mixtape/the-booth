@@ -1,0 +1,31 @@
+import { expect, it } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { Session, TrackSchema } from '../src/domain/session';
+import { advanceAdventure, beginAdventure } from '../src/experience/kids-adventure';
+const fixtures = TrackSchema.array().parse(JSON.parse(readFileSync('public/audio/manifest.json', 'utf8')));
+it('discovery needs a new manual action and actual output, never silence or an agent action', () => {
+ const session = new Session(fixtures), initial = beginAdventure(session.snapshot(0), 0);
+ session.apply({ type: 'play', deck: 'A' }, 1, 'agent');
+ expect(advanceAdventure(initial, session.snapshot(1), 1, { A: .1, B: 0 })).toBe(initial);
+ session.apply({ type: 'play', deck: 'A' }, 2, 'accessible');
+ expect(advanceAdventure(initial, session.snapshot(2), 2, { A: 0, B: 0 })).toBe(initial);
+ expect(advanceAdventure(initial, session.snapshot(2), 2, { A: .1, B: 0 }).stage).toBe(1);
+ const later = beginAdventure(session.snapshot(3), 3);
+ expect(advanceAdventure(later, session.snapshot(3), 3, { A: .1, B: 0 })).toBe(later);
+});
+it('progress follows sound shaping and an audible blend; replacing a source resets it', () => {
+ const session = new Session(fixtures);
+ let activity = beginAdventure(session.snapshot(0), 0);
+ session.apply({ type: 'play', deck: 'A' }, 1, 'accessible');
+ activity = advanceAdventure(activity, session.snapshot(1), 1, { A: .1, B: 0 });
+ session.apply({ type: 'filter', deck: 'A', value: .5 }, 2, 'pointer');
+ activity = advanceAdventure(activity, session.snapshot(2), 2, { A: .05, B: 0 });
+ expect(activity.stage).toBe(2);
+ session.apply({ type: 'play', deck: 'B' }, 3, 'accessible');
+ session.apply({ type: 'crossfader', value: .5 }, 4, 'pointer');
+ expect(advanceAdventure(activity, session.snapshot(4), 4, { A: 0, B: .1 })).toBe(activity);
+ activity = advanceAdventure(activity, session.snapshot(4), 4, { A: .05, B: .1 });
+ expect(activity.stage).toBe(3); expect(activity.observations).toHaveLength(3);
+ session.decks.A.track = { ...fixtures[0], preparationVersion: 2 };
+ expect(advanceAdventure(activity, session.snapshot(5), 5, { A: .1, B: .1 }).stage).toBe(0);
+});

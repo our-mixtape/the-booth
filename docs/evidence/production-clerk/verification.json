@@ -1,0 +1,14 @@
+{
+  "deploymentId": "dpl_4vXvVK8bSj27UooQYEfLuvx9E3EE",
+  "productionUrl": "https://mixtape-the-booth.vercel.app",
+  "immutableUrl": "https://mixtape-the-booth-fg5phv07t-efficient-frontier-labs.vercel.app",
+  "bundle": "/assets/index-CntiMkko.js",
+  "aliasServesNewBundle": true,
+  "authRequired": true,
+  "authConfigured": true,
+  "publishableKeyInstance": "development",
+  "anonymousHintStatus": 401,
+  "secretValuesRead": false,
+  "realSignInVerified": false,
+  "modelRequestMade": false
+}
