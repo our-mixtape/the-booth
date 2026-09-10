@@ -1,4 +1,4 @@
-# Proposed $7/month base compute; creating the service requires billing approval.
+# $7/month base compute, approved by the user for this Booth gateway.
 # For updates, use the maintenance procedure in docs/HOSTED_GATEWAY.md.
 services:
   - type: web
