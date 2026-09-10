@@ -181,3 +181,29 @@ it.each(['unknown function', 'malformed arguments', 'oversized arguments', 'wron
  else socket.emit({ type: 'response.output_item.done', response_id: 'resp_first', item: { type: 'function_call', name: mode === 'unknown function' ? 'move_control' : 'watch_attempt', call_id: 'call_forbidden', async: true, arguments: mode === 'oversized arguments' ? 'x'.repeat(2001) : '{' } });
  expect(await next()).toMatchObject({ t: 'error' }); expect(socket.readyState).toBe(3);
 });
+
+
+it.each(['response limit', 'socket send failure'])('contains a queued review %s inside the socket event callback', async mode => {
+ const onEvent = vi.fn(), onClose = vi.fn();
+ const core = createAstraSession({ key: 'test-only', WebSocketImpl: FakeWebSocket, onEvent, onClose });
+ const count = mode === 'response limit' ? 64 : 1;
+ for (let index = 1; index <= count; index++) {
+  await core.brief({ state: {}, brief: 'Plan the handoff' });
+  const socket = FakeWebSocket.instances.at(-1)!;
+  created(socket, `resp_${index}`);
+  if (index < count) { completed(socket, `resp_${index}`); continue; }
+  toolCall(socket, `resp_${index}`);
+  core.toolOutput({ callId: 'call_attempt', output: { status: 'complete', entryError: 0.12 } });
+  expect(socket.sent).toHaveLength(count);
+  if (mode === 'socket send failure') vi.spyOn(socket, 'send').mockImplementationOnce(() => { throw Error('private-provider-details'); });
+  expect(() => completed(socket, `resp_${index}`)).not.toThrow();
+  // Node EventTarget reports escaped listener exceptions on a later tick.
+  await new Promise(resolve => setTimeout(resolve, 0));
+  expect(socket.readyState).toBe(3);
+  expect(onClose).toHaveBeenCalledTimes(1);
+  const errors = onEvent.mock.calls.map(([event]) => event).filter(event => event.t === 'error');
+  expect(errors).toHaveLength(1);
+  expect(JSON.stringify(errors)).not.toContain('private-provider-details');
+  expect(() => core.toolOutput({ callId: 'call_attempt', output: { status: 'complete' } })).toThrow();
+ }
+});

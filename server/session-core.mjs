@@ -101,7 +101,8 @@ export function createAstraSession({ key, model = 'gpt-6-astra', WebSocketImpl =
     if (data.response?.model !== model) return fail('Astra returned an unexpected model. Manual playback continues.');
     latest = responseId; inFlight = null; creating = false; clearTimeout(responseTimer);
     emit({ t: 'completed', responseId, model: data.response.model });
-    flush();
+    // Queued creates run inside a socket callback, without an HTTP caller to catch errors.
+    try { flush(); } catch { fail(); }
     break;
    case 'error': case 'response.failed':
     fail('Astra could not complete the session response. Manual playback continues.');
