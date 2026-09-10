@@ -167,7 +167,7 @@ def binding(control_id, location, kind, axis, limits, input_range, hit_location,
     if kind == 'rotation':
         constraint = control.constraints.new('LIMIT_ROTATION')
         constraint.use_limit_z = True
-        constraint.min_z, constraint.max_z = limits
+        constraint.min_z, constraint.max_z = sorted(limits)
         constraint.owner_space = 'LOCAL'
     else:
         constraint = control.constraints.new('LIMIT_LOCATION')
@@ -204,7 +204,7 @@ for index, channel in enumerate(channel_order):
         # Washers and scale marks stay on the face; pointer marks move with the knob.
         cylinder(f'{channel}.{band}.washer', (x, y, .299), radius + .027, .014, metal)
         knob = binding(f'{channel}.{band}', (x, y, .385), 'rotation', 'y',
-                       [-2.25, 2.25] if is_filter else [-2.2, 2.2],
+                       [2.25, -2.25] if is_filter else [2.2, -2.2],
                        [0, 1] if is_filter else [-12, 12], (x, y, .40), (.43, .41, .34))
         cylinder(f'{channel}.{band}.grip', (x, y, .385), radius, .175,
                  control_surface, knob, filter_color if is_filter else knob_color)

@@ -96,7 +96,7 @@ export function createBooth(host:HTMLDivElement,engine:AudioEngine,send:(c:Comma
  const fallbackMixer=new THREE.Group();fallbackMixer.name='mixer.procedural-fallback';
  for(const object of [...scene.children])if(!playerObjects.has(object))fallbackMixer.add(object);
  scene.add(fallbackMixer);
- const ray=new THREE.Raycaster(),mouse=new THREE.Vector2();let drag:{hit:Hit;x:number;y:number;value:number;pointer:number}|undefined;
+ const ray=new THREE.Raycaster(),mouse=new THREE.Vector2();let drag:{hit:Hit;x:number;y:number;value:number;pointer:number;axis?:'x'|'y'}|undefined;
  let disposed=false,mixer: MixerAsset|undefined,pendingMixer: MixerAsset|undefined;
  const assetRequest=new AbortController();
  renderer.domElement.dataset.mixerAsset='loading';onMixerStatus('Loading editable mixer · controls ready');
@@ -133,9 +133,14 @@ export function createBooth(host:HTMLDivElement,engine:AudioEngine,send:(c:Comma
   const value=hit.kind==='crossfader'?engine.session.crossfader:hit.kind==='gain'?d?d.gain:0:hit.kind==='filter'?d?d.filter:0:d&&(hit.kind==='low'||hit.kind==='mid'||hit.kind==='high')?(d.eq[hit.kind]+12)/24:0;
   onGrab(true);drag={hit,x:e.clientX,y:e.clientY,value,pointer:e.pointerId};renderer.domElement.setPointerCapture(e.pointerId);renderer.domElement.style.cursor='grabbing';
  }
- function move(e:PointerEvent){if(drag){const delta=drag.hit.kind==='crossfader'?(e.clientX-drag.x)/170:(drag.y-e.clientY)/140;const value=Math.max(0,Math.min(1,drag.value+delta));
+ function move(e:PointerEvent){if(drag){
+   const dx=e.clientX-drag.x,dy=drag.y-e.clientY;
+   const knob=drag.hit.kind==='filter'||drag.hit.kind==='low'||drag.hit.kind==='mid'||drag.hit.kind==='high';
+   if(knob&&!drag.axis){if(Math.max(Math.abs(dx),Math.abs(dy))<3)return;drag.axis=Math.abs(dx)>=Math.abs(dy)?'x':'y';}
+   const delta=drag.hit.kind==='crossfader'?dx/170:(knob&&drag.axis==='x'?dx:dy)/140;
+   const value=Math.max(0,Math.min(1,drag.value+delta));
    if(drag.hit.deck&&(drag.hit.kind==='low'||drag.hit.kind==='mid'||drag.hit.kind==='high'))send({type:'eq',deck:drag.hit.deck,band:drag.hit.kind,value:value*24-12});else if(drag.hit.kind==='crossfader')send({type:'crossfader',value});else if(drag.hit.deck&&(drag.hit.kind==='gain'||drag.hit.kind==='filter'))send({type:drag.hit.kind,deck:drag.hit.deck,value});
-  }else {const h=pick(e);renderer.domElement.style.cursor=h?'grab':'default';onHover(h?`${h.deck?`Deck ${h.deck} · `:''}${h.kind}${h.kind==='play'||h.kind==='cue'||h.kind==='load'?' · click':' · drag'}`:'Drag a fader or filter. Click PLAY / CUE.');}}
+  }else {const h=pick(e);renderer.domElement.style.cursor=h?'grab':'default';onHover(h?`${h.deck?`Deck ${h.deck} · `:''}${h.kind}${h.kind==='play'||h.kind==='cue'||h.kind==='load'?' · click':h.kind==='gain'||h.kind==='crossfader'?' · drag':' · left lowers / right raises · or drag vertically'}`:'Drag a fader or filter. Click PLAY / CUE.');}}
  function up(){const held=drag;drag=undefined;onGrab(false);if(held&&renderer.domElement.hasPointerCapture(held.pointer))renderer.domElement.releasePointerCapture(held.pointer);renderer.domElement.style.cursor='default';activateMixer();}
  renderer.domElement.addEventListener('pointerdown',down);renderer.domElement.addEventListener('pointermove',move);renderer.domElement.addEventListener('pointerup',up);renderer.domElement.addEventListener('pointercancel',up);renderer.domElement.addEventListener('lostpointercapture',up);window.addEventListener('blur',up);
  const resize=new ResizeObserver(()=>{const {width,height}=host.getBoundingClientRect();if(width<=0||height<=0)return;renderer.setSize(width,height);camera.aspect=width/height;const distance=Math.max(8,(rigWidth+1)/(2*Math.tan(THREE.MathUtils.degToRad(18.5))*camera.aspect)+1.5);camera.position.set(0,distance*0.84,distance*0.543);camera.lookAt(0,0,0);camera.updateProjectionMatrix();});resize.observe(host);
@@ -143,7 +148,7 @@ export function createBooth(host:HTMLDivElement,engine:AudioEngine,send:(c:Comma
  function render(t:number){frame=requestAnimationFrame(render);if(t-lastFrame<33||host.clientWidth===0)return;lastFrame=t;const started=performance.now();const state=engine.snapshot();
   const levels={A:engine.meter('A'),B:engine.meter('B'),C:engine.meter('C'),D:engine.meter('D')};
   if(mixer)mixer.update(state,levels);else caps.crossfader.position.x=-0.7+state.crossfader*1.4;
-  for(const id of deckIds){const d=state.decks[id];if(!mixer){caps[`${id}.gain`].position.z=1.5-d.gain*.94;caps[`${id}.filter`].rotation.y=(d.filter-.5)*4.5;for(const band of ['low','mid','high'] as const)caps[`${id}.${band}`].rotation.y=d.eq[band]/12*2.2;}
+  for(const id of deckIds){const d=state.decks[id];if(!mixer){caps[`${id}.gain`].position.z=1.5-d.gain*.94;caps[`${id}.filter`].rotation.y=(.5-d.filter)*4.5;for(const band of ['low','mid','high'] as const)caps[`${id}.${band}`].rotation.y=-d.eq[band]/12*2.2;}
    const jog=jogs[id];if(jog&&!reduced.matches)jog.rotation.y=-d.position*Math.PI*(vinyl?1.111:0.6);
    const play=caps[`${id}.play`];if(play){const material=play.material as THREE.MeshStandardMaterial;material.emissive.setHex(d.playing?0x287c49:0);material.emissiveIntensity=d.playing?.7:0;}
    const meter=meters[id];if(meter&&!mixer)meter.scale.z=Math.max(.01,Math.min(1,levels[id]*7));

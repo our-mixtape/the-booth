@@ -16,12 +16,12 @@ Open <http://127.0.0.1:5176/#play>. Sign in with the existing Booth account. The
 pnpm typecheck
 pnpm lint
 pnpm test
-VITE_CLERK_PUBLISHABLE_KEY='' PORT=5176 GATEWAY_PORT=8790 pnpm exec playwright test tests/session.browser.ts tests/ask.browser.ts tests/auth.browser.ts tests/experience.browser.ts tests/layout.browser.ts
+VITE_CLERK_PUBLISHABLE_KEY='' PORT=5177 GATEWAY_PORT=8791 pnpm exec playwright test tests/session.browser.ts tests/ask.browser.ts tests/auth.browser.ts tests/experience.browser.ts tests/layout.browser.ts tests/mixer.browser.ts tests/waveforms.browser.ts
 pnpm build
 node --env-file=.env scripts/astra-session-check.mjs
 ```
 
-Stop an existing preview on port 5176 before the browser suite. The existing anonymous-account/import tests require an unconfigured browser provider; the explicit empty publishable-key override applies only to the test server and does not edit `.env`. Restart ordinary `pnpm dev` afterward for real sign-in. Playwright reuses an already-running server, which would ignore that startup override.
+Use free test ports 5177/8791 for the browser suite; the signed-in preview can remain on 5176/8790. The anonymous-account/import tests require an unconfigured browser provider; the explicit empty publishable-key override applies only to the test server and does not edit `.env`. Playwright reuses an already-running server on the selected test port, which would ignore that startup override.
 
 The last command makes real model calls and saves a redacted transport log. Its numeric attempt result is a **synthetic test fixture**, not browser performance or an audition. Browser tests use mocked identity/API streams; server tests separately verify signed JWTs and scripted WebSocket events. The [real signed-in rehearsal](evidence/astra-session/real-session.md) is a distinct evidence item: it passed with a measured retry, using actual Clerk authentication, visible controls and genuine Astra responses.
 

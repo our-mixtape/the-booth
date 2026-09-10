@@ -38,7 +38,7 @@ PORT=5176 GATEWAY_PORT=8790 pnpm dev
 
 Open [the local booth](http://127.0.0.1:5176/#play). Configure the existing Booth Clerk keys and `OPENAI_API_KEY` in an ignored server-side `.env` with mode 600 for live sessions. Manual mixing needs no credentials. Default ports remain 5173/8787.
 
-For the latest deck-order change, typecheck, lint, **92 unit tests**, **14 selected browser tests**, and the production build passed. The browser checks cover physical CDJ routing, all mixer controls, layout/audio continuity, waveforms and both Astra panels. The real signed-in live session and existing HTTP hint both returned genuine `gpt-6-astra` feedback. Exact commands and test prerequisites are in [the runbook](docs/ASTRA_SESSION.md). No dependencies were added for live sessions, and this iteration made no deployment or DNS changes. A system-audio demo recording and its video URL remain outstanding.
+For the latest mixer changes, typecheck, lint, **92 unit tests**, **27 browser tests**, and the production build passed. These include left/right knob input and clockwise indicators on both mixer versions, physical CDJ routing, all 21 mixer controls, layout/audio continuity, accounts, Kids/Afterhours and both Astra panels. [Knob-direction evidence](docs/evidence/knob-direction/). The real signed-in live session and existing HTTP hint both returned genuine `gpt-6-astra` feedback. Exact commands and test prerequisites are in [the runbook](docs/ASTRA_SESSION.md). No dependencies were added for live sessions, and this iteration made no deployment or DNS changes. A system-audio demo recording and its video URL remain outstanding.
 
 ## Earlier checkpoints
 
@@ -118,7 +118,7 @@ Open http://127.0.0.1:5173. The launch script starts Vite and a loopback-only ga
 3. Drag the central crossfader right to B before **bar 9 / 16 seconds**. The exercise records B's actual start error (target ±0.25 seconds) and handoff time. It does not judge taste.
 4. Read the observed result and click **Retry practice**. Original tracks, cues, stems, levels and filters return to the checkpoint; A starts from a fresh audio-clock origin.
 
-For free play, use either deck's PLAY/CUE buttons. Drag filter knobs vertically (up opens the low-pass), channel faders vertically, and the crossfader horizontally. Jog rotation is a transport indicator only. Stop all decks leaves the app ready for another mix.
+For free play, use either deck's PLAY/CUE buttons. Drag EQ/filter knobs right to raise the value or left to lower it; their indicators increase clockwise. Vertical knob drags also work (up raises/opens, down lowers/closes), with the chosen axis held until release. Drag channel faders vertically and the crossfader horizontally. Jog rotation is a transport indicator only. Stop all decks leaves the app ready for another mix.
 
 Keyboard: **Q/P** play/pause A/B, **W/O** cue A/B, **←/→** blend in 5% steps, **R** retry, **Space** stop all decks, **E/I** play/pause C/D, **Alt** switch digital/turntable layouts. Shortcuts do not intercept focused inputs/buttons; focus the booth or page first. The expandable **Track library & accessible controls** provides native keyboard sliders and the same commands.
 

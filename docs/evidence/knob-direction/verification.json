@@ -1,0 +1,44 @@
+{
+  "recordedAt": "2026-09-10T20:48:34.058394+00:00",
+  "typecheck": "pass",
+  "lint": "pass",
+  "unitTests": 92,
+  "browserTests": {
+    "passed": 27,
+    "duration": "2.8 minutes",
+    "command": "VITE_CLERK_PUBLISHABLE_KEY='' PORT=5177 GATEWAY_PORT=8791 pnpm exec playwright test tests/session.browser.ts tests/ask.browser.ts tests/auth.browser.ts tests/experience.browser.ts tests/layout.browser.ts tests/mixer.browser.ts tests/waveforms.browser.ts"
+  },
+  "build": {
+    "status": "pass",
+    "jsKB": 1193.82,
+    "gzipJsKB": 324.96,
+    "warning": "Existing >500 kB bundle warning"
+  },
+  "gestures": {
+    "left": "lower value",
+    "right": "higher value",
+    "up": "higher value",
+    "down": "lower value",
+    "axis": "locks to first deliberate horizontal or vertical movement until release"
+  },
+  "visualDirection": "clockwise raises, counterclockwise lowers in both exported and fallback mixers",
+  "geometryCheck": "actual exported bright pointer vertices project right for boost and left for cut",
+  "audio": {
+    "rms": 0.025827506109735367,
+    "longestSilence": 8.333333333333333e-05
+  },
+  "audioLimit": "internal fixture master bus, not system audio or human audition",
+  "sourceHashes": {
+    "src/scene/booth.ts": "621d8f2f7c7d299ce30f2560424f3db7ff11285004788162f71ce1bfb00f6d98",
+    "assets/blender/create_mixer.py": "19d2e9825707ecbc1cd562859c34b187f9aeee618dd01da80f5452e2a16fd285",
+    "public/models/mixtape-mixer.glb": "d1fea4fe999c6a19424248136a9ef2243ff98df017cd45d9978eb9b7a3cfc558",
+    "public/models/mixtape-mixer.bindings.json": "7a0fe00320db6bc95148557ce3094f72f08503e989b8f847fd8cff7c15300381"
+  },
+  "mergeReadiness": {
+    "serverBranchIncluded": true,
+    "clientBranchIncluded": true,
+    "originMainAheadOfIntegration": 0,
+    "publicMergePerformed": false
+  },
+  "deploymentPerformed": false
+}
