@@ -23,8 +23,8 @@ export function createBooth(host:HTMLDivElement,engine:AudioEngine,send:(c:Comma
  }
  function bind(mesh:THREE.Mesh,hit:Hit){mesh.userData.hit=hit;hits.push(mesh);}
  const vinyl=layout==='vinyl',four=layout==='digital4';
- const visible:DeckId[]=four?['C','A','B','D']:['A','B'];
- const deckX=(id:DeckId)=>id==='C'?-6.4:id==='D'?6.4:(id==='A'?-1:1)*(vinyl?3.35:3.05);
+ const visible:readonly DeckId[]=four?deckIds:['A','B'];
+ const deckX=(id:DeckId)=>four?({A:-6.4,B:-3.05,C:3.05,D:6.4}[id]):(id==='A'?-1:1)*(vinyl?3.35:3.05);
  const rigWidth=four?16.3:vinyl?11.5:10.9;
  const platterZ=vinyl?0:0.35;
  box('booth.table',0,-0.34,0,rigWidth,0.35,5.1,palette.surface);box('booth.front',0,-0.51,2.43,rigWidth,0.08,0.1,0x656f9e);
@@ -76,7 +76,7 @@ export function createBooth(host:HTMLDivElement,engine:AudioEngine,send:(c:Comma
  }
  const playerObjects=new Set(scene.children),playerHitCount=hits.length;
  box('mixer.body',0,0,0,2.55,.50,4.66,palette.body);box('mixer.face',0,.27,0,2.49,.035,4.57,palette.face);label('MIXTAPE / FOUR CHANNEL',0,-2.1,2.20, .30);
- const channels:DeckId[]=['C','A','B','D'];
+ const channels=deckIds;
  for(const [i,id]of channels.entries()){
   const x=-.91+i*.60;label(id,x,-1.80,.35,.32);
   for(const [j,band]of (['high','mid','low']as const).entries()){

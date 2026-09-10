@@ -1,0 +1,40 @@
+{
+  "recordedAt": "2026-09-10T20:39:51.513639+00:00",
+  "order": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "typecheck": "pass",
+  "lint": "pass",
+  "unitTests": 92,
+  "browserTests": {
+    "passed": 14,
+    "duration": "1.9 minutes",
+    "command": "VITE_CLERK_PUBLISHABLE_KEY='' PORT=5177 GATEWAY_PORT=8791 pnpm exec playwright test tests/layout.browser.ts tests/mixer.browser.ts tests/waveforms.browser.ts tests/session.browser.ts tests/ask.browser.ts"
+  },
+  "build": "pass",
+  "modelMetrics": {
+    "bytes": 876692,
+    "meshes": 30,
+    "primitives": 30,
+    "triangles": 16263,
+    "controls": 21,
+    "authoringBlender": "5.2.1 LTS"
+  },
+  "glbSha256": "3064d3c598f502655e6a1db29b71a91a7f2c45e58a8912cc391158517427adfd",
+  "playCueRouting": "each physical CDJ addresses the correct deck and nonzero channel audio; all other decks stay paused; cue returns only that deck to zero",
+  "mixerControls": "all 21 actual pointer hit regions dispatch their intended command and DSP parameter",
+  "layoutAudio": {
+    "rms": 0.025805917504197116,
+    "longestSilence": 8.333333333333333e-05
+  },
+  "audioSource": "original generated fixtures, internal master bus; not system audio or human audition",
+  "crossfaderRouting": "unchanged: A+C left, B+D right",
+  "visualInspection": [
+    "abcd-cdjs.png",
+    "live-preview.png"
+  ],
+  "deploymentPerformed": false
+}

@@ -1,6 +1,6 @@
 # Mixtape — The Booth
 
-A browser DJ instrument you perform in: a four-channel Web Audio mixer, crossfader, filter, EQ, tempo, stems and a Three.js booth, with **GPT-6 Astra as a read-only practice companion**.
+A browser DJ instrument you perform in: a four-channel Web Audio mixer, crossfader, filter, EQ, tempo, stems and a Three.js booth, with **GPT-6 Astra as a read-only practice companion**. Four CDJs and their mixer strips now read **A, B, C, D from left to right** ([verified controls and audio](docs/evidence/deck-order/)).
 
 - **Live:** [Mixtape — The Booth](https://mixtape-the-booth.vercel.app/#play) — free play needs no Booth account; Astra hints need Booth sign-in. Existing Vercel deployment protection is separate.
 - **Video (60 s):** pending a shareable recording URL.
@@ -38,7 +38,7 @@ PORT=5176 GATEWAY_PORT=8790 pnpm dev
 
 Open [the local booth](http://127.0.0.1:5176/#play). Configure the existing Booth Clerk keys and `OPENAI_API_KEY` in an ignored server-side `.env` with mode 600 for live sessions. Manual mixing needs no credentials. Default ports remain 5173/8787.
 
-Typecheck, lint, **92 unit tests**, **20 selected browser tests**, and the production build passed. The real signed-in live session and existing HTTP hint both returned genuine `gpt-6-astra` feedback. Exact commands and test prerequisites are in [the runbook](docs/ASTRA_SESSION.md). No dependencies were added for live sessions, and this iteration made no deployment or DNS changes. A system-audio demo recording and its video URL remain outstanding.
+For the latest deck-order change, typecheck, lint, **92 unit tests**, **14 selected browser tests**, and the production build passed. The browser checks cover physical CDJ routing, all mixer controls, layout/audio continuity, waveforms and both Astra panels. The real signed-in live session and existing HTTP hint both returned genuine `gpt-6-astra` feedback. Exact commands and test prerequisites are in [the runbook](docs/ASTRA_SESSION.md). No dependencies were added for live sessions, and this iteration made no deployment or DNS changes. A system-audio demo recording and its video URL remain outstanding.
 
 ## Earlier checkpoints
 
@@ -128,7 +128,7 @@ The two 32-second, 120 BPM tracks loop continuously. The six drum/bass/melody bu
 
 ## Equipment layouts
 
-Choose **2 CDJs** or **4 CDJs** for digital playback. **ALT · 2 turntables** (or the Alt/Option key) swaps to two Technics-inspired turntables and back to your previous digital count. The central mixer always has four real channels, ordered C / A / B / D. A+C route to the left crossfader bus; B+D route right. Each has level, low-pass filter and three-band EQ (±12 dB). Master level starts conservatively at 0.35; EQ boosts can increase peaks, so live meters should guide levels.
+Choose **2 CDJs** or **4 CDJs** for digital playback. **ALT · 2 turntables** (or the Alt/Option key) swaps to two Technics-inspired turntables and back to your previous digital count. The four CDJs run A / B / C / D from left to right, with the mixer between B and C. The central mixer always has four real channels, also ordered A / B / C / D. A+C route to the left crossfader bus; B+D route right. Each has level, low-pass filter and three-band EQ (±12 dB). Master level starts conservatively at 0.35; EQ boosts can increase peaks, so live meters should guide levels.
 
 Tracks, source clocks, channel levels, EQ and stems survive switching; the engine is not recreated. C/D transport controls remain visible in two-player/vinyl mode, and their mixer channels remain live. A held 3D control locks layout switching until release/cancellation. Practice still uses A/B; using C/D during it invalidates the attempt, and retry stops/resets all four.
 

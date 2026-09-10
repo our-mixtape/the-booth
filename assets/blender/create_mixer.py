@@ -32,6 +32,7 @@ static_parts = []
 moving_parts = {}
 controls = []
 meters = []
+channel_order = ['A', 'B', 'C', 'D']
 
 
 def material(name, color, metal=0.0, rough=0.5, vertex_color=False):
@@ -193,7 +194,7 @@ for x in [-1.14, 1.14]:
     for y in [-1.88, 1.88]:
         cylinder('mixer.foot', (x * .85, y, -.275), .14, .15, rubber, vertices=16)
 
-for index, channel in enumerate(['C', 'A', 'B', 'D']):
+for index, channel in enumerate(channel_order):
     x = -.90 + index * .60
     label(f'{channel}.label', channel, x, 1.81, .125)
     for index, band in enumerate(['high', 'mid', 'low', 'filter']):
@@ -307,7 +308,7 @@ metrics = {'bytes': len(glb), 'meshes': len(model.get('meshes', [])),
            'triangles': triangles, 'controls': len(controls),
            'authoringBlender': bpy.app.version_string}
 manifest = {'version': 2, 'asset': 'mixtape-mixer.glb', 'upAxis': 'Y',
-            'authoringUpAxis': 'Z', 'channelOrder': ['C', 'A', 'B', 'D'],
+            'authoringUpAxis': 'Z', 'channelOrder': channel_order,
             'controls': controls, 'meters': meters, 'metrics': metrics}
 manifest_bytes = (json.dumps(manifest, indent=2) + '\n').encode()
 (args.public_dir / 'mixtape-mixer.glb').write_bytes(glb)
