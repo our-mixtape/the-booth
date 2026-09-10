@@ -1,6 +1,6 @@
 # Persistent Astra gateway
 
-The app remains on **https://mixtape-the-booth.vercel.app**. The user selected a portable gateway on September 10, 2026; no persistent hosting account or hostname has been supplied. The app was subsequently [redeployed to Vercel](evidence/hosted-gateway/vercel-release.json) at the user’s request. The persistent configuration is ready for an approved server, **not deployed remote-session evidence**. See [verification](evidence/hosted-gateway/README.md).
+The app remains on **https://mixtape-the-booth.vercel.app**. The user selected a portable gateway on September 10, 2026 and subsequently provided signed-in access to Andrew's Render workspace. The app was [redeployed to Vercel](evidence/hosted-gateway/vercel-release.json) at the user’s request. Render service configuration is in progress; this is **not deployed remote-session evidence**. See [verification](evidence/hosted-gateway/README.md).
 
 ## Deployment shape
 
@@ -60,6 +60,18 @@ Run `up` only on the approved host after its hostname resolves there. Caddy obta
 `SIGTERM` closes streams, upstream sockets and timers, rejects new session work, and permits at most 10 seconds for other HTTP requests to finish. Compose allows 15 seconds before forced termination. Restart only between demonstrations or explicitly accept session termination; audio runs independently in the browser.
 
 ## Connect the Vercel app
+
+### Render account setup
+
+The user provided signed-in Render workspace access after the Vercel release. `render.yaml` prepares one Docker web service named `mixtape-astra-gateway`, in Virginia, on the `0.5c-512mb` plan ($7/month base compute at the checked September 10 pricing). It uses the existing pinned gateway image build and `/healthz`; Render supplies the HTTPS endpoint. No Caddy container, database or disk is needed there. This file is a proposed configuration, not evidence that a service was created or billing approved.
+
+Use the selected workspace's **New Blueprint** flow with this repository and the `codex/hosted-astra-sessions` branch until PR #2 is merged. Review the single service and cost, then supply the existing Booth OpenAI/Clerk credentials in Render's secret fields. `sync: false` keeps their values out of Git. Leave one instance and automatic deploys off. First verify its assigned `onrender.com` HTTPS endpoint, then add the proposed exact `astra.ourmixtape.org` custom domain and the provider-specified DNS record. `booth.ourmixtape.org` belongs to the Vercel app; neither the root charity site nor a wildcard is part of this configuration.
+
+**Subsequent Render updates require a maintenance window.** Render's normal deploy process sends new HTTP requests to the replacement instance before terminating the old one, which can separate an existing SSE stream from its later steer/tool requests. Before deploying, restarting or changing runtime settings, enable Render's paid [maintenance mode](https://render.com/docs/maintenance-mode) to block public gateway requests. Treat existing Astra sessions as ended. Keep maintenance enabled until Render reports the deploy complete and the old instance is terminated; its [documented sequence](https://render.com/docs/deploys#zero-downtime-deploys) includes 60 seconds before SIGTERM plus our bounded shutdown. Then disable maintenance, check readiness, and brief a new session. The Vercel instrument remains independent. Do not claim uninterrupted session migration, use automatic deploys, or increase the replica count.
+
+The [Blueprint fields](https://render.com/docs/blueprint-spec), [Docker behavior](https://render.com/docs/docker) and [pricing](https://render.com/pricing) were checked against Render's documentation. Provider-side validation and the real remote acceptance run are still required before declaring Render deployment complete.
+
+### Frontend connection
 
 After the gateway passes HTTPS readiness and authentication checks, set **only** the public origin in the Booth Vercel project and rebuild the relevant environment:
 

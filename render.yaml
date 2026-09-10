@@ -1,0 +1,37 @@
+# Proposed $7/month base compute; creating the service requires billing approval.
+# For updates, use the maintenance procedure in docs/HOSTED_GATEWAY.md.
+services:
+  - type: web
+    name: mixtape-astra-gateway
+    runtime: docker
+    repo: https://github.com/our-mixtape/the-booth
+    branch: codex/hosted-astra-sessions
+    region: virginia
+    plan: 0.5c-512mb
+    numInstances: 1
+    autoDeployTrigger: "off"
+    dockerfilePath: ./Dockerfile.gateway
+    dockerContext: .
+    healthCheckPath: /healthz
+    maxShutdownDelaySeconds: 15
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GATEWAY_MODE
+        value: persistent
+      - key: GATEWAY_HOST
+        value: 0.0.0.0
+      - key: GATEWAY_PORT
+        value: "8787"
+      - key: PORT
+        value: "8787"
+      - key: APP_ORIGIN
+        value: https://mixtape-the-booth.vercel.app
+      - key: ALLOWED_ORIGINS
+        value: https://booth.ourmixtape.org
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: CLERK_SECRET_KEY
+        sync: false
+      - key: CLERK_PUBLISHABLE_KEY
+        sync: false
