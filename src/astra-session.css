@@ -1,0 +1,33 @@
+.astra-session { margin: 24px 0; padding: 28px; border: 1px solid var(--line, #353746); border-radius: 18px; background: #10101a; color: var(--paper, #f3f3f5); }
+.astra-session-heading, .astra-session-actions { display: flex; justify-content: space-between; align-items: center; gap: 18px; }
+.astra-session-heading { margin-bottom: 20px; }
+.astra-session h3 { margin: 8px 0 0; font-size: clamp(20px, 2vw, 28px); }
+.astra-session .eyebrow { margin: 0; color: var(--lime, #aab5ff); }
+.astra-session button { border: 1px solid #54586d; background: #22232e; color: var(--paper, #f3f3f5); padding: 9px 13px; border-radius: 8px; font: inherit; }
+.astra-session button.primary { background: var(--lime, #aab5ff); color: var(--ink, #111117); white-space: nowrap; }
+.astra-session button:disabled { opacity: .45; cursor: not-allowed; }
+.astra-session button:focus-visible, .astra-session input:focus-visible, .astra-session textarea:focus-visible { outline: 2px solid var(--lime, #aab5ff); outline-offset: 3px; }
+.astra-session label { display: block; font-size: 13px; margin-bottom: 8px; }
+.astra-session textarea, .astra-session input { width: 100%; box-sizing: border-box; background: #08080b; color: var(--paper, #f3f3f5); border: 1px solid #54586d; border-radius: 8px; padding: 12px; font: inherit; }
+.astra-session textarea { resize: vertical; margin-bottom: 12px; }
+.astra-session-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+.astra-session-chips button { font-size: 12px; }
+.astra-session-lifecycle { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 8px; padding: 0; list-style: none; }
+.astra-session-lifecycle li { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; border: 1px solid var(--line, #353746); border-radius: 8px; padding: 6px 9px; font-size: 11px; color: var(--muted, #b4b7c5); }
+.astra-session-lifecycle li[aria-current] { background: var(--lime, #aab5ff); color: var(--ink, #111117); }
+.astra-session-lifecycle li small { font-size: 10px; color: inherit; }
+.astra-session-current { font-size: 12px; color: var(--lime, #aab5ff); }
+.astra-session-responses { max-height: 420px; overflow: auto; overflow-wrap: anywhere; }
+.astra-session-responses article { border-top: 1px solid var(--line, #353746); padding: 14px 0; }
+.astra-session-response-label { margin: 0 0 9px; font-size: 11px; color: var(--muted, #b4b7c5); }
+.astra-session-plan { white-space: pre-wrap; margin: 0; font-size: 15px; line-height: 1.6; }
+.astra-session .previous-response { color: #c5c6d0; }
+.astra-session-wait { border-left: 3px solid var(--lime, #aab5ff); padding: 12px; background: #242743; }
+.astra-session-steer { margin-top: 18px; }
+.astra-session-steer-input { display: flex; gap: 8px; margin-top: 9px; }
+.astra-session-steer-input input { min-width: 0; flex: 1; }
+.astra-session-steer-input button { white-space: nowrap; }
+.astra-session-notice { color: #f5cf9c; }
+.astra-session-meta { font-size: 11px; color: var(--muted, #b4b7c5); overflow-wrap: anywhere; margin: 18px 0 8px; }
+.astra-session > small { display: block; max-width: 86ch; font-size: 11px; line-height: 1.5; color: var(--muted, #b4b7c5); }
+@media (max-width: 680px) { .astra-session { padding: 18px; } .astra-session-heading, .astra-session-actions { align-items: flex-start; flex-direction: column; gap: 12px; } .astra-session-steer-input { flex-direction: column; } .astra-session-lifecycle { gap: 5px; } }

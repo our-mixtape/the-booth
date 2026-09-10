@@ -4,130 +4,20 @@
   "upAxis": "Y",
   "authoringUpAxis": "Z",
   "channelOrder": [
-    "C",
     "A",
     "B",
+    "C",
     "D"
   ],
   "controls": [
-    {
-      "id": "C.high",
-      "node": "C.high",
-      "transform": {
-        "property": "rotation",
-        "axis": "y",
-        "min": -2.2,
-        "max": 2.2
-      },
-      "input": {
-        "min": -12,
-        "max": 12
-      },
-      "hit": {
-        "node": "hit.C.high",
-        "size": [
-          0.43,
-          0.34,
-          0.41
-        ]
-      }
-    },
-    {
-      "id": "C.mid",
-      "node": "C.mid",
-      "transform": {
-        "property": "rotation",
-        "axis": "y",
-        "min": -2.2,
-        "max": 2.2
-      },
-      "input": {
-        "min": -12,
-        "max": 12
-      },
-      "hit": {
-        "node": "hit.C.mid",
-        "size": [
-          0.43,
-          0.34,
-          0.41
-        ]
-      }
-    },
-    {
-      "id": "C.low",
-      "node": "C.low",
-      "transform": {
-        "property": "rotation",
-        "axis": "y",
-        "min": -2.2,
-        "max": 2.2
-      },
-      "input": {
-        "min": -12,
-        "max": 12
-      },
-      "hit": {
-        "node": "hit.C.low",
-        "size": [
-          0.43,
-          0.34,
-          0.41
-        ]
-      }
-    },
-    {
-      "id": "C.filter",
-      "node": "C.filter",
-      "transform": {
-        "property": "rotation",
-        "axis": "y",
-        "min": -2.25,
-        "max": 2.25
-      },
-      "input": {
-        "min": 0,
-        "max": 1
-      },
-      "hit": {
-        "node": "hit.C.filter",
-        "size": [
-          0.43,
-          0.34,
-          0.41
-        ]
-      }
-    },
-    {
-      "id": "C.gain",
-      "node": "C.gain",
-      "transform": {
-        "property": "position",
-        "axis": "z",
-        "min": 1.5,
-        "max": 0.56
-      },
-      "input": {
-        "min": 0,
-        "max": 1
-      },
-      "hit": {
-        "node": "hit.C.gain",
-        "size": [
-          0.4,
-          0.28,
-          1.13
-        ]
-      }
-    },
     {
       "id": "A.high",
       "node": "A.high",
       "transform": {
         "property": "rotation",
         "axis": "y",
-        "min": -2.2,
-        "max": 2.2
+        "min": 2.2,
+        "max": -2.2
       },
       "input": {
         "min": -12,
@@ -148,8 +38,8 @@
       "transform": {
         "property": "rotation",
         "axis": "y",
-        "min": -2.2,
-        "max": 2.2
+        "min": 2.2,
+        "max": -2.2
       },
       "input": {
         "min": -12,
@@ -170,8 +60,8 @@
       "transform": {
         "property": "rotation",
         "axis": "y",
-        "min": -2.2,
-        "max": 2.2
+        "min": 2.2,
+        "max": -2.2
       },
       "input": {
         "min": -12,
@@ -192,8 +82,8 @@
       "transform": {
         "property": "rotation",
         "axis": "y",
-        "min": -2.25,
-        "max": 2.25
+        "min": 2.25,
+        "max": -2.25
       },
       "input": {
         "min": 0,
@@ -236,8 +126,8 @@
       "transform": {
         "property": "rotation",
         "axis": "y",
-        "min": -2.2,
-        "max": 2.2
+        "min": 2.2,
+        "max": -2.2
       },
       "input": {
         "min": -12,
@@ -258,8 +148,8 @@
       "transform": {
         "property": "rotation",
         "axis": "y",
-        "min": -2.2,
-        "max": 2.2
+        "min": 2.2,
+        "max": -2.2
       },
       "input": {
         "min": -12,
@@ -280,8 +170,8 @@
       "transform": {
         "property": "rotation",
         "axis": "y",
-        "min": -2.2,
-        "max": 2.2
+        "min": 2.2,
+        "max": -2.2
       },
       "input": {
         "min": -12,
@@ -302,8 +192,8 @@
       "transform": {
         "property": "rotation",
         "axis": "y",
-        "min": -2.25,
-        "max": 2.25
+        "min": 2.25,
+        "max": -2.25
       },
       "input": {
         "min": 0,
@@ -341,13 +231,123 @@
       }
     },
     {
+      "id": "C.high",
+      "node": "C.high",
+      "transform": {
+        "property": "rotation",
+        "axis": "y",
+        "min": 2.2,
+        "max": -2.2
+      },
+      "input": {
+        "min": -12,
+        "max": 12
+      },
+      "hit": {
+        "node": "hit.C.high",
+        "size": [
+          0.43,
+          0.34,
+          0.41
+        ]
+      }
+    },
+    {
+      "id": "C.mid",
+      "node": "C.mid",
+      "transform": {
+        "property": "rotation",
+        "axis": "y",
+        "min": 2.2,
+        "max": -2.2
+      },
+      "input": {
+        "min": -12,
+        "max": 12
+      },
+      "hit": {
+        "node": "hit.C.mid",
+        "size": [
+          0.43,
+          0.34,
+          0.41
+        ]
+      }
+    },
+    {
+      "id": "C.low",
+      "node": "C.low",
+      "transform": {
+        "property": "rotation",
+        "axis": "y",
+        "min": 2.2,
+        "max": -2.2
+      },
+      "input": {
+        "min": -12,
+        "max": 12
+      },
+      "hit": {
+        "node": "hit.C.low",
+        "size": [
+          0.43,
+          0.34,
+          0.41
+        ]
+      }
+    },
+    {
+      "id": "C.filter",
+      "node": "C.filter",
+      "transform": {
+        "property": "rotation",
+        "axis": "y",
+        "min": 2.25,
+        "max": -2.25
+      },
+      "input": {
+        "min": 0,
+        "max": 1
+      },
+      "hit": {
+        "node": "hit.C.filter",
+        "size": [
+          0.43,
+          0.34,
+          0.41
+        ]
+      }
+    },
+    {
+      "id": "C.gain",
+      "node": "C.gain",
+      "transform": {
+        "property": "position",
+        "axis": "z",
+        "min": 1.5,
+        "max": 0.56
+      },
+      "input": {
+        "min": 0,
+        "max": 1
+      },
+      "hit": {
+        "node": "hit.C.gain",
+        "size": [
+          0.4,
+          0.28,
+          1.13
+        ]
+      }
+    },
+    {
       "id": "D.high",
       "node": "D.high",
       "transform": {
         "property": "rotation",
         "axis": "y",
-        "min": -2.2,
-        "max": 2.2
+        "min": 2.2,
+        "max": -2.2
       },
       "input": {
         "min": -12,
@@ -368,8 +368,8 @@
       "transform": {
         "property": "rotation",
         "axis": "y",
-        "min": -2.2,
-        "max": 2.2
+        "min": 2.2,
+        "max": -2.2
       },
       "input": {
         "min": -12,
@@ -390,8 +390,8 @@
       "transform": {
         "property": "rotation",
         "axis": "y",
-        "min": -2.2,
-        "max": 2.2
+        "min": 2.2,
+        "max": -2.2
       },
       "input": {
         "min": -12,
@@ -412,8 +412,8 @@
       "transform": {
         "property": "rotation",
         "axis": "y",
-        "min": -2.25,
-        "max": 2.25
+        "min": 2.25,
+        "max": -2.25
       },
       "input": {
         "min": 0,
@@ -475,11 +475,6 @@
   ],
   "meters": [
     {
-      "deck": "C",
-      "node": "C.meter",
-      "axis": "z"
-    },
-    {
       "deck": "A",
       "node": "A.meter",
       "axis": "z"
@@ -487,6 +482,11 @@
     {
       "deck": "B",
       "node": "B.meter",
+      "axis": "z"
+    },
+    {
+      "deck": "C",
+      "node": "C.meter",
       "axis": "z"
     },
     {

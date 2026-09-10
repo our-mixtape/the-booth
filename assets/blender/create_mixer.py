@@ -32,6 +32,7 @@ static_parts = []
 moving_parts = {}
 controls = []
 meters = []
+channel_order = ['A', 'B', 'C', 'D']
 
 
 def material(name, color, metal=0.0, rough=0.5, vertex_color=False):
@@ -166,7 +167,7 @@ def binding(control_id, location, kind, axis, limits, input_range, hit_location,
     if kind == 'rotation':
         constraint = control.constraints.new('LIMIT_ROTATION')
         constraint.use_limit_z = True
-        constraint.min_z, constraint.max_z = limits
+        constraint.min_z, constraint.max_z = sorted(limits)
         constraint.owner_space = 'LOCAL'
     else:
         constraint = control.constraints.new('LIMIT_LOCATION')
@@ -193,7 +194,7 @@ for x in [-1.14, 1.14]:
     for y in [-1.88, 1.88]:
         cylinder('mixer.foot', (x * .85, y, -.275), .14, .15, rubber, vertices=16)
 
-for index, channel in enumerate(['C', 'A', 'B', 'D']):
+for index, channel in enumerate(channel_order):
     x = -.90 + index * .60
     label(f'{channel}.label', channel, x, 1.81, .125)
     for index, band in enumerate(['high', 'mid', 'low', 'filter']):
@@ -203,7 +204,7 @@ for index, channel in enumerate(['C', 'A', 'B', 'D']):
         # Washers and scale marks stay on the face; pointer marks move with the knob.
         cylinder(f'{channel}.{band}.washer', (x, y, .299), radius + .027, .014, metal)
         knob = binding(f'{channel}.{band}', (x, y, .385), 'rotation', 'y',
-                       [-2.25, 2.25] if is_filter else [-2.2, 2.2],
+                       [2.25, -2.25] if is_filter else [2.2, -2.2],
                        [0, 1] if is_filter else [-12, 12], (x, y, .40), (.43, .41, .34))
         cylinder(f'{channel}.{band}.grip', (x, y, .385), radius, .175,
                  control_surface, knob, filter_color if is_filter else knob_color)
@@ -307,7 +308,7 @@ metrics = {'bytes': len(glb), 'meshes': len(model.get('meshes', [])),
            'triangles': triangles, 'controls': len(controls),
            'authoringBlender': bpy.app.version_string}
 manifest = {'version': 2, 'asset': 'mixtape-mixer.glb', 'upAxis': 'Y',
-            'authoringUpAxis': 'Z', 'channelOrder': ['C', 'A', 'B', 'D'],
+            'authoringUpAxis': 'Z', 'channelOrder': channel_order,
             'controls': controls, 'meters': meters, 'metrics': metrics}
 manifest_bytes = (json.dumps(manifest, indent=2) + '\n').encode()
 (args.public_dir / 'mixtape-mixer.glb').write_bytes(glb)

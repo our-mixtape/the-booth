@@ -1,5 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
-import { readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { PerspectiveCamera, Vector3, MathUtils } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { bindMixerAsset } from '../src/scene/mixer-asset';
@@ -92,4 +92,42 @@ test('a late asset waits for grab release and cannot reset the blend', async ({ 
   await expect(page.locator('.canvas-host canvas')).toHaveAttribute('data-mixer-asset', 'ready');
   await page.getByRole('button', { name: 'Track library & accessible controls', exact: false }).click();
   await expect(page.getByLabel('Crossfader', { exact: true })).toHaveValue('0.5');
+});
+
+for(const fallback of [false,true])test(`${fallback?'fallback':'exported'} knobs lower left, raise right and keep the chosen drag axis`,async({page})=>{
+ if(fallback)await page.route('**/models/mixtape-mixer.glb',route=>route.fulfill({status:503,body:'Fallback direction check'}));
+ await page.goto('/#play');await page.getByRole('button',{name:'Start audio',exact:false}).click();
+ await expect(page.locator('.canvas-host canvas')).toHaveAttribute('data-mixer-asset',fallback?'fallback':'ready');
+ await page.getByRole('slider',{name:'Performance high EQ A',exact:true}).fill('0');
+ await page.getByRole('slider',{name:'Performance filter A',exact:true}).fill('0.5');
+ const observations=[];
+ for(const kind of ['high','filter'] as const){
+  const point=await project(page,new Vector3(fallback?-.91:-.90,.40,kind==='high'?-1.47:.17));
+  const read=()=>page.evaluate(async kind=>{
+   const path='/src/audio/engine.ts';const {getEngine}=await import(/* @vite-ignore */path) as typeof import('../src/audio/engine');const engine=await getEngine();
+   return {value:kind==='high'?engine.session.decks.A.eq.high:engine.session.decks.A.filter,dsp:kind==='high'?engine.channels.A.eq.high.gain.value:engine.channels.A.filter.frequency.value};
+  },kind);
+  await page.mouse.move(point.x,point.y);await page.mouse.down();
+  await page.mouse.move(point.x-35,point.y,{steps:4});
+  const low=kind==='high'?-6:.25,high=kind==='high'?6:.75;
+  await expect.poll(async()=>(await read()).value).toBeCloseTo(low,4);
+  await expect.poll(async()=>(await read()).dsp).toBeCloseTo(kind==='high'?low:160*125**low,kind==='high'?2:0);
+  observations.push({kind,direction:'left',...await read()});
+  // Once horizontal is selected, a larger incidental vertical displacement must not reverse the value.
+  await page.mouse.move(point.x+35,point.y+55,{steps:4});
+  await expect.poll(async()=>(await read()).value).toBeCloseTo(high,4);
+  await expect.poll(async()=>(await read()).dsp).toBeCloseTo(kind==='high'?high:160*125**high,kind==='high'?2:0);
+  observations.push({kind,direction:'right with vertical drift',...await read()});
+  await page.mouse.move(point.x,point.y);await page.mouse.up();
+  await expect.poll(async()=>(await read()).value).toBeCloseTo(kind==='high'?0:.5,4);
+  // Vertical input remains available; incidental sideways travel does not change its chosen axis.
+  await page.mouse.move(point.x,point.y);await page.mouse.down();await page.mouse.move(point.x,point.y-35,{steps:4});
+  await page.mouse.move(point.x-55,point.y-35,{steps:4});
+  await expect.poll(async()=>(await read()).value).toBeCloseTo(high,4);
+  observations.push({kind,direction:'up with horizontal drift',...await read()});
+  await page.mouse.up();
+ }
+ await mkdir('docs/evidence/knob-direction',{recursive:true});
+ await page.locator('.stage').screenshot({path:`docs/evidence/knob-direction/${fallback?'fallback':'exported'}-clockwise.png`});
+ await writeFile(`docs/evidence/knob-direction/${fallback?'fallback':'exported'}-routing.json`,JSON.stringify(observations,null,2)+'\n');
 });

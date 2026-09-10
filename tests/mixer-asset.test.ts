@@ -30,9 +30,20 @@ describe('actual exported Blender mixer contract', () => {
     const original = JSON.stringify(session.snapshot(1));
     asset.update(session, { A: .1 }); asset.root.updateMatrixWorld(true);
     expect(surface.getWorldPosition(new Vector3()).z - before.z).toBeCloseTo(-.94, 4);
-    expect(asset.controls.get('A.high')!.rotation.y).toBeCloseTo(2.2);
-    expect(asset.controls.get('B.high')!.rotation.y).toBeCloseTo(-2.2);
-    expect(asset.controls.get('A.filter')!.rotation.y).toBeCloseTo(-2.25);
+    expect(asset.controls.get('A.high')!.rotation.y).toBeCloseTo(-2.2);
+    expect(asset.controls.get('B.high')!.rotation.y).toBeCloseTo(2.2);
+    expect(asset.controls.get('A.filter')!.rotation.y).toBeCloseTo(2.25);
+    const indicatorSide = (id: string) => {
+      const knob = asset.controls.get(id)!;
+      const surface = knob.children.find(node => node instanceof Mesh) as Mesh;
+      const colors = surface.geometry.getAttribute('color'), positions = surface.geometry.getAttribute('position');
+      const center = new Vector3(); let count = 0;
+      for (let i = 0; i < colors.count; i++) if (colors.getX(i) > .7) { center.add(new Vector3().fromBufferAttribute(positions, i)); count++; }
+      expect(count).toBeGreaterThan(0);
+      return surface.localToWorld(center.divideScalar(count)).x - knob.getWorldPosition(new Vector3()).x;
+    };
+    expect(indicatorSide('A.high')).toBeGreaterThan(0); // Boost points right, clockwise from noon.
+    expect(indicatorSide('B.high')).toBeLessThan(0); // Cut points left.
     expect(asset.controls.get('crossfader')!.position.x).toBeCloseTo(.7);
     expect(asset.root.getObjectByName('A.meter')!.scale.z).toBeCloseTo(.7);
     expect(JSON.stringify(session.snapshot(1))).toBe(original);

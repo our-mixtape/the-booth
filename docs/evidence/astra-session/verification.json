@@ -1,0 +1,67 @@
+{
+  "recordedAt": "2026-09-10T20:20:26.178969+00:00",
+  "typecheck": "pass",
+  "lint": "pass",
+  "unitTests": {
+    "passed": 92,
+    "baselinePreserved": 61
+  },
+  "browserTests": {
+    "passed": 20,
+    "command": "VITE_CLERK_PUBLISHABLE_KEY='' PORT=5176 GATEWAY_PORT=8790 pnpm exec playwright test tests/session.browser.ts tests/ask.browser.ts tests/auth.browser.ts tests/experience.browser.ts tests/layout.browser.ts",
+    "identity": "mocked/unconfigured per existing test; not a real Clerk login"
+  },
+  "productionBuild": {
+    "status": "pass",
+    "jsKB": 1193.48,
+    "gzipJSKB": 324.86,
+    "warning": "Existing >500 kB bundle warning"
+  },
+  "audio": {
+    "layout": {
+      "rms": 0.026691742631423536,
+      "longestSilence": 0.000125
+    },
+    "navigation": {
+      "duration": 2.94,
+      "rms": 0.02507802151886416,
+      "longestSilence": 4.1666666666666665e-05
+    },
+    "source": "original generated fixtures; actual internal master-bus captures",
+    "physicalOutputOrHumanAudition": false,
+    "systemAudioCapture": false
+  },
+  "realApi": {
+    "log": "check-1789071731.md",
+    "transport": "pass",
+    "durationSeconds": 16.88,
+    "attemptResult": "synthetic test fixture",
+    "nativeSteering": true,
+    "asyncToolReview": true,
+    "testedSourceCommit": "8c78e3cf8d99e3a851f47bcebe8420b54b85f633"
+  },
+  "realSignedInBrowserRehearsal": {
+    "status": "pass",
+    "recordedAt": "2026-09-10T20:28:47.059Z",
+    "sourceCommit": "5e1754061fa777dfb59a94521344a768e87f61da",
+    "identity": "real Clerk session",
+    "model": "gpt-6-astra",
+    "controls": "browser automation using ordinary visible controls",
+    "fixtures": "original generated audio",
+    "durationSeconds": 56.6,
+    "reviewDurationSeconds": 3.0,
+    "attemptStatus": "retry",
+    "entryErrorSeconds": 6.9013,
+    "toleranceSeconds": 0.25,
+    "evidence": "real-session.md",
+    "humanAudition": false,
+    "systemAudioCapture": false
+  },
+  "hostedDeploymentPerformed": false,
+  "realSignedInHttpHint": {
+    "status": "pass",
+    "recordedAt": "2026-09-10T20:30:17.405Z",
+    "model": "gpt-6-astra",
+    "evidence": "real-http-hint.json"
+  }
+}
