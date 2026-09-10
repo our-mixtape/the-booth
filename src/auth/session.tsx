@@ -23,7 +23,7 @@ export function useBoothSession() { return useContext(SessionContext); }
 export class SignInRequiredError extends Error {
  constructor() { super('Your sign-in has expired. Sign out and sign in again to use Astra.'); }
 }
-export async function sessionFetch(getToken: BoothSession['getToken'], path: '/api/hint' | '/api/voice/session', init: RequestInit) {
+export async function sessionFetch(getToken: BoothSession['getToken'], path: '/api/hint' | '/api/voice/session' | '/api/session/brief' | '/api/session/steer' | '/api/session/tool', init: RequestInit) {
  const token = await getToken();
  init.signal?.throwIfAborted();
  if (!token) throw new SignInRequiredError();
