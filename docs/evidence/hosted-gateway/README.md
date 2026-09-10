@@ -18,7 +18,7 @@ The final hosted recording completed at **18:47:16 EDT** on September 10, 2026. 
 
 The visible pending interval is **40.8 seconds**, measured conservatively from the completed plan. Codex used ordinary visible controls to start practice, enter B and move the crossfader. The engine measured **+2.368 seconds** entry error and returned **retry** against the unchanged **±0.25-second** target. Astra cited these measurements and declined to infer a completed handoff, beat alignment or musical quality. The engine's UI separately reported a handoff at about 10.62 seconds; the tool does not claim that exact timestamp is available to Astra. The requested one-bar delay intentionally misses the fixed exercise target.
 
-- [60-second hosted demonstration](booth-hosted-demo-60s.mp4)
+- [60-second hosted demonstration](booth-hosted-demo-60s.mp4) · [public MP4](https://raw.githubusercontent.com/our-mixtape/the-booth/ba68aa1027fd65811b7fbe8d8d7557e6c83d9e89/docs/evidence/hosted-gateway/booth-hosted-demo-60s.mp4)
 - [Recorded hosted lifecycle and actual practice result](hosted-recorded-session.json) · [review screenshot](hosted-final-review.png)
 - [Capture-time region and system-audio metrics](hosted-capture.json) · [encoded audio check](hosted-system-audio-check.json)
 - [Earlier hosted acceptance run](hosted-session.json), with a **74.0-second** pending watch, review at **89.7 seconds**, and **+5.363-second** entry error · [screenshot](hosted-review.png)
